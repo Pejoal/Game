@@ -2,10 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Comment;
-use App\Models\Like;
-use App\Models\Post;
-use App\Models\Reply;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -51,10 +47,6 @@ class User extends Authenticatable implements MustVerifyEmail {
   protected $casts = [
     'email_verified_at' => 'datetime',
   ];
-
-  public function appointments() {
-    return $this->hasMany(Appointment::class);
-  }
 
 
   /**
