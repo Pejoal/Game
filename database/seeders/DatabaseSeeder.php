@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder {
 
     $this->call([
       SetupSeeder::class,
-      LobbySeeder::class,
+      // LobbySeeder::class,
     ]);
 
   }
