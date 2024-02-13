@@ -10,6 +10,9 @@ import { ref } from "vue";
 import Echo from "laravel-echo";
 import Pusher from "pusher-js";
 import { getRandomDigits } from "@/utils";
+import { usePage } from "@inertiajs/vue3";
+
+const page = usePage().props;
 
 let props = defineProps({
   name: {
@@ -23,10 +26,6 @@ let props = defineProps({
   lobbyId: {
     type: Number,
     default: 0,
-  },
-  users: {
-    type: Array,
-    default: [],
   },
   messages: {
     type: Array,
@@ -58,6 +57,7 @@ onMounted(() => {
         return {
           id: user.id,
           name: user.firstname[0] + user.lastname[0],
+          fullname: user.firstname + ' ' + user.lastname,
         };
       });
     })
@@ -89,14 +89,16 @@ onMounted(() => {
     })
     .listen("LobbyMessageSent", (data) => {
       // console.log("Event received:", data);
-      messages.value.unshift({
-        id: getRandomDigits(),
-        firstname: data.firstname,
-        lastname: data.lastname,
-        content: data.content,
-        created_at: new Date().toLocaleTimeString(),
-        type: "content",
-      });
+      if (data.user_id != page.auth.user.id) {
+        messages.value.unshift({
+          id: getRandomDigits(),
+          firstname: data.firstname,
+          lastname: data.lastname,
+          content: data.content,
+          created_at: new Date().toLocaleTimeString(),
+          type: "content",
+        });
+      }
     })
     .error((error) => {
       console.error(error);
@@ -132,16 +134,6 @@ const unshiftMessage = (data) => {
         </p>
       </header>
 
-      <section class="my-2 p-2 bg-neutral-300">
-        <h3 class="text-lg font-semibold">Joined Users</h3>
-        <p
-          class="bg-neutral-100 p-2 rounded-lg"
-          v-for="user in props.users"
-          :key="user.id"
-        >
-          {{ user.firstname + " " + user.lastname }}
-        </p>
-      </section>
       <section class="bg-zinc-800">
         <div
           class="mb-2 bg-zinc-700 px-2 border border-gray-600 rounded-md shadow-lg"
@@ -149,12 +141,13 @@ const unshiftMessage = (data) => {
           <section
             class="flex gap-1 m-2 px-2 py-4 border rounded-lg overflow-x-auto"
           >
-            <div
+            <p
               class="flex items-center justify-center w-10 h-10 bg-gray-800 text-white rounded-full"
               v-for="initial in initials"
               :key="initial.id"
               v-text="initial.name"
-            ></div>
+              :title="initial.fullname"
+            ></p>
           </section>
           <div
             class="overflow-y-auto h-96 max-h-[75vh] mb-5 px-2 py-4 border border-gray-600 rounded-lg"

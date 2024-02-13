@@ -38,6 +38,7 @@ class LobbyMessageSent implements ShouldBroadcastNow {
   {
     return [
       "content" => $this->content,
+      "user_id" => $this->user->id,
       "firstname" => $this->user->firstname,
       "lastname" => $this->user->lastname,
     ];

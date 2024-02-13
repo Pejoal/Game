@@ -9,9 +9,9 @@ use Inertia\Inertia;
 class LobbyController extends Controller {
 
   public function join(Lobby $lobby) {
-    if (!in_array(auth()->id(), $lobby->users->pluck('id')->toArray())) {
-      $lobby->users()->attach(auth()->id());
-    }
+    // if (!in_array(auth()->id(), $lobby->users->pluck('id')->toArray())) {
+    //   $lobby->users()->attach(auth()->id());
+    // }
 
     $messages = $lobby->messages()->with('user')->get()->map(function ($message) {
       return [
@@ -22,16 +22,16 @@ class LobbyController extends Controller {
       ];
     });
 
-    $users = $lobby->users->map(function ($user) {
-      return [
-        'id' => $user->id,
-        'firstname' => $user->firstname,
-        'lastname' => $user->lastname,
-      ];
-    });
+    // $users = $lobby->users->map(function ($user) {
+    //   return [
+    //     'id' => $user->id,
+    //     'firstname' => $user->firstname,
+    //     'lastname' => $user->lastname,
+    //   ];
+    // });
 
     return Inertia::render('Lobby/Index', [
-      "users" => $users,
+      // "users" => $users,
       "lobbyId" => $lobby->id,
       "name" => $lobby->name,
       "max_players" => $lobby->max_players,
