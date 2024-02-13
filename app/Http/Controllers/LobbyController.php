@@ -9,6 +9,10 @@ class LobbyController extends Controller {
   //
 
   public function join(Lobby $lobby) {
+    if (!in_array(auth()->id(), $lobby->users->pluck('id')->toArray())) {
+      $lobby->users()->attach(auth()->id());
+    }
+
     $messages = $lobby->messages()->with('user')->get()->map(function ($message) {
       return [
         "id" => $message->id,
@@ -46,9 +50,6 @@ class LobbyController extends Controller {
       'max_players' => $request->max_players,
     ]);
 
-    $lobby->users()->attach(auth()->id());
-
     return redirect(route('lobby.join', $lobby->id));
-
   }
 }
