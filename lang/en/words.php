@@ -89,5 +89,6 @@ return [
   'close' => "Close",
   'already_registered' => "Already Registered",
   'copyright_all_rights_reserved' => "Copyright © 2024 - All Rights Reserved",
-
+  'join' => "Join",
+  
 ];

@@ -2,6 +2,7 @@
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import { Head } from "@inertiajs/vue3";
 import { defineProps } from "vue"; // Import defineProps function
+import { Link } from "@inertiajs/vue3";
 
 const props = defineProps({
   lobbies: {
@@ -20,26 +21,19 @@ const props = defineProps({
     <title>{{ trans("words.home") }}</title>
   </Head>
   <GuestLayout>
-    <main class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 lg:gap-10">
+    <main class="grid grid-cols-1 md:grid-cols-3">
       <section class="bg-amber-200 p-2">
-        <h2 class="text-xl font-semibold">Lobbies</h2>
-        <section>
-          <p v-for="lobby in lobbies" :key="lobby.id">
+        <h2 class="text-xl font-bold">Lobbies</h2>
+        <section class="flex gap-2" v-for="lobby in lobbies" :key="lobby.id">
+          <p class="font-semibold">
             {{ lobby.name }}
           </p>
-          <Link
-            :href="route('lobby.join')"
-            class="hover:font-bold"
-            :class="{
-              'text-zinc-700 hover:text-zinc-800': props.dark,
-              'underline  font-bold': route().current('profile.edit'),
-            }"
-          >
-            {{ trans("words.settings") }}
+          <Link :href="route('lobby.join')" class="underline hover:font-bold">
+            {{ trans("words.join") }}
           </Link>
         </section>
       </section>
-      <section class="">Hello Everyone!</section>
+      <section class="col-span-2 bg-indigo-400">Hello Everyone!</section>
     </main>
   </GuestLayout>
 </template>

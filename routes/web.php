@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\LobbyController;
 use App\Http\Controllers\QuizController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -65,6 +66,7 @@ Route::group([], function () {
     // User
     Route::group(['middleware' => 'clients-only'], function () {
       Route::get('user/profile', [ProfileController::class, 'myProfile'])->name('user.profile.me');
+      Route::get('lobby/join', [LobbyController::class, 'join'])->name('lobby.join');
 
     });
 
