@@ -92,5 +92,6 @@ return [
   'join' => "Join",
   'name' => "Name",
   'created' => "Created",
+  'dashboard' => "Dashboard",
   
 ];

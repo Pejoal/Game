@@ -45,7 +45,7 @@ const props = defineProps({
           'underline font-bold': route().current('admin.dashboard'),
         }"
       >
-        {{ trans("words.admin_dashboard") }}
+        {{ trans("words.dashboard") }}
       </Link>
       <Link
         :href="route('quiz.admin')"
