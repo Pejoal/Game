@@ -33,26 +33,7 @@ const props = defineProps({
     >
       {{ trans("words.home") }}
     </Link>
-    <Link
-      :href="route('imprint')"
-      class="hover:font-bold"
-      :class="{
-        'text-zinc-700 hover:text-zinc-800': props.dark,
-        'underline  font-bold': route().current('imprint'),
-      }"
-    >
-      {{ trans("words.imprint") }}
-    </Link>
-    <Link
-      :href="route('data-protection')"
-      class="hover:font-bold"
-      :class="{
-        'text-zinc-700 hover:text-zinc-800': props.dark,
-        'underline  font-bold': route().current('data-protection'),
-      }"
-    >
-      {{ trans("words.data_protection") }}
-    </Link>
+    
     <template
       v-if="['admin', 'super admin'].includes($page.props.auth?.user?.type)"
     >
