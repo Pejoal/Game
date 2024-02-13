@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Events\LobbyMessageSent;
 use App\Models\Lobby;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class LobbyController extends Controller {
-  //
 
   public function join(Lobby $lobby) {
     if (!in_array(auth()->id(), $lobby->users->pluck('id')->toArray())) {
@@ -52,4 +52,10 @@ class LobbyController extends Controller {
 
     return redirect(route('lobby.join', $lobby->id));
   }
+
+  public function broadcastMessage(Request $request) {
+    $user = $request->user();
+    broadcast(new LobbyMessageSent($user, $request->content, $request->lobbyId))->toOthers();
+  }
+
 }

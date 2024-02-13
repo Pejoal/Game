@@ -1,8 +1,6 @@
 <?php
 
-use App\Models\ChatGroup;
 use App\Models\User;
-use App\Services\FriendshipService;
 use Illuminate\Support\Facades\Broadcast;
 
 /*
@@ -16,3 +14,17 @@ use Illuminate\Support\Facades\Broadcast;
 |
  */
 
+Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
+  return (int) $user->id === (int) $id;
+});
+
+Broadcast::channel('chat.{lobbyId}', function (User $user, int $lobbyId) {
+  return ['id' => $user->id, 'firstname' => $user->firstname, 'lastname' => $user->lastname];
+});
+
+Broadcast::channel('chat.group.{chatGroupId}', function (User $user, int $chatGroupId) {
+  if (!$user->joinedChatGroups->contains($chatGroupId)) {
+    abort(403, 'Not Authorized');
+  }
+  return ['id' => $user->id];
+});
