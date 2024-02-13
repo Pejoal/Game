@@ -49,7 +49,7 @@ class User extends Authenticatable implements MustVerifyEmail {
   ];
 
   public function lobbies() {
-    return $this->hasMany(Lobby::class);
+    return $this->hasMany(Lobby::class, 'host_id');
   }
 
   /**

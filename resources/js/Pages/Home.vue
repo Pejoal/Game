@@ -21,6 +21,7 @@ const props = defineProps({
 
 const form = useForm({
   name: "",
+  max_players: 4,
 });
 
 const store = () => {
@@ -32,6 +33,9 @@ const store = () => {
     onError: () => {
       if (form.errors.name) {
         nameInput.value.focus();
+      }
+      if (form.errors.max_players) {
+        max_playersInput.value.focus();
       }
     },
   });
@@ -72,6 +76,7 @@ const store = () => {
                 @submit.prevent="store"
                 class="px-4 py-2"
               >
+
                 <TextInput
                   id="name"
                   ref="nameInput"
@@ -84,6 +89,20 @@ const store = () => {
                   :message="form.errors.name"
                   class="my-2 bg-white rounded-md px-2 py-1"
                 />
+
+                <TextInput
+                  id="max_players"
+                  ref="max_playersInput"
+                  v-model="form.max_players"
+                  type="text"
+                  class="my-2 block w-3/4 text-black rounded-lg"
+                  :placeholder="trans('words.max_players')"
+                />
+                <InputError
+                  :message="form.errors.max_players"
+                  class="my-2 bg-white rounded-md px-2 py-1"
+                />
+
                 <button class="btn btn-primary" :disabled="form.processing">
                   {{ trans("words.save") }}
                 </button>

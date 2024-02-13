@@ -12,7 +12,8 @@ return new class extends Migration {
     Schema::create('lobbies', function (Blueprint $table) {
       $table->id();
       $table->string('name');
-      $table->foreignId('user_id')->constrained()->onDelete('cascade');
+      $table->foreignId('host_id')->constrained('users')->onDelete('cascade');
+      $table->integer('max_players')->default(4);
       $table->timestamps();
     });
   }

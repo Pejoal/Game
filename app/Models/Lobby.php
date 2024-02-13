@@ -11,7 +11,7 @@ class Lobby extends Model
 
   protected $fillable = ['name'];
 
-  public function user() {
+  public function host() {
     return $this->belongsTo(User::class);
   }
 }
