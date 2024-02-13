@@ -49,42 +49,6 @@ const _sfc_main$3 = {
         }),
         _: 1
       }, _parent));
-      _push(ssrRenderComponent(unref(Link), {
-        href: _ctx.route("data-protection"),
-        class: ["hover:font-bold", {
-          "text-zinc-700 hover:text-zinc-800": props.dark,
-          "underline  font-bold": _ctx.route().current("data-protection")
-        }]
-      }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
-          if (_push2) {
-            _push2(`${ssrInterpolate(_ctx.trans("words.data_protection"))}`);
-          } else {
-            return [
-              createTextVNode(toDisplayString(_ctx.trans("words.data_protection")), 1)
-            ];
-          }
-        }),
-        _: 1
-      }, _parent));
-      _push(ssrRenderComponent(unref(Link), {
-        href: _ctx.route("imprint"),
-        class: ["hover:font-bold", {
-          "text-zinc-700 hover:text-zinc-800": props.dark,
-          "underline  font-bold": _ctx.route().current("imprint")
-        }]
-      }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
-          if (_push2) {
-            _push2(`${ssrInterpolate(_ctx.trans("words.imprint"))}`);
-          } else {
-            return [
-              createTextVNode(toDisplayString(_ctx.trans("words.imprint")), 1)
-            ];
-          }
-        }),
-        _: 1
-      }, _parent));
       if (["admin", "super admin"].includes((_b = (_a = _ctx.$page.props.auth) == null ? void 0 : _a.user) == null ? void 0 : _b.type)) {
         _push(`<!--[-->`);
         _push(ssrRenderComponent(unref(Link), {
@@ -128,43 +92,6 @@ const _sfc_main$3 = {
         _push(`<!---->`);
       }
       if (((_d = (_c = _ctx.$page.props.auth) == null ? void 0 : _c.user) == null ? void 0 : _d.type) === "client") {
-        _push(`<!--[-->`);
-        _push(ssrRenderComponent(unref(Link), {
-          href: _ctx.route("appointments.index"),
-          class: ["hover:font-bold", {
-            "text-zinc-700 hover:text-zinc-800": props.dark,
-            "underline  font-bold": _ctx.route().current("appointments.index")
-          }]
-        }, {
-          default: withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              _push2(`${ssrInterpolate(_ctx.trans("words.appointments"))}`);
-            } else {
-              return [
-                createTextVNode(toDisplayString(_ctx.trans("words.appointments")), 1)
-              ];
-            }
-          }),
-          _: 1
-        }, _parent));
-        _push(ssrRenderComponent(unref(Link), {
-          href: _ctx.route("quiz.client"),
-          class: ["hover:font-bold", {
-            "text-zinc-700 hover:text-zinc-800": props.dark,
-            "underline  font-bold": _ctx.route().current("quiz.client")
-          }]
-        }, {
-          default: withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              _push2(`${ssrInterpolate(_ctx.trans("words.quiz"))}`);
-            } else {
-              return [
-                createTextVNode(toDisplayString(_ctx.trans("words.quiz")), 1)
-              ];
-            }
-          }),
-          _: 1
-        }, _parent));
         _push(ssrRenderComponent(unref(Link), {
           href: _ctx.route("user.profile.me"),
           class: ["hover:font-bold", {
@@ -183,7 +110,6 @@ const _sfc_main$3 = {
           }),
           _: 1
         }, _parent));
-        _push(`<!--]-->`);
       } else {
         _push(`<!---->`);
       }
@@ -216,10 +142,10 @@ const _sfc_main$3 = {
         }, {
           default: withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(`${ssrInterpolate(_ctx.trans("login"))}`);
+              _push2(`${ssrInterpolate(_ctx.trans("words.login"))}`);
             } else {
               return [
-                createTextVNode(toDisplayString(_ctx.trans("login")), 1)
+                createTextVNode(toDisplayString(_ctx.trans("words.login")), 1)
               ];
             }
           }),
@@ -236,7 +162,7 @@ _sfc_main$3.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/Navigations.vue");
   return _sfc_setup$3 ? _sfc_setup$3(props, ctx) : void 0;
 };
-const Hamburger_vue_vue_type_style_index_0_scoped_a78159de_lang = "";
+const Hamburger_vue_vue_type_style_index_0_scoped_963fbf2a_lang = "";
 const _sfc_main$2 = {
   __name: "Hamburger",
   __ssrInlineRender: true,
@@ -252,7 +178,7 @@ const _sfc_main$2 = {
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<section${ssrRenderAttrs(mergeProps({
         class: ["hamburger-icon", { active: __props.show }]
-      }, _attrs))} data-v-a78159de><span class="${ssrRenderClass([{ "bg-black": props.dark }, "bar bg-white"])}" data-v-a78159de></span><span class="${ssrRenderClass([{ "bg-black": props.dark }, "bar bg-white"])}" data-v-a78159de></span><span class="${ssrRenderClass([{ "bg-black": props.dark }, "bar bg-white"])}" data-v-a78159de></span></section>`);
+      }, _attrs))} data-v-963fbf2a><span class="${ssrRenderClass([{ "bg-black": props.dark }, "bar bg-white"])}" data-v-963fbf2a></span><span class="${ssrRenderClass([{ "bg-black": props.dark }, "bar bg-white"])}" data-v-963fbf2a></span><span class="${ssrRenderClass([{ "bg-black": props.dark }, "bar bg-white"])}" data-v-963fbf2a></span></section>`);
     };
   }
 };
@@ -262,7 +188,7 @@ _sfc_main$2.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/Hamburger.vue");
   return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
 };
-const Hamburger = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-a78159de"]]);
+const Hamburger = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-963fbf2a"]]);
 const _sfc_main$1 = {
   __name: "Locales",
   __ssrInlineRender: true,
@@ -324,20 +250,26 @@ const _sfc_main$1 = {
           if (_push2) {
             _push2(`<!--[-->`);
             ssrRenderList(_ctx.$page.props.locales, (locale, code) => {
-              _push2(`<button class="flex justify-between items-center w-full p-2 text-gray-900 hover:text-white bg-white hover:bg-zinc-900"${_scopeId}><span${_scopeId}>${ssrInterpolate(locale.native)}</span><span${_scopeId}>${ssrInterpolate(locale.emoji)}</span></button>`);
+              _push2(`<button class="${ssrRenderClass([
+                code === _ctx.$page.props.active_locale_code ? "bg-zinc-900 text-white" : "text-gray-900 hover:text-white",
+                "flex justify-between items-center w-full p-2 bg-white hover:bg-zinc-900"
+              ])}"${_scopeId}><span${_scopeId}>${ssrInterpolate(locale.native)}</span><span${_scopeId}>${ssrInterpolate(locale.emoji)}</span></button>`);
             });
             _push2(`<!--]-->`);
           } else {
             return [
               (openBlock(true), createBlock(Fragment, null, renderList(_ctx.$page.props.locales, (locale, code) => {
                 return openBlock(), createBlock("button", {
-                  class: "flex justify-between items-center w-full p-2 text-gray-900 hover:text-white bg-white hover:bg-zinc-900",
+                  class: [
+                    "flex justify-between items-center w-full p-2 bg-white hover:bg-zinc-900",
+                    code === _ctx.$page.props.active_locale_code ? "bg-zinc-900 text-white" : "text-gray-900 hover:text-white"
+                  ],
                   onClick: ($event) => active_locale(code, locale.url),
                   key: code
                 }, [
                   createVNode("span", null, toDisplayString(locale.native), 1),
                   createVNode("span", null, toDisplayString(locale.emoji), 1)
-                ], 8, ["onClick"]);
+                ], 10, ["onClick"]);
               }), 128))
             ];
           }
@@ -359,9 +291,7 @@ const _sfc_main = {
   __ssrInlineRender: true,
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<footer${ssrRenderAttrs(mergeProps({ class: "bg-gray-900 text-white py-8" }, _attrs))}><main class="container mx-auto flex flex-wrap justify-between"><section class="w-full sm:w-1/2 md:w-1/4 px-4 mb-8"><h2 class="h-20 text-2xl font-semibold mb-4"><span class="font-bold text-green-400"> KGV </span> papenwinkel e.V.Höxter </h2><p> Seit 1948 gibt es nun schon den KGV Papenwinkel im Herzen des Weserberglandes. Besuchen Sie uns gerne! […] </p></section><section class="w-full sm:w-1/2 md:w-1/4 px-4 mb-8"><h2 class="h-20 text-2xl font-semibold mb-4">Links Unsere Web Seite</h2>`);
-      _push(ssrRenderComponent(_sfc_main$3, { vertical: true }, null, _parent));
-      _push(`</section><section class="w-full sm:w-1/2 md:w-1/4 px-4 mb-8"><h2 class="h-20 text-2xl font-semibold mb-4">Best Of KGV</h2> ABC </section><section class="w-full sm:w-1/2 md:w-1/4 px-4 mb-8"><h2 class="h-20 text-2xl font-semibold mb-4">Aushang</h2><article class="text-lg space-y-2"><p class="text-gray-200"><a href="#">Bürozeiten: </a></p><hr><p class="text-zinc-200">Samstags: 10:00 Uhr - 12:00 Uhr.</p><p class="text-zinc-200">Mittwochs: 16:00 Uhr - 18:00 Uhr.</p><p class="text-zinc-200">Samstags: 10:00 Uhr - 12:00 Uhr.</p><p class="mb-2 text-zinc-200"> in der Winterpause entfällt die Erreichbarkeit am Samstag. </p><hr><p class="mt-2 text-gray-200"><a href="tel:0176/40172874">Mobil-Nr: 0176/40172874 </a></p><p class="text-gray-200"><a href="mailto:kgv1948@web.de">E-Mail: kgv1948@web.de </a></p></article></section></main></footer>`);
+      _push(`<footer${ssrRenderAttrs(mergeProps({ class: "bg-gray-900 text-white py-8" }, _attrs))}> Footer </footer>`);
     };
   }
 };

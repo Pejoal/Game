@@ -1,11 +1,11 @@
 import { useSSRContext, unref, withCtx, createVNode, withModifiers, toDisplayString, openBlock, createBlock, createCommentVNode, Transition } from "vue";
 import { ssrRenderComponent, ssrInterpolate, ssrIncludeBooleanAttr, ssrRenderAttr } from "vue/server-renderer";
-import { A as AuthLayout } from "./AuthLayout-1cd28b10.mjs";
+import { A as AuthLayout } from "./AuthLayout-aaf8546f.mjs";
 import _sfc_main$4 from "./DeleteUserForm-0636c234.mjs";
 import _sfc_main$3 from "./UpdatePasswordForm-2bb9897a.mjs";
 import _sfc_main$2 from "./UpdateProfileInformationForm-47e92260.mjs";
 import { useForm, Head } from "@inertiajs/vue3";
-import "./Footer-11875b49.mjs";
+import "./Footer-1c20d405.mjs";
 import "./_plugin-vue_export-helper-cc2b3d55.mjs";
 import "./Dropdown-d2a4ee41.mjs";
 import "laravel-vue-i18n";
@@ -40,13 +40,6 @@ const _sfc_main = {
         title: _ctx.trans("words.profile")
       }, null, _parent));
       _push(ssrRenderComponent(AuthLayout, null, {
-        "left-sidebar": withCtx((_, _push2, _parent2, _scopeId) => {
-          if (_push2)
-            ;
-          else {
-            return [];
-          }
-        }),
         content: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`<div class="bg-gray-50 pb-2"${_scopeId}><div class="p-2 sm:p-4 shadow sm:rounded-lg"${_scopeId}>`);

@@ -1,15 +1,15 @@
 import { unref, withCtx, createVNode, toDisplayString, useSSRContext } from "vue";
 import { ssrRenderComponent, ssrInterpolate } from "vue/server-renderer";
-import _sfc_main$1 from "./Questions-b61f7b57.mjs";
-import { A as AuthLayout } from "./AuthLayout-1cd28b10.mjs";
+import _sfc_main$1 from "./Questions-5b73d3f2.mjs";
+import { A as AuthLayout } from "./AuthLayout-aaf8546f.mjs";
 import { Head } from "@inertiajs/vue3";
 import "./ResuableModal-2ed3759c.mjs";
 import "./_plugin-vue_export-helper-cc2b3d55.mjs";
 import "./Toast-0297fd7e.mjs";
 import "laravel-vue-i18n";
-import "./QuestionLocales-2c5994b2.mjs";
+import "./QuestionLocales-584f2d5b.mjs";
 import "./Dropdown-d2a4ee41.mjs";
-import "./Footer-11875b49.mjs";
+import "./Footer-1c20d405.mjs";
 const _sfc_main = {
   __name: "Admin",
   __ssrInlineRender: true,
@@ -35,13 +35,6 @@ const _sfc_main = {
         _: 1
       }, _parent));
       _push(ssrRenderComponent(AuthLayout, null, {
-        "left-sidebar": withCtx((_, _push2, _parent2, _scopeId) => {
-          if (_push2)
-            ;
-          else {
-            return [];
-          }
-        }),
         content: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`<main class="p-4 space-y-2"${_scopeId}>`);

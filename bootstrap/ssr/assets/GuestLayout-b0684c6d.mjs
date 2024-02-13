@@ -1,6 +1,6 @@
 import { ref, mergeProps, unref, withCtx, createTextVNode, toDisplayString, useSSRContext } from "vue";
-import { ssrRenderAttrs, ssrRenderComponent, ssrInterpolate, ssrRenderSlot } from "vue/server-renderer";
-import { _ as _sfc_main$1, a as _sfc_main$2, H as Hamburger, b as _sfc_main$3 } from "./Footer-11875b49.mjs";
+import { ssrRenderAttrs, ssrRenderAttr, ssrRenderComponent, ssrInterpolate, ssrRenderSlot } from "vue/server-renderer";
+import { _ as _sfc_main$1, a as _sfc_main$2, H as Hamburger, b as _sfc_main$3 } from "./Footer-1c20d405.mjs";
 import { Link } from "@inertiajs/vue3";
 const _sfc_main = {
   __name: "GuestLayout",
@@ -11,22 +11,29 @@ const _sfc_main = {
       showNav.value = !showNav.value;
     };
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "min-h-screen bg-gray-100" }, _attrs))}><header class="flex items-center justify-between h-20 bg-zinc-400 py-2 px-4 sm:px-6 lg:px-8">`);
+      var _a, _b, _c, _d;
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "min-h-screen bg-gray-100" }, _attrs))}><header class="flex items-center justify-between h-20 bg-zinc-400 py-2 px-4 sm:px-6 lg:px-8"><section class="flex items-center gap-2">`);
+      if ((_b = (_a = _ctx.$page) == null ? void 0 : _a.props) == null ? void 0 : _b.logo) {
+        _push(`<img class="rounded-full w-14 h-14 md:w-16 md:h-16"${ssrRenderAttr("src", (_d = (_c = _ctx.$page) == null ? void 0 : _c.props) == null ? void 0 : _d.logo)}${ssrRenderAttr("alt", _ctx.trans("words.logo"))}>`);
+      } else {
+        _push(`<!---->`);
+      }
       _push(ssrRenderComponent(unref(Link), {
         class: "font-bold text-xl",
         href: _ctx.route("home")
       }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`${ssrInterpolate(_ctx.trans("words.my_drive_school"))}`);
+            _push2(`${ssrInterpolate(_ctx.trans("words.game"))}`);
           } else {
             return [
-              createTextVNode(toDisplayString(_ctx.trans("words.my_drive_school")), 1)
+              createTextVNode(toDisplayString(_ctx.trans("words.game")), 1)
             ];
           }
         }),
         _: 1
       }, _parent));
+      _push(`</section>`);
       _push(ssrRenderComponent(_sfc_main$1, { horizontal: true }, null, _parent));
       _push(ssrRenderComponent(_sfc_main$2, { horizontal: true }, null, _parent));
       _push(ssrRenderComponent(Hamburger, {

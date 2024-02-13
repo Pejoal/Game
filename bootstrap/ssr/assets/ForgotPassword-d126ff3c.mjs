@@ -1,9 +1,9 @@
 import { withCtx, unref, createVNode, toDisplayString, openBlock, createBlock, createCommentVNode, withModifiers, useSSRContext } from "vue";
 import { ssrRenderComponent, ssrInterpolate, ssrRenderClass, ssrIncludeBooleanAttr } from "vue/server-renderer";
-import { _ as _sfc_main$1 } from "./GuestLayout-d397f8de.mjs";
+import { _ as _sfc_main$1 } from "./GuestLayout-b0684c6d.mjs";
 import { _ as _sfc_main$2, a as _sfc_main$3, b as _sfc_main$4 } from "./TextInput-1899e056.mjs";
 import { useForm, Head } from "@inertiajs/vue3";
-import "./Footer-11875b49.mjs";
+import "./Footer-1c20d405.mjs";
 import "./_plugin-vue_export-helper-cc2b3d55.mjs";
 import "./Dropdown-d2a4ee41.mjs";
 import "laravel-vue-i18n";

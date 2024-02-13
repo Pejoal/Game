@@ -1,10 +1,10 @@
 import { ref, watch, unref, withCtx, createVNode, toDisplayString, openBlock, createBlock, Fragment, renderList, useSSRContext } from "vue";
 import { ssrRenderComponent, ssrInterpolate, ssrRenderAttr, ssrRenderList } from "vue/server-renderer";
-import { A as AuthLayout } from "./AuthLayout-1cd28b10.mjs";
+import { A as AuthLayout } from "./AuthLayout-aaf8546f.mjs";
 import _sfc_main$1 from "./AppointmentsGroup-be50479d.mjs";
 import { Head } from "@inertiajs/vue3";
 import axios from "axios";
-import "./Footer-11875b49.mjs";
+import "./Footer-1c20d405.mjs";
 import "./_plugin-vue_export-helper-cc2b3d55.mjs";
 import "./Dropdown-d2a4ee41.mjs";
 import "laravel-vue-i18n";
@@ -70,13 +70,6 @@ const _sfc_main = {
         title: _ctx.trans("words.admin_dashboard")
       }, null, _parent));
       _push(ssrRenderComponent(AuthLayout, null, {
-        "left-sidebar": withCtx((_, _push2, _parent2, _scopeId) => {
-          if (_push2)
-            ;
-          else {
-            return [];
-          }
-        }),
         content: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`<section class="p-4"${_scopeId}><header class="flex items-center justify-center mb-2"${_scopeId}><h2 class="text-xl font-bold pb-1 border-b border-b-black"${_scopeId}>${ssrInterpolate(_ctx.trans("words.appointment_requests"))}</h2></header><main class="space-y-2 rounded-lg"${_scopeId}><section class="flex items-center"${_scopeId}><label for="users" class="text-2xl font-bold w-1/3"${_scopeId}>${ssrInterpolate(_ctx.trans("words.filter_by_user"))}</label><select id="users" class="chosen-select"${ssrRenderAttr("data-placeholder", _ctx.trans("words.choose_a_user"))} multiple${_scopeId}><!--[-->`);

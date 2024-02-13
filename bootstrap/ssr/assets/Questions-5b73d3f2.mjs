@@ -4,7 +4,7 @@ import { usePage, useForm, Link } from "@inertiajs/vue3";
 import { R as ResuableModal } from "./ResuableModal-2ed3759c.mjs";
 import { T as Toast } from "./Toast-0297fd7e.mjs";
 import { trans } from "laravel-vue-i18n";
-import _sfc_main$1 from "./QuestionLocales-2c5994b2.mjs";
+import _sfc_main$1 from "./QuestionLocales-584f2d5b.mjs";
 import "./_plugin-vue_export-helper-cc2b3d55.mjs";
 import "./Dropdown-d2a4ee41.mjs";
 const _sfc_main = {
