@@ -44,7 +44,7 @@ const store = () => {
   </Head>
   <GuestLayout>
     <main class="grid grid-cols-1 md:grid-cols-3">
-      <section class="bg-amber-200 p-2">
+      <section class="bg-amber-50 p-2">
         <h2 class="text-xl font-bold">Lobbies</h2>
         <section class="flex gap-2" v-for="lobby in lobbies" :key="lobby.id">
           <p class="font-semibold">
@@ -104,7 +104,7 @@ const store = () => {
           </ResuableModal>
         </Teleport>
       </section>
-      <section class="col-span-2 bg-indigo-400">Hello Everyone!</section>
+      <section class="col-span-2 p-2">Hello Everyone!</section>
     </main>
   </GuestLayout>
 </template>
