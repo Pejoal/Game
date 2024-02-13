@@ -66,7 +66,7 @@ Route::group([], function () {
     // User
     Route::group(['middleware' => 'clients-only'], function () {
       Route::get('user/profile', [ProfileController::class, 'myProfile'])->name('user.profile.me');
-      Route::get('lobby/join', [LobbyController::class, 'join'])->name('lobby.join');
+      Route::get('lobby/{lobby}/join', [LobbyController::class, 'join'])->name('lobby.join');
 
     });
 

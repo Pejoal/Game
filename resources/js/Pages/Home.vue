@@ -3,15 +3,16 @@ import GuestLayout from "@/Layouts/GuestLayout.vue";
 import { Head } from "@inertiajs/vue3";
 import { defineProps } from "vue"; // Import defineProps function
 import { Link } from "@inertiajs/vue3";
+import ResuableModal from "@/Components/ResuableModal.vue";
+import { Teleport } from "vue";
+import { ref } from "vue";
+
+let showModal = ref(false);
 
 const props = defineProps({
   lobbies: {
     type: Array,
-    default: [
-      { id: 1, name: "A" },
-      { id: 2, name: "B" },
-      { id: 3, name: "C" },
-    ],
+    default: [],
   },
 });
 </script>
@@ -28,10 +29,26 @@ const props = defineProps({
           <p class="font-semibold">
             {{ lobby.name }}
           </p>
-          <Link :href="route('lobby.join')" class="underline hover:font-bold">
+          <Link
+            :href="route('lobby.join', lobby.id)"
+            class="underline hover:font-bold"
+          >
             {{ trans("words.join") }}
           </Link>
         </section>
+        <button class="btn btn-primary" @click="showModal = true">
+          Create Lobby
+        </button>
+        <Teleport to="#modal">
+          <ResuableModal
+            :classes="['w-[90%] md:w-[85%] lg:w-[80%] h-[80%]']"
+            :header="'xxx'"
+            :show="showModal"
+            @close="showModal = false"
+          >
+            <template #content> xxx </template>
+          </ResuableModal>
+        </Teleport>
       </section>
       <section class="col-span-2 bg-indigo-400">Hello Everyone!</section>
     </main>
