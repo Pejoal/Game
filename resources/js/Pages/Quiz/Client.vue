@@ -17,7 +17,6 @@ defineProps({
     <title>{{ trans("words.quiz") }}</title>
   </Head>
   <AuthLayout>
-    <template #left-sidebar> </template>
     <template #content>
       <section class="p-4 space-y-2">
         <Quiz :type="'test'" :questions_count="test_questions_count" />

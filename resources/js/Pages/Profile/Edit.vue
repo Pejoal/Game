@@ -30,8 +30,6 @@ const enableNotifications = (event) => {
   <Head :title="trans('words.profile')" />
 
   <AuthLayout>
-    <template #left-sidebar>
-    </template>
     <template #content>
       <div class="bg-gray-50 pb-2">
         <div class="p-2 sm:p-4 shadow sm:rounded-lg">
@@ -52,7 +50,9 @@ const enableNotifications = (event) => {
         >
           <section class="flex justify-between flex-col sm:flex-row">
             <div class="my-2">
-              <label class="pr-2" for="profile_photo"> {{ trans('words.profile_photo') }} </label>
+              <label class="pr-2" for="profile_photo">
+                {{ trans("words.profile_photo") }}
+              </label>
               <input
                 id="profile_photo"
                 type="file"
@@ -64,7 +64,7 @@ const enableNotifications = (event) => {
               type="submit"
               :disabled="form.processing"
             >
-              {{ trans('words.upload') }}
+              {{ trans("words.upload") }}
             </button>
           </section>
           <p
@@ -86,7 +86,7 @@ const enableNotifications = (event) => {
             class="transition ease-in-out"
           >
             <p v-if="form.recentlySuccessful" class="text-sm">
-              {{ trans('words.uploaded') }}
+              {{ trans("words.uploaded") }}
             </p>
           </Transition>
         </form>

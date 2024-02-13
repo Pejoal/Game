@@ -68,7 +68,6 @@ const submitAnswers = (answers) => {
     <title>{{ trans("words.quiz") }}</title>
   </Head>
   <AuthLayout>
-    <template #left-sidebar> </template>
     <template #content>
       <section class="p-4">
         <div v-if="currentIndex < questions.length">

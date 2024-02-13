@@ -129,7 +129,6 @@ const active_locale = (newLocale) => {
     <title>{{ trans("words.questions") }}</title>
   </Head>
   <AuthLayout>
-    <template #left-sidebar> </template>
     <template #content>
       <Teleport to="#toasts">
         <Toast

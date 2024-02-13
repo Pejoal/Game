@@ -68,7 +68,6 @@ $(document).ready(() => {
   <Head :title="trans('words.admin_dashboard')" />
 
   <AuthLayout>
-    <template #left-sidebar> </template>
     <template #content>
       <section class="p-4">
         <header class="flex items-center justify-center mb-2">
