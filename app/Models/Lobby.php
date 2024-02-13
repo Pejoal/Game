@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Lobby extends Model {
   use HasFactory;
 
-  protected $fillable = ['name'];
+  protected $fillable = ['name','max_players'];
 
   public function host() {
     return $this->belongsTo(User::class);

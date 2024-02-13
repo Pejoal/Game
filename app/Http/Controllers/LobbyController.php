@@ -21,6 +21,7 @@ class LobbyController extends Controller {
     return Inertia::render('Lobby/Index', [
       "lobbyId" => $lobby->id,
       "name" => $lobby->name,
+      "max_players" => $lobby->max_players,
       "messages" => $messages,
     ]);
   }
