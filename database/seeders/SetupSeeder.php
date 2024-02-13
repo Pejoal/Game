@@ -45,5 +45,38 @@ class SetupSeeder extends Seeder {
       'type' => 'client',
     ]);
 
+    User::create([
+      'firstname' => 'client',
+      'lastname' => '3',
+      'username' => 'client3',
+      'gender' => 'female',
+      'email' => 'client3@example.com',
+      'email_verified_at' => now(),
+      'password' => bcrypt('11111111'),
+      'type' => 'client',
+    ]);
+
+    User::create([
+      'firstname' => 'client',
+      'lastname' => '4',
+      'username' => 'client4',
+      'gender' => 'female',
+      'email' => 'client4@example.com',
+      'email_verified_at' => now(),
+      'password' => bcrypt('11111111'),
+      'type' => 'client',
+    ]);
+
+    User::create([
+      'firstname' => 'client',
+      'lastname' => '5',
+      'username' => 'client5',
+      'gender' => 'female',
+      'email' => 'client5@example.com',
+      'email_verified_at' => now(),
+      'password' => bcrypt('11111111'),
+      'type' => 'client',
+    ]);
+
   }
 }
