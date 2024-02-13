@@ -1,7 +1,8 @@
 import { computed, mergeProps, unref, useSSRContext, withCtx, createTextVNode, toDisplayString, createVNode, openBlock, createBlock, createCommentVNode, withModifiers } from "vue";
 import { ssrRenderAttrs, ssrLooseContain, ssrGetDynamicModelProps, ssrRenderComponent, ssrInterpolate, ssrRenderClass, ssrIncludeBooleanAttr } from "vue/server-renderer";
 import { _ as _sfc_main$2 } from "./GuestLayout-b0684c6d.mjs";
-import { _ as _sfc_main$3, a as _sfc_main$4, b as _sfc_main$5 } from "./TextInput-1899e056.mjs";
+import { _ as _sfc_main$4, a as _sfc_main$5 } from "./TextInput-66ab7a8d.mjs";
+import { _ as _sfc_main$3 } from "./InputLabel-f67e6be2.mjs";
 import { useForm, Head, Link } from "@inertiajs/vue3";
 import "./Footer-1c20d405.mjs";
 import "./_plugin-vue_export-helper-cc2b3d55.mjs";

@@ -7,14 +7,9 @@ import "./_plugin-vue_export-helper-cc2b3d55.mjs";
 import "./Dropdown-d2a4ee41.mjs";
 import "laravel-vue-i18n";
 const _sfc_main = {
-  __name: "Home",
+  __name: "Index",
   __ssrInlineRender: true,
-  props: {
-    screen: {
-      type: Object,
-      default: {}
-    }
-  },
+  props: {},
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<!--[-->`);
@@ -33,10 +28,10 @@ const _sfc_main = {
       _push(ssrRenderComponent(_sfc_main$1, null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<main${_scopeId}> Hello Everyone! </main>`);
+            _push2(`<main class=""${_scopeId}> Lobbies Index </main>`);
           } else {
             return [
-              createVNode("main", null, " Hello Everyone! ")
+              createVNode("main", { class: "" }, " Lobbies Index ")
             ];
           }
         }),
@@ -49,7 +44,7 @@ const _sfc_main = {
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Home.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Lobby/Index.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 export {

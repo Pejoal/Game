@@ -1,6 +1,7 @@
 import { mergeProps, useSSRContext, watch, onMounted, onUnmounted, computed, unref, ref, withCtx, createTextVNode, toDisplayString, createVNode, withKeys, nextTick } from "vue";
 import { ssrRenderAttrs, ssrRenderSlot, ssrRenderTeleport, ssrRenderStyle, ssrRenderClass, ssrInterpolate, ssrRenderComponent } from "vue/server-renderer";
-import { _ as _sfc_main$3, a as _sfc_main$4, b as _sfc_main$5 } from "./TextInput-1899e056.mjs";
+import { _ as _sfc_main$4, a as _sfc_main$5 } from "./TextInput-66ab7a8d.mjs";
+import { _ as _sfc_main$3 } from "./InputLabel-f67e6be2.mjs";
 import { useForm, Link } from "@inertiajs/vue3";
 const _sfc_main$2 = {
   __name: "DangerButton",

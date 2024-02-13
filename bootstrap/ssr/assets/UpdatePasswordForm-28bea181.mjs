@@ -1,6 +1,7 @@
 import { ref, unref, useSSRContext } from "vue";
 import { ssrRenderAttrs, ssrInterpolate, ssrRenderComponent, ssrIncludeBooleanAttr } from "vue/server-renderer";
-import { _ as _sfc_main$1, a as _sfc_main$2, b as _sfc_main$3 } from "./TextInput-1899e056.mjs";
+import { _ as _sfc_main$2, a as _sfc_main$3 } from "./TextInput-66ab7a8d.mjs";
+import { _ as _sfc_main$1 } from "./InputLabel-f67e6be2.mjs";
 import { useForm } from "@inertiajs/vue3";
 const _sfc_main = {
   __name: "UpdatePasswordForm",
