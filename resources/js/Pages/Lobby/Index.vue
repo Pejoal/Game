@@ -5,7 +5,7 @@ import CreateMessage from "@/Components/CreateMessage.vue";
 import Message from "@/Components/Message.vue";
 import { Head } from "@inertiajs/vue3";
 import { defineProps } from "vue"; // Import defineProps function
-import { onMounted } from "vue";
+import { onMounted, onUnmounted } from "vue";
 import { ref } from "vue";
 import Echo from "laravel-echo";
 import Pusher from "pusher-js";
@@ -36,13 +36,14 @@ let props = defineProps({
 const env = import.meta.env;
 let initials = ref([]); // Online Users
 let messages = ref([]);
+let echo;
 
 onMounted(() => {
   const pusher = new Pusher(env.VITE_PUSHER_APP_KEY, {
     cluster: env.VITE_PUSHER_APP_CLUSTER,
     encrypted: true,
   });
-  const echo = new Echo({
+  echo = new Echo({
     broadcaster: "pusher",
     key: env.VITE_PUSHER_APP_KEY,
     cluster: env.VITE_PUSHER_APP_CLUSTER,
@@ -57,7 +58,7 @@ onMounted(() => {
         return {
           id: user.id,
           name: user.firstname[0] + user.lastname[0],
-          fullname: user.firstname + ' ' + user.lastname,
+          fullname: user.firstname + " " + user.lastname,
         };
       });
     })
@@ -104,6 +105,14 @@ onMounted(() => {
       console.error(error);
     });
 });
+
+onUnmounted(() => {
+  echo.leaveAllChannels();
+});
+
+const leave = () => {
+  location.href = '/';
+};
 
 const unshiftMessage = (data) => {
   messages.value.unshift({
@@ -166,6 +175,7 @@ const unshiftMessage = (data) => {
           />
         </div>
       </section>
+      <button @click="leave" class="btn btn-danger">Leave Lobby</button>
     </main>
   </GuestLayout>
 </template>
