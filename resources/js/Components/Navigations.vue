@@ -23,17 +23,6 @@ const props = defineProps({
       'flex flex-col space-y-2 px-4': props.vertical,
     }"
   >
-    <Link
-      :href="route('home')"
-      class="hover:font-bold"
-      :class="{
-        'text-zinc-700 hover:text-zinc-800': props.dark,
-        'underline  font-bold': route().current('home'),
-      }"
-    >
-      {{ trans("words.home") }}
-    </Link>
-
     <template
       v-if="['admin', 'super admin'].includes($page.props.auth?.user?.type)"
     >
@@ -59,6 +48,16 @@ const props = defineProps({
       </Link>
     </template>
     <template v-if="$page.props.auth?.user?.type === 'client'">
+      <Link
+        :href="route('home')"
+        class="hover:font-bold"
+        :class="{
+          'text-zinc-700 hover:text-zinc-800': props.dark,
+          'underline  font-bold': route().current('home'),
+        }"
+      >
+        {{ trans("words.home") }}
+      </Link>
       <Link
         :href="route('user.profile.me')"
         class="hover:font-bold"
