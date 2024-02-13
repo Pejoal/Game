@@ -5,8 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Lobby extends Model
-{
+class Lobby extends Model {
   use HasFactory;
 
   protected $fillable = ['name'];
@@ -14,4 +13,9 @@ class Lobby extends Model
   public function host() {
     return $this->belongsTo(User::class);
   }
+
+  public function users() {
+    return $this->belongsToMany(User::class);
+  }
+
 }
