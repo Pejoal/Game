@@ -74,6 +74,7 @@ onMounted(() => {
       initials.value.unshift({
         id: user.id,
         name: user.firstname[0] + user.lastname[0],
+        fullname: user.firstname + " " + user.lastname,
       });
     })
     .leaving((user) => {
