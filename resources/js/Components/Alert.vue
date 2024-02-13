@@ -53,7 +53,7 @@ let props = defineProps({
       </div>
       <p>
         {{ message.firstname + " " + message.lastname }} has
-        {{ message.type === "leave" ? "left" : "joined" }} the room
+        {{ message.type === "leave" ? "left" : "joined" }} the lobby
       </p>
     </div>
   </section>
