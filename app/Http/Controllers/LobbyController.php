@@ -18,7 +18,16 @@ class LobbyController extends Controller {
       ];
     });
 
+    $users = $lobby->users->map(function ($user) {
+      return [
+        'id' => $user->id,
+        'firstname' => $user->firstname,
+        'lastname' => $user->lastname,
+      ];
+    });
+
     return Inertia::render('Lobby/Index', [
+      "users" => $users,
       "lobbyId" => $lobby->id,
       "name" => $lobby->name,
       "max_players" => $lobby->max_players,
