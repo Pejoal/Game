@@ -26,7 +26,7 @@ const form = useForm({
 const store = () => {
   form.post(route("lobby.store"), {
     onSuccess: () => {
-      showModal.value = false;
+      // showModal.value = false;
       form.reset();
     },
     onError: () => {

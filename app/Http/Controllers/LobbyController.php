@@ -14,12 +14,12 @@ class LobbyController extends Controller {
   }
 
   public function store(Request $request) {
+    $request->validate([
+      'name' => 'required|string|max:255',
+    ]);
+    
     auth()->user()->lobbies()->create([
       'name' => $request->name,
     ]);
-    // Lobby::create([
-    //   "user_id" => $user->id,
-    //   'name' => $request->name,
-    // ]);
   }
 }
