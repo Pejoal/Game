@@ -3,7 +3,20 @@ import GuestLayout from "@/Layouts/GuestLayout.vue";
 import { Head } from "@inertiajs/vue3";
 import { defineProps } from "vue"; // Import defineProps function
 
-const props = defineProps({});
+let props = defineProps({
+  name: {
+    type: String,
+    default: "",
+  },
+  lobbyId: {
+    type: Number,
+    default: 0,
+  },
+  messages: {
+    type: Array,
+    default: [],
+  },
+});
 </script>
 
 <template>
@@ -11,8 +24,6 @@ const props = defineProps({});
     <title>{{ trans("words.home") }}</title>
   </Head>
   <GuestLayout>
-    <main class="">
-      Lobbies Index
-    </main>
+    <main class="">Lobbies Index</main>
   </GuestLayout>
 </template>

@@ -1,14 +1,27 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Lobby;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class LobbyController extends Controller {
   //
 
-  public function join() {
+  public function join(Lobby $lobby) {
+    $messages = $lobby->messages()->with('user')->get()->map(function ($message) {
+      return [
+        "id" => $message->id,
+        "content" => $message->content,
+        "firstname" => $message->user->firstname,
+        "lastname" => $message->user->lastname,
+      ];
+    });
+
     return Inertia::render('Lobby/Index', [
+      "lobbyId" => $lobby->id,
+      "name" => $lobby->name,
+      "messages" => $messages,
     ]);
   }
 
