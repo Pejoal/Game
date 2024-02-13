@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Screen;
-use App\Models\Settings;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -47,23 +45,5 @@ class SetupSeeder extends Seeder {
       'type' => 'client',
     ]);
 
-    Screen::create([
-      'name' => 'home',
-      'content' => '',
-    ]);
-
-    Screen::create([
-      'name' => 'imprint',
-      'content' => '',
-    ]);
-
-    Screen::create([
-      'name' => 'data_protection',
-      'content' => '',
-    ]);
-
-    Settings::create([
-      'logo' => null,
-    ]);
   }
 }

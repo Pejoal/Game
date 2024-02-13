@@ -33,7 +33,7 @@ const props = defineProps({
     >
       {{ trans("words.home") }}
     </Link>
-    
+
     <template
       v-if="['admin', 'super admin'].includes($page.props.auth?.user?.type)"
     >
@@ -57,38 +57,8 @@ const props = defineProps({
       >
         {{ trans("words.quiz") }}
       </Link>
-      <Link
-        :href="route('admin.screens')"
-        class="hover:font-bold"
-        :class="{
-          'text-zinc-700 hover:text-zinc-800': props.dark,
-          'underline  font-bold': route().current('admin.screens'),
-        }"
-      >
-        {{ trans("words.screens") }}
-      </Link>
     </template>
     <template v-if="$page.props.auth?.user?.type === 'client'">
-      <Link
-        :href="route('appointments.index')"
-        class="hover:font-bold"
-        :class="{
-          'text-zinc-700 hover:text-zinc-800': props.dark,
-          'underline  font-bold': route().current('appointments.index'),
-        }"
-      >
-        {{ trans("words.appointments") }}
-      </Link>
-      <Link
-        :href="route('quiz.client')"
-        class="hover:font-bold"
-        :class="{
-          'text-zinc-700 hover:text-zinc-800': props.dark,
-          'underline  font-bold': route().current('quiz.client'),
-        }"
-      >
-        {{ trans("words.quiz") }}
-      </Link>
       <Link
         :href="route('user.profile.me')"
         class="hover:font-bold"

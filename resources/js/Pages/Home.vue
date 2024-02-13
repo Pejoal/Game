@@ -14,7 +14,8 @@ const props = defineProps({
     <title>{{ trans("words.home") }}</title>
   </Head>
   <GuestLayout>
-    <main v-html="screen.content">
+    <main>
+      Hello Everyone!
     </main>
   </GuestLayout>
 </template>

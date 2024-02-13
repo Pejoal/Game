@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder {
 
     $this->call([
       SetupSeeder::class,
-      BusinessHourSeeder::class,
     ]);
 
   }
