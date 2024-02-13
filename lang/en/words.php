@@ -93,5 +93,6 @@ return [
   'name' => "Name",
   'created' => "Created",
   'dashboard' => "Dashboard",
+  'max_players' => "Max Players",
   
 ];

@@ -72,36 +72,40 @@ const store = () => {
             @close="showModal = false"
           >
             <template #content>
-              <form
-                @submit.prevent="store"
-                class="px-4 py-2"
-              >
+              <form @submit.prevent="store" class="px-4 py-2">
+                <section>
+                  {{ trans("words.name") }}
 
-                <TextInput
-                  id="name"
-                  ref="nameInput"
-                  v-model="form.name"
-                  type="text"
-                  class="my-2 block w-3/4 text-black rounded-lg"
-                  :placeholder="trans('words.name')"
-                />
-                <InputError
-                  :message="form.errors.name"
-                  class="my-2 bg-white rounded-md px-2 py-1"
-                />
+                  <TextInput
+                    id="name"
+                    ref="nameInput"
+                    v-model="form.name"
+                    type="text"
+                    class="my-2 block w-3/4 text-black rounded-lg"
+                    :placeholder="trans('words.name')"
+                  />
+                  <InputError
+                    :message="form.errors.name"
+                    class="my-2 bg-white rounded-md px-2 py-1"
+                  />
+                </section>
 
-                <TextInput
-                  id="max_players"
-                  ref="max_playersInput"
-                  v-model="form.max_players"
-                  type="text"
-                  class="my-2 block w-3/4 text-black rounded-lg"
-                  :placeholder="trans('words.max_players')"
-                />
-                <InputError
-                  :message="form.errors.max_players"
-                  class="my-2 bg-white rounded-md px-2 py-1"
-                />
+                <section>
+                  {{ trans("words.max_players") }}
+
+                  <TextInput
+                    id="max_players"
+                    ref="max_playersInput"
+                    v-model="form.max_players"
+                    type="text"
+                    class="my-2 block w-3/4 text-black rounded-lg"
+                    :placeholder="trans('words.max_players')"
+                  />
+                  <InputError
+                    :message="form.errors.max_players"
+                    class="my-2 bg-white rounded-md px-2 py-1"
+                  />
+                </section>
 
                 <button class="btn btn-primary" :disabled="form.processing">
                   {{ trans("words.save") }}
