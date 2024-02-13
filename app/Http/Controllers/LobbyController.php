@@ -48,5 +48,7 @@ class LobbyController extends Controller {
 
     $lobby->users()->attach(auth()->id());
 
+    return redirect(route('lobby.join', $lobby->id));
+
   }
 }
