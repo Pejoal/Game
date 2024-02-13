@@ -1,5 +1,4 @@
 <script setup>
-import Appointments from "./Partials/Appointments.vue";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
 import { Head } from "@inertiajs/vue3";
 
