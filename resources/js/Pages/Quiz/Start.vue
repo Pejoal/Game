@@ -1,8 +1,6 @@
 <script setup>
 import AuthLayout from "@/Layouts/AuthLayout.vue";
-import { Head, Link } from "@inertiajs/vue3";
-import axios from "axios";
-import { ref } from "vue";
+import { Head } from "@inertiajs/vue3";
 
 const props = defineProps({
   type: {

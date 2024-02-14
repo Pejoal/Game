@@ -68,6 +68,7 @@ Route::group([], function () {
       Route::get('user/profile', [ProfileController::class, 'myProfile'])->name('user.profile.me');
       
       Route::get('lobby/{lobby}/join', [LobbyController::class, 'join'])->name('lobby.join');
+      Route::delete('lobby/{lobby}/delete', [LobbyController::class, 'delete'])->name('lobby.delete');
       Route::post('lobby/store', [LobbyController::class, 'store'])->name('lobby.store');
       Route::post('/lobby_message', [LobbyController::class, 'broadcastMessage']);
 

@@ -11,6 +11,7 @@ import Echo from "laravel-echo";
 import Pusher from "pusher-js";
 import { getRandomDigits } from "@/utils";
 import { usePage } from "@inertiajs/vue3";
+import axios from "axios";
 
 const page = usePage().props;
 
@@ -24,6 +25,10 @@ let props = defineProps({
     default: 4,
   },
   lobbyId: {
+    type: Number,
+    default: 0,
+  },
+  hostId: {
     type: Number,
     default: 0,
   },
@@ -116,7 +121,15 @@ const leave = () => {
 };
 
 const start = () => {
-  console.log('start');
+  console.log("start");
+};
+
+const deleteLobby = () => {
+  axios.delete(route("lobby.delete", props.lobbyId)).then(() => {
+  location.href = "/";
+
+  });
+  
 };
 
 const unshiftMessage = (data) => {
@@ -179,9 +192,14 @@ const unshiftMessage = (data) => {
         />
       </section>
       <section class="flex items-center justify-center gap-2 my-2">
-      <button @click="leave" class="btn btn-danger">Leave Lobby</button>
-      <button @click="start" class="btn btn-primary">Start Game</button>
-    </section>
+        <template v-if="props.hostId === page.auth.user.id">
+          <button @click="deleteLobby" class="btn btn-danger">
+            Delete Lobby
+          </button>
+          <button @click="start" class="btn btn-primary">Start Game</button>
+        </template>
+        <button @click="leave" class="btn btn-danger">Leave Lobby</button>
+      </section>
     </main>
   </GuestLayout>
 </template>

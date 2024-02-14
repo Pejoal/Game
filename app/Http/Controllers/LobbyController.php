@@ -33,6 +33,7 @@ class LobbyController extends Controller {
     return Inertia::render('Lobby/Index', [
       // "users" => $users,
       "lobbyId" => $lobby->id,
+      "hostId" => $lobby->host_id,
       "name" => $lobby->name,
       "max_players" => $lobby->max_players,
       "messages" => $messages,
@@ -56,6 +57,14 @@ class LobbyController extends Controller {
   public function broadcastMessage(Request $request) {
     $user = $request->user();
     broadcast(new LobbyMessageSent($user, $request->content, $request->lobbyId))->toOthers();
+  }
+
+  public function delete(Lobby $lobby) {
+    if (auth()->user()->id !== $lobby->host_id) {
+      abort(403, 'Not Authorized');
+    }
+    $lobby->delete();
+
   }
 
 }
