@@ -112,7 +112,11 @@ onUnmounted(() => {
 });
 
 const leave = () => {
-  location.href = '/';
+  location.href = "/";
+};
+
+const start = () => {
+  console.log('start');
 };
 
 const unshiftMessage = (data) => {
@@ -144,39 +148,40 @@ const unshiftMessage = (data) => {
         </p>
       </header>
 
-      <section class="bg-zinc-800">
-        <div
-          class="mb-2 bg-zinc-700 px-2 border border-gray-600 rounded-md shadow-lg"
+      <section
+        class="mb-2 bg-zinc-400 px-2 border border-gray-600 rounded-md shadow-lg"
+      >
+        <section
+          class="flex gap-1 m-2 px-2 py-4 border rounded-lg overflow-x-auto"
         >
-          <section
-            class="flex gap-1 m-2 px-2 py-4 border rounded-lg overflow-x-auto"
-          >
-            <p
-              class="flex items-center justify-center w-10 h-10 bg-gray-800 text-white rounded-full"
-              v-for="initial in initials"
-              :key="initial.id"
-              v-text="initial.name"
-              :title="initial.fullname"
-            ></p>
+          <p
+            class="flex items-center justify-center w-10 h-10 bg-gray-900 text-white rounded-full"
+            v-for="initial in initials"
+            :key="initial.id"
+            v-text="initial.name"
+            :title="initial.fullname"
+          ></p>
+        </section>
+        <div
+          class="overflow-y-auto h-96 max-h-[75vh] mb-5 px-2 py-4 border border-gray-600 rounded-lg"
+        >
+          <section v-for="message in messages" :key="message.id">
+            <Alert
+              v-if="message.type === 'join' || message.type === 'leave'"
+              :message="message"
+            />
+            <Message v-else :message="message" />
           </section>
-          <div
-            class="overflow-y-auto h-96 max-h-[75vh] mb-5 px-2 py-4 border border-gray-600 rounded-lg"
-          >
-            <section v-for="message in messages" :key="message.id">
-              <Alert
-                v-if="message.type === 'join' || message.type === 'leave'"
-                :message="message"
-              />
-              <Message v-else :message="message" />
-            </section>
-          </div>
-          <CreateMessage
-            :lobbyId="props.lobbyId"
-            v-on:unshiftMessage="unshiftMessage"
-          />
         </div>
+        <CreateMessage
+          :lobbyId="props.lobbyId"
+          v-on:unshiftMessage="unshiftMessage"
+        />
       </section>
+      <section class="flex items-center justify-center gap-2 my-2">
       <button @click="leave" class="btn btn-danger">Leave Lobby</button>
+      <button @click="start" class="btn btn-primary">Start Game</button>
+    </section>
     </main>
   </GuestLayout>
 </template>
