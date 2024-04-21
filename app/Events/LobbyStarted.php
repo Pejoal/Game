@@ -10,15 +10,13 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class LobbyMessageSent implements ShouldBroadcastNow {
+class LobbyStarted implements ShouldBroadcastNow {
   use Dispatchable, InteractsWithSockets, SerializesModels;
 
   public $user;
-  public $content;
   public $lobbyId;
-  public function __construct(User $user, string $content, int $lobbyId) {
+  public function __construct(User $user, int $lobbyId) {
     $this->user = $user;
-    $this->content = $content;
     $this->lobbyId = $lobbyId;
   }
 
@@ -27,17 +25,14 @@ class LobbyMessageSent implements ShouldBroadcastNow {
    *
    * @return array<int, \Illuminate\Broadcasting\Channel>
    */
-  public function broadcastOn(): array
-  {
+  public function broadcastOn(): array {
     return [
       new PresenceChannel('chat.' . $this->lobbyId),
     ];
   }
 
-  public function broadcastWith(): array
-  {
+  public function broadcastWith(): array {
     return [
-      "content" => $this->content,
       "user_id" => $this->user->id,
       "firstname" => $this->user->firstname,
       "lastname" => $this->user->lastname,

@@ -3,7 +3,7 @@ import GuestLayout from "@/Layouts/GuestLayout.vue";
 import Alert from "@/Components/Alert.vue";
 import CreateMessage from "@/Components/CreateMessage.vue";
 import Message from "@/Components/Message.vue";
-import { Head } from "@inertiajs/vue3";
+import { Head, Link } from "@inertiajs/vue3";
 import { defineProps } from "vue"; // Import defineProps function
 import { onMounted, onUnmounted } from "vue";
 import { ref } from "vue";
@@ -12,6 +12,7 @@ import Pusher from "pusher-js";
 import { getRandomDigits } from "@/utils";
 import { usePage } from "@inertiajs/vue3";
 import axios from "axios";
+import { getActiveLanguage } from "laravel-vue-i18n";
 
 const page = usePage().props;
 
@@ -32,10 +33,10 @@ let props = defineProps({
     type: Number,
     default: 0,
   },
-  messages: {
-    type: Array,
-    default: [],
-  },
+  // messages: {
+  //   type: Array,
+  //   default: [],
+  // },
 });
 
 const env = import.meta.env;
@@ -95,7 +96,6 @@ onMounted(() => {
       });
     })
     .listen("LobbyMessageSent", (data) => {
-      // console.log("Event received:", data);
       if (data.user_id != page.auth.user.id) {
         messages.value.unshift({
           id: getRandomDigits(),
@@ -107,10 +107,15 @@ onMounted(() => {
         });
       }
     })
+    .listen("LobbyStarted", (data) => {
+      let link = `/${getActiveLanguage()}/lobby/${props.lobbyId}/start`;
+      location.href = link;
+    })
     .error((error) => {
       console.error(error);
     });
 });
+
 
 onUnmounted(() => {
   echo.leaveAllChannels();
@@ -120,16 +125,10 @@ const leave = () => {
   location.href = "/";
 };
 
-const start = () => {
-  console.log("start");
-};
-
 const deleteLobby = () => {
   axios.delete(route("lobby.delete", props.lobbyId)).then(() => {
-  location.href = "/";
-
+    location.href = "/";
   });
-  
 };
 
 const unshiftMessage = (data) => {
@@ -196,7 +195,9 @@ const unshiftMessage = (data) => {
           <button @click="deleteLobby" class="btn btn-danger">
             Delete Lobby
           </button>
-          <button @click="start" class="btn btn-primary">Start Game</button>
+          <Link :href="route('lobby.start', lobbyId)" class="btn btn-primary">
+            Start Game
+          </Link>
         </template>
         <button @click="leave" class="btn btn-danger">Leave Lobby</button>
       </section>

@@ -94,5 +94,6 @@ return [
   'created' => "Created",
   'dashboard' => "Dashboard",
   'max_players' => "Max Players",
+  'game_started' => "Game Started",
   
 ];

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Events\LobbyMessageSent;
+use App\Events\LobbyStarted;
 use App\Models\Lobby;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -9,34 +10,32 @@ use Inertia\Inertia;
 class LobbyController extends Controller {
 
   public function join(Lobby $lobby) {
-    // if (!in_array(auth()->id(), $lobby->users->pluck('id')->toArray())) {
-    //   $lobby->users()->attach(auth()->id());
-    // }
-
-    $messages = $lobby->messages()->with('user')->get()->map(function ($message) {
-      return [
-        "id" => $message->id,
-        "content" => $message->content,
-        "firstname" => $message->user->firstname,
-        "lastname" => $message->user->lastname,
-      ];
-    });
-
-    // $users = $lobby->users->map(function ($user) {
+    // $messages = $lobby->messages()->with('user')->get()->map(function ($message) {
     //   return [
-    //     'id' => $user->id,
-    //     'firstname' => $user->firstname,
-    //     'lastname' => $user->lastname,
+    //     "id" => $message->id,
+    //     "content" => $message->content,
+    //     "firstname" => $message->user->firstname,
+    //     "lastname" => $message->user->lastname,
     //   ];
     // });
 
     return Inertia::render('Lobby/Index', [
-      // "users" => $users,
       "lobbyId" => $lobby->id,
       "hostId" => $lobby->host_id,
       "name" => $lobby->name,
       "max_players" => $lobby->max_players,
-      "messages" => $messages,
+    ]);
+  }
+
+  public function start(Request $request, Lobby $lobby) {
+    $user = $request->user();
+    broadcast(new LobbyStarted($user, $lobby->id))->toOthers();
+
+    return Inertia::render('Lobby/Start', [
+      "lobbyId" => $lobby->id,
+      "hostId" => $lobby->host_id,
+      "name" => $lobby->name,
+      "max_players" => $lobby->max_players,
     ]);
   }
 
