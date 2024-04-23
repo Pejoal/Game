@@ -80,6 +80,8 @@ Route::group([], function () {
       Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
       Route::get('admin/modes', [ModeController::class, 'admin'])->name('admin.mode');
+      Route::post('admin/mode/store', [ModeController::class, 'store'])->name('mode.store');
+
 
       Route::get('questions/{type}', [QuestionController::class, 'showByType'])->name('questions.showByType');
       Route::post('question/store', [QuestionController::class, 'store'])->name('question.store');

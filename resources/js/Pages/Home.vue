@@ -11,6 +11,8 @@ import { Transition } from "vue";
 import InputError from "@/Components/InputError.vue";
 
 let showModal = ref(false);
+let nameInput = ref(null);
+let max_playersInput = ref(null);
 
 const props = defineProps({
   lobbies: {
@@ -27,7 +29,9 @@ const form = useForm({
 const store = () => {
   form.post(route("lobby.store"), {
     onSuccess: () => {
-      showModal.value = false;
+      setTimeout(() => {
+        showModal.value = false;
+      }, 1000);
       form.reset();
     },
     onError: () => {
@@ -49,7 +53,10 @@ const store = () => {
   <AuthLayout>
     <main class="grid grid-cols-1 md:grid-cols-3">
       <section class="bg-amber-50 p-2">
-        <h2 class="text-xl font-bold">Lobbies</h2>
+        <h2 class="text-xl font-bold">
+          {{ trans("words.lobbies") }}
+        </h2>
+
         <section class="flex gap-2" v-for="lobby in lobbies" :key="lobby.id">
           <p class="font-semibold">
             {{ lobby.name }}
@@ -62,12 +69,12 @@ const store = () => {
           </Link>
         </section>
         <button class="btn btn-primary" @click="showModal = true">
-          Create Lobby
+          {{ trans("words.create_lobby") }}
         </button>
         <Teleport to="#modal">
           <ResuableModal
             :classes="['w-[90%] md:w-[85%] lg:w-[80%] h-[80%]']"
-            :header="'Create Lobby'"
+            :header="trans('words.create_lobby')"
             :show="showModal"
             @close="showModal = false"
           >

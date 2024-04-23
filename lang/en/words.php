@@ -96,5 +96,9 @@ return [
   'dashboard' => "Dashboard",
   'max_players' => "Max Players",
   'game_started' => "Game Started",
+  'description' => "Description",
+  'lobbies' => "Lobbies",
+  'create_lobby' => "Create Lobby",
+  'create_mode' => "Create Mode",
   
 ];
