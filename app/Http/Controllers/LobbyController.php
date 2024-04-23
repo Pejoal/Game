@@ -4,17 +4,21 @@ namespace App\Http\Controllers;
 use App\Events\LobbyMessageSent;
 use App\Events\LobbyStarted;
 use App\Models\Lobby;
+use App\Models\Mode;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class LobbyController extends Controller {
 
   public function join(Lobby $lobby) {
+    $modes = Mode::get()->toArray();
+
     return Inertia::render('Lobby/Index', [
       "lobbyId" => $lobby->id,
       "hostId" => $lobby->host_id,
       "name" => $lobby->name,
       "max_players" => $lobby->max_players,
+      "modes" => $modes,
     ]);
   }
 

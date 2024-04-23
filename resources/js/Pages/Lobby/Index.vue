@@ -4,7 +4,6 @@ import Alert from "@/Components/Alert.vue";
 import CreateMessage from "@/Components/CreateMessage.vue";
 import Message from "@/Components/Message.vue";
 import { Head, Link } from "@inertiajs/vue3";
-import { defineProps } from "vue"; // Import defineProps function
 import { onMounted, onUnmounted } from "vue";
 import { ref } from "vue";
 import Echo from "laravel-echo";
@@ -33,10 +32,10 @@ let props = defineProps({
     type: Number,
     default: 0,
   },
-  // messages: {
-  //   type: Array,
-  //   default: [],
-  // },
+  modes: {
+    type: Array,
+    default: [],
+  },
 });
 
 const env = import.meta.env;
@@ -116,7 +115,6 @@ onMounted(() => {
     });
 });
 
-
 onUnmounted(() => {
   echo.leaveAllChannels();
 });
@@ -141,6 +139,8 @@ const unshiftMessage = (data) => {
     type: "content",
   });
 };
+
+let selectedOption = ref(null);
 </script>
 
 <template>
@@ -148,59 +148,74 @@ const unshiftMessage = (data) => {
     <title>{{ trans("words.home") }}</title>
   </Head>
   <AuthLayout>
-    <main>
-      <header class="p-2 text-xl font-bold flex items-center justify-between">
-        <h2 class="">
-          {{ props.name }}
-        </h2>
-        <p>
-          {{ trans("words.max_players") }}
-          :
-          {{ props.max_players }}
-        </p>
-      </header>
-
-      <section
-        class="mb-2 bg-zinc-400 px-2 border border-gray-600 rounded-md shadow-lg"
+    <header class="p-2 text-xl font-bold flex items-center justify-between">
+      <h2 class="">
+        {{ props.name }}
+      </h2>
+      <p>
+        {{ trans("words.max_players") }}
+        :
+        {{ props.max_players }}
+      </p>
+    </header>
+    <section class="my-1 px-2">
+      <label for="select" class="block text-sm font-medium text-gray-700"
+        >Select an option:</label
       >
-        <section
-          class="flex gap-1 m-2 px-2 py-4 border rounded-lg overflow-x-auto"
+      <section class="mt-1 relative">
+        <select
+          id="select"
+          v-model="selectedOption"
+          class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
         >
-          <p
-            class="flex items-center justify-center w-10 h-10 bg-gray-900 text-white rounded-full"
-            v-for="initial in initials"
-            :key="initial.id"
-            v-text="initial.name"
-            :title="initial.fullname"
-          ></p>
+          <option value="" disabled>Select an option</option>
+            <option v-for="mode in props.modes" :key="mode.id" :value="mode.id">
+              {{ mode.name }}
+            </option>
+        </select>
+      </section>
+    </section>
+
+    <section
+      class="mb-2 bg-zinc-400 px-2 border border-gray-600 rounded-md shadow-lg"
+    >
+      <section
+        class="flex gap-1 m-2 px-2 py-4 border rounded-lg overflow-x-auto"
+      >
+        <p
+          class="flex items-center justify-center w-10 h-10 bg-gray-900 text-white rounded-full"
+          v-for="initial in initials"
+          :key="initial.id"
+          v-text="initial.name"
+          :title="initial.fullname"
+        ></p>
+      </section>
+      <div
+        class="overflow-y-auto h-96 max-h-[75vh] mb-5 px-2 py-4 border border-gray-600 rounded-lg"
+      >
+        <section v-for="message in messages" :key="message.id">
+          <Alert
+            v-if="message.type === 'join' || message.type === 'leave'"
+            :message="message"
+          />
+          <Message v-else :message="message" />
         </section>
-        <div
-          class="overflow-y-auto h-96 max-h-[75vh] mb-5 px-2 py-4 border border-gray-600 rounded-lg"
-        >
-          <section v-for="message in messages" :key="message.id">
-            <Alert
-              v-if="message.type === 'join' || message.type === 'leave'"
-              :message="message"
-            />
-            <Message v-else :message="message" />
-          </section>
-        </div>
-        <CreateMessage
-          :lobbyId="props.lobbyId"
-          v-on:unshiftMessage="unshiftMessage"
-        />
-      </section>
-      <section class="flex items-center justify-center gap-2 my-2">
-        <template v-if="props.hostId === page.auth.user.id">
-          <button @click="deleteLobby" class="btn btn-danger">
-            Delete Lobby
-          </button>
-          <Link :href="route('lobby.start', lobbyId)" class="btn btn-primary">
-            Start Game
-          </Link>
-        </template>
-        <button @click="leave" class="btn btn-danger">Leave Lobby</button>
-      </section>
-    </main>
+      </div>
+      <CreateMessage
+        :lobbyId="props.lobbyId"
+        v-on:unshiftMessage="unshiftMessage"
+      />
+    </section>
+    <section class="flex items-center justify-center gap-2 my-2">
+      <template v-if="props.hostId === page.auth.user.id">
+        <button @click="deleteLobby" class="btn btn-danger">
+          Delete Lobby
+        </button>
+        <Link :href="route('lobby.start', lobbyId)" class="btn btn-primary">
+          Start Game
+        </Link>
+      </template>
+      <button @click="leave" class="btn btn-danger">Leave Lobby</button>
+    </section>
   </AuthLayout>
 </template>
