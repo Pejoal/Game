@@ -52,6 +52,7 @@ const store = () => {
         {{ trans("words.modes") }}
       </h2>
 
+      <!-- Create Mode -->
       <button class="btn btn-primary" @click="showModal = true">
         {{ trans("words.create_mode") }}
       </button>
@@ -115,6 +116,7 @@ const store = () => {
         </ResuableModal>
       </Teleport>
 
+      <!-- Modes List -->
       <section v-for="mode in modes" class="m-1 p-2 rounded-lg bg-slate-500">
         <p class="text-lg font-bold text-gray-100">{{ mode.name }}</p>
         <p class="indent-2 text-white">{{ mode.description }}</p>
