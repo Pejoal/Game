@@ -12,17 +12,12 @@ const props = defineProps({
     required: true,
   },
 });
-
 </script>
 <template>
   <Head>
     <title>{{ trans("words.quiz") }}</title>
   </Head>
   <AuthLayout>
-    <template #content>
-      <section class="p-4">
-        Start
-      </section>
-    </template>
+    <section class="p-4">Start</section>
   </AuthLayout>
 </template>

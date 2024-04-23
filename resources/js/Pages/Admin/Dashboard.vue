@@ -8,7 +8,5 @@ const props = defineProps({});
 <template>
   <Head :title="trans('words.dashboard')" />
 
-  <AuthLayout>
-    <template #content> Dashboard </template>
-  </AuthLayout>
+  <AuthLayout> Dashboard </AuthLayout>
 </template>

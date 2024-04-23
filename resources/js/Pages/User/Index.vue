@@ -18,8 +18,6 @@ let props = defineProps({
   <Head :title="trans('words.my_data')" />
 
   <AuthLayout>
-    <template #content>
-      <section class="p-4">hey</section>
-    </template>
+    <section class="p-4">hey</section>
   </AuthLayout>
 </template>

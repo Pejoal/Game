@@ -30,68 +30,67 @@ const enableNotifications = (event) => {
   <Head :title="trans('words.profile')" />
 
   <AuthLayout>
-    <template #content>
-      <div class="bg-gray-50 pb-2">
-        <div class="p-2 sm:p-4 shadow sm:rounded-lg">
-          <UpdateProfileInformationForm
-            :must-verify-email="mustVerifyEmail"
-            :status="status"
-            class="max-w-xl"
-          />
-        </div>
+    <div class="bg-gray-50 pb-2">
+      <div class="p-2 sm:p-4 shadow sm:rounded-lg">
+        <UpdateProfileInformationForm
+          :must-verify-email="mustVerifyEmail"
+          :status="status"
+          class="max-w-xl"
+        />
+      </div>
 
-        <div class="p-2 sm:p-4 shadow sm:rounded-lg">
-          <UpdatePasswordForm class="max-w-xl" />
-        </div>
+      <div class="p-2 sm:p-4 shadow sm:rounded-lg">
+        <UpdatePasswordForm class="max-w-xl" />
+      </div>
 
-        <form
-          class="p-2 sm:p-4 shadow sm:rounded-lg"
-          @submit.prevent="uploadProfilePhoto"
+      <form
+        class="p-2 sm:p-4 shadow sm:rounded-lg"
+        @submit.prevent="uploadProfilePhoto"
+      >
+        <section class="flex justify-between flex-col sm:flex-row">
+          <div class="my-2">
+            <label class="pr-2" for="profile_photo">
+              {{ trans("words.profile_photo") }}
+            </label>
+            <input
+              id="profile_photo"
+              type="file"
+              @input="form.profile_photo = $event.target.files[0]"
+            />
+          </div>
+          <button
+            class="btn btn-success"
+            type="submit"
+            :disabled="form.processing"
+          >
+            {{ trans("words.upload") }}
+          </button>
+        </section>
+        <p
+          v-if="form.errors.profile_photo"
+          class="text-sm bg-red-600 rounded-md my-1 px-2 py-1"
         >
-          <section class="flex justify-between flex-col sm:flex-row">
-            <div class="my-2">
-              <label class="pr-2" for="profile_photo">
-                {{ trans("words.profile_photo") }}
-              </label>
-              <input
-                id="profile_photo"
-                type="file"
-                @input="form.profile_photo = $event.target.files[0]"
-              />
-            </div>
-            <button
-              class="btn btn-success"
-              type="submit"
-              :disabled="form.processing"
-            >
-              {{ trans("words.upload") }}
-            </button>
-          </section>
-          <p
-            v-if="form.errors.profile_photo"
-            class="text-sm bg-red-600 rounded-md my-1 px-2 py-1"
-          >
-            {{ form.errors.profile_photo }}
+          {{ form.errors.profile_photo }}
+        </p>
+        <progress
+          v-if="form.progress"
+          :value="form.progress.percentage"
+          max="100"
+        >
+          {{ form.progress.percentage }}%
+        </progress>
+        <Transition
+          enter-from-class="opacity-0"
+          leave-to-class="opacity-0"
+          class="transition ease-in-out"
+        >
+          <p v-if="form.recentlySuccessful" class="text-sm">
+            {{ trans("words.uploaded") }}
           </p>
-          <progress
-            v-if="form.progress"
-            :value="form.progress.percentage"
-            max="100"
-          >
-            {{ form.progress.percentage }}%
-          </progress>
-          <Transition
-            enter-from-class="opacity-0"
-            leave-to-class="opacity-0"
-            class="transition ease-in-out"
-          >
-            <p v-if="form.recentlySuccessful" class="text-sm">
-              {{ trans("words.uploaded") }}
-            </p>
-          </Transition>
-        </form>
+        </Transition>
+      </form>
 
-        <!-- <form
+      <!-- <form
           class="p-2 sm:p-4 shadow sm:rounded-lg"
           @submit.prevent="enableNotifications()"
         >
@@ -105,10 +104,9 @@ const enableNotifications = (event) => {
           </section>
         </form> -->
 
-        <div class="p-2 sm:p-4 shadow sm:rounded-lg">
-          <DeleteUserForm class="max-w-xl" />
-        </div>
+      <div class="p-2 sm:p-4 shadow sm:rounded-lg">
+        <DeleteUserForm class="max-w-xl" />
       </div>
-    </template>
+    </div>
   </AuthLayout>
 </template>

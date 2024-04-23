@@ -15,10 +15,8 @@ defineProps({
     <title>{{ trans("words.quiz") }}</title>
   </Head>
   <AuthLayout>
-    <template #content>
       <main class="p-4 space-y-2">
         Quiz
       </main>
-    </template>
   </AuthLayout>
 </template>
