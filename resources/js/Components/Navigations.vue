@@ -37,14 +37,14 @@ const props = defineProps({
         {{ trans("words.dashboard") }}
       </Link>
       <Link
-        :href="route('quiz.admin')"
+        :href="route('admin.mode')"
         class="hover:font-bold"
         :class="{
           'text-zinc-700 hover:text-zinc-800': props.dark,
-          'underline  font-bold': route().current('quiz.admin'),
+          'underline  font-bold': route().current('admin.mode'),
         }"
       >
-        {{ trans("words.quiz") }}
+        {{ trans("words.mode") }}
       </Link>
     </template>
     <template v-if="$page.props.auth?.user?.type === 'client'">

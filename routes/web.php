@@ -3,9 +3,9 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LobbyController;
+use App\Http\Controllers\ModeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
-use App\Http\Controllers\QuizController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -66,7 +66,7 @@ Route::group([], function () {
       Route::get('home', [HomeController::class, 'index'])->name('home');
 
       Route::get('user/profile', [ProfileController::class, 'myProfile'])->name('user.profile.me');
-      
+
       Route::get('lobby/{lobby}/join', [LobbyController::class, 'join'])->name('lobby.join');
       Route::delete('lobby/{lobby}/delete', [LobbyController::class, 'delete'])->name('lobby.delete');
       Route::get('lobby/{lobby}/start', [LobbyController::class, 'start'])->name('lobby.start');
@@ -78,9 +78,8 @@ Route::group([], function () {
     // Admin
     Route::group(['middleware' => 'admins-only'], function () {
       Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-      Route::post('admin/logo/update', [AdminController::class, 'updateLogo'])->name('admin.logo.update');
 
-      Route::get('quiz/admin', [QuizController::class, 'admin'])->name('quiz.admin');
+      Route::get('admin/modes', [ModeController::class, 'admin'])->name('admin.mode');
 
       Route::get('questions/{type}', [QuestionController::class, 'showByType'])->name('questions.showByType');
       Route::post('question/store', [QuestionController::class, 'store'])->name('question.store');

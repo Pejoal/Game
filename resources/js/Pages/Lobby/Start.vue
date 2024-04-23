@@ -1,5 +1,5 @@
 <script setup>
-import GuestLayout from "@/Layouts/GuestLayout.vue";
+import AuthLayout from "@/Layouts/AuthLayout.vue";
 import { Head, Link } from "@inertiajs/vue3";
 import { Teleport, defineProps } from "vue"; // Import defineProps function
 import Toast from "@/Components/Toast.vue";
@@ -41,7 +41,7 @@ setTimeout(() => {
   <Head>
     <title>{{ trans("words.home") }}</title>
   </Head>
-  <GuestLayout>
+  <AuthLayout>
     <main>
       <Teleport to="#toasts">
         <Toast
@@ -66,5 +66,5 @@ setTimeout(() => {
         <h2>Hey</h2>
       </section>
     </main>
-  </GuestLayout>
+  </AuthLayout>
 </template>

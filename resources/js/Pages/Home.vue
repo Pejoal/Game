@@ -1,5 +1,5 @@
 <script setup>
-import GuestLayout from "@/Layouts/GuestLayout.vue";
+import AuthLayout from "@/Layouts/AuthLayout.vue";
 import { Head, useForm } from "@inertiajs/vue3";
 import { defineProps } from "vue"; // Import defineProps function
 import { Link } from "@inertiajs/vue3";
@@ -46,7 +46,7 @@ const store = () => {
   <Head>
     <title>{{ trans("words.home") }}</title>
   </Head>
-  <GuestLayout>
+  <AuthLayout>
     <main class="grid grid-cols-1 md:grid-cols-3">
       <section class="bg-amber-50 p-2">
         <h2 class="text-xl font-bold">Lobbies</h2>
@@ -129,5 +129,5 @@ const store = () => {
       </section>
       <section class="col-span-2 p-2">Hello Everyone!</section>
     </main>
-  </GuestLayout>
+  </AuthLayout>
 </template>

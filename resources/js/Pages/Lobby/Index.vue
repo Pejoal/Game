@@ -1,5 +1,5 @@
 <script setup>
-import GuestLayout from "@/Layouts/GuestLayout.vue";
+import AuthLayout from "@/Layouts/AuthLayout.vue";
 import Alert from "@/Components/Alert.vue";
 import CreateMessage from "@/Components/CreateMessage.vue";
 import Message from "@/Components/Message.vue";
@@ -147,7 +147,7 @@ const unshiftMessage = (data) => {
   <Head>
     <title>{{ trans("words.home") }}</title>
   </Head>
-  <GuestLayout>
+  <AuthLayout>
     <main>
       <header class="p-2 text-xl font-bold flex items-center justify-between">
         <h2 class="">
@@ -202,5 +202,5 @@ const unshiftMessage = (data) => {
         <button @click="leave" class="btn btn-danger">Leave Lobby</button>
       </section>
     </main>
-  </GuestLayout>
+  </AuthLayout>
 </template>
