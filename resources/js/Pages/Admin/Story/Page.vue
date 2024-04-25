@@ -158,6 +158,16 @@ const storeCard = () => {
       <p class="text-lg font-bold text-gray-100">{{ cardGroup.name }}</p>
       <p class="indent-2 text-white">{{ cardGroup.description }}</p>
 
+      <!-- Cards List -->
+      <section
+        v-for="card in cardGroup.cards"
+        :key="card.id"
+        class="block m-1 p-2 rounded-lg bg-gray-800"
+      >
+        <p class="text-lg font-bold text-gray-100">{{ card.name }}</p>
+        <p class="indent-2 text-white">{{ card.description }}</p>
+      </section>
+
       <!-- Create Card -->
       <section class="flex items-center justify-center">
         <button
