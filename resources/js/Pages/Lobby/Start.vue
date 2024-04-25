@@ -155,10 +155,26 @@ const createStatus = () => {
     </form> -->
 
     <main class="relative bg-slate-700 h-40">
-      <section class="absolute top-1 left-1 text-white">Player 1</section>
-      <section class="absolute bottom-1 left-1 text-white">Player 2</section>
-      <section class="absolute top-1 right-1 text-white">Player 3</section>
-      <section class="absolute bottom-1 right-1 text-white">Player 4</section>
+      <section
+        class="absolute top-1 left-[50%] transform -translate-x-1/2 text-white"
+      >
+        Player 1
+      </section>
+      <section
+        class="absolute top-[50%] left-1 transform -translate-y-1/2 text-white"
+      >
+        Player 2
+      </section>
+      <section
+        class="absolute top-[50%] right-1 transform -translate-y-1/2 text-white"
+      >
+        Player 3
+      </section>
+      <section
+        class="absolute bottom-1 right-[50%] transform translate-x-1/2 text-white"
+      >
+        Player 4
+      </section>
     </main>
 
     <section class="relative p-2 flex overflow-x-auto h-full">
