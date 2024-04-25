@@ -3,10 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Lobby;
-use App\Models\Project;
-use App\Models\Status;
 use App\Models\Story;
-use App\Models\Task;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -100,36 +97,29 @@ class SetupSeeder extends Seeder {
       'description' => 'Story 2 description',
       'user_id' => 1,
     ]);
+  
+    // $numbers = range(1, 4);
+    // foreach ($numbers as $number) {
+    //   Status::create([
+    //     'name' => 'Status ' . $number,
+    //     'slug' => 'stat' . $number,
+    //     'order' => 0,
+    //     'project_id' => 1,
+    //     'creator_id' => 2,
+    //   ]);
+    // }
 
-    Project::create([
-      'name' => 'Project 1',
-      'code' => 'prg1',
-      'slug' => 'prg1',
-      'creator_id' => 2,
-    ]);
-
-    $numbers = range(1, 4);
-    foreach ($numbers as $number) {
-      Status::create([
-        'name' => 'Status ' . $number,
-        'slug' => 'stat' . $number,
-        'order' => 0,
-        'project_id' => 1,
-        'creator_id' => 2,
-      ]);
-    }
-
-    $numbers = range(1, 12);
-    foreach ($numbers as $number) {
-      Task::create([
-        'title' => 'task ' . $number,
-        'description' => 'task ' . $number . ' description',
-        'slug' => 'task' . $number,
-        'order' => 0,
-        'status_id' => 1,
-        'creator_id' => 2,
-      ]);
-    }
+    // $numbers = range(1, 12);
+    // foreach ($numbers as $number) {
+    //   Task::create([
+    //     'title' => 'task ' . $number,
+    //     'description' => 'task ' . $number . ' description',
+    //     'slug' => 'task' . $number,
+    //     'order' => 0,
+    //     'status_id' => 1,
+    //     'creator_id' => 2,
+    //   ]);
+    // }
 
   }
 }

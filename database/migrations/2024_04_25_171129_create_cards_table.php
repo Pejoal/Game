@@ -9,13 +9,12 @@ return new class extends Migration {
    * Run the migrations.
    */
   public function up(): void {
-    Schema::create('tasks', function (Blueprint $table) {
+    Schema::create('card', function (Blueprint $table) {
       $table->id();
-      $table->string('title');
-      $table->string('slug');
+      $table->string('name');
       $table->text('description')->nullable();
       $table->smallInteger('order')->default(0);
-      $table->foreignId('status_id')->constrained('statuses')->onDelete('cascade');
+      $table->foreignId('card_group_id')->constrained('card_groups')->onDelete('cascade');
       $table->foreignId('creator_id')->constrained('users')->onDelete('cascade');
       $table->timestamps();
     });
@@ -25,6 +24,6 @@ return new class extends Migration {
    * Reverse the migrations.
    */
   public function down(): void {
-    Schema::dropIfExists('tasks');
+    Schema::dropIfExists('card');
   }
 };

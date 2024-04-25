@@ -98,7 +98,7 @@ return [
   'lobbies' => "Lobbies",
   'create_lobby' => "Create Lobby",
   'story' => "Story",
-  'stories' => "stories",
+  'stories' => "Stories",
   'create_story' => "Create Story",
   
 ];
