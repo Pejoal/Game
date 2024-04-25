@@ -67,8 +67,6 @@ return [
   'a_new_verification_link_has_been_sent_to_the_email_address_you_provided_during_registration' => 'A new verification link has been sent to the email address you provided during registration',
   'resend_verification_email' => 'Resend Verification Email',
   'profile' => 'Profile',
-  'mode' => 'Mode',
-  'modes' => 'Modes',
   'my_data' => 'My Data',
   'navigation' => 'Navigation',
   'pending' => 'Pending',
@@ -99,6 +97,8 @@ return [
   'description' => "Description",
   'lobbies' => "Lobbies",
   'create_lobby' => "Create Lobby",
-  'create_mode' => "Create Mode",
+  'story' => "Story",
+  'stories' => "stories",
+  'create_story' => "Create Story",
   
 ];

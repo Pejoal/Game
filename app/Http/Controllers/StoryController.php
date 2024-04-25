@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mode;
+use App\Models\Story;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class ModeController extends Controller {
+class StoryController extends Controller {
 
   public function admin(Request $request) {
-    $modes = Mode::get();
-    return Inertia::render('Admin/Mode/Index', [
-      "modes" => $modes,
+    $storys = Story::get();
+    return Inertia::render('Admin/story/Index', [
+      "storys" => $storys,
     ]);
   }
 
@@ -21,19 +21,19 @@ class ModeController extends Controller {
       'description' => 'string|nullable|max:2000',
     ]);
 
-    $mode = auth()->user()->modes()->create([
+    $story = auth()->user()->storys()->create([
       'name' => $request->name,
       'description' => $request->description,
     ]);
 
-    // return redirect(route('mode.join', $mode->id));
+    // return redirect(route('story.join', $story->id));
   }
 
-  public function delete(Mode $mode) {
-    if (auth()->user()->id !== $mode->user_id) {
+  public function delete(Story $story) {
+    if (auth()->user()->id !== $story->user_id) {
       abort(403, 'Not Authorized');
     }
 
-    $mode->delete();
+    $story->delete();
   }
 }

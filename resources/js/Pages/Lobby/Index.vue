@@ -32,7 +32,7 @@ let props = defineProps({
     type: Number,
     default: 0,
   },
-  modes: {
+  stories: {
     type: Array,
     default: [],
   },
@@ -160,7 +160,7 @@ let selectedOption = ref(null);
     </header>
     <section class="my-1 px-2">
       <label for="select" class="block text-sm font-medium text-gray-700"
-        >Select an option:</label
+        >Story:</label
       >
       <section class="mt-1 relative">
         <select
@@ -169,8 +169,8 @@ let selectedOption = ref(null);
           class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
         >
           <option value="" disabled>Select an option</option>
-            <option v-for="mode in props.modes" :key="mode.id" :value="mode.id">
-              {{ mode.name }}
+            <option v-for="story in props.stories" :key="story.id" :value="story.id">
+              {{ story.name }}
             </option>
         </select>
       </section>

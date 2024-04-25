@@ -3,9 +3,9 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LobbyController;
-use App\Http\Controllers\ModeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\StoryController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -79,9 +79,8 @@ Route::group([], function () {
     Route::group(['middleware' => 'admins-only'], function () {
       Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
-      Route::get('admin/modes', [ModeController::class, 'admin'])->name('admin.mode');
-      Route::post('admin/mode/store', [ModeController::class, 'store'])->name('mode.store');
-
+      Route::get('admin/storys', [StoryController::class, 'admin'])->name('admin.story');
+      Route::post('admin/story/store', [StoryController::class, 'store'])->name('story.store');
 
       Route::get('questions/{type}', [QuestionController::class, 'showByType'])->name('questions.showByType');
       Route::post('question/store', [QuestionController::class, 'store'])->name('question.store');

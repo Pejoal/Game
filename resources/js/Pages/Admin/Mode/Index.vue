@@ -9,7 +9,7 @@ import { Transition } from "vue";
 import InputError from "@/Components/InputError.vue";
 
 const props = defineProps({
-  modes: {
+  stories: {
     type: Array,
     default: [],
   },
@@ -24,7 +24,7 @@ let nameInput = ref(null);
 let descriptionInput = ref(null);
 
 const store = () => {
-  form.post(route("mode.store"), {
+  form.post(route("story.store"), {
     onSuccess: () => {
       setTimeout(() => {
         showModal.value = false;
@@ -44,21 +44,21 @@ const store = () => {
 </script>
 
 <template>
-  <Head :title="trans('words.mode')" />
+  <Head :title="trans('words.story')" />
 
   <AuthLayout>
     <h2 class="text-2xl font-bold underline">
-      {{ trans("words.modes") }}
+      {{ trans("words.stories") }}
     </h2>
 
-    <!-- Create Mode -->
+    <!-- Create Story -->
     <button class="btn btn-primary" @click="showModal = true">
-      {{ trans("words.create_mode") }}
+      {{ trans("words.create_story") }}
     </button>
     <Teleport to="#modal">
       <ResuableModal
         :classes="['w-[90%] md:w-[85%] lg:w-[80%] h-[80%]']"
-        :header="trans('words.create_mode')"
+        :header="trans('words.create_story')"
         :show="showModal"
         @close="showModal = false"
       >
@@ -115,10 +115,10 @@ const store = () => {
       </ResuableModal>
     </Teleport>
 
-    <!-- Modes List -->
-    <section v-for="mode in modes" class="m-1 p-2 rounded-lg bg-slate-500">
-      <p class="text-lg font-bold text-gray-100">{{ mode.name }}</p>
-      <p class="indent-2 text-white">{{ mode.description }}</p>
+    <!-- Stories List -->
+    <section v-for="story in stories" class="m-1 p-2 rounded-lg bg-slate-500">
+      <p class="text-lg font-bold text-gray-100">{{ story.name }}</p>
+      <p class="indent-2 text-white">{{ story.description }}</p>
     </section>
   </AuthLayout>
 </template>

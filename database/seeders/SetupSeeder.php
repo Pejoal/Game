@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Story;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -27,7 +28,7 @@ class SetupSeeder extends Seeder {
       'firstname' => 'client',
       'lastname' => '1',
       'username' => 'client1',
-      'gender' => 'female',
+      'gender' => 'male',
       'email' => 'client1@example.com',
       'email_verified_at' => now(),
       'password' => bcrypt('11111111'),
@@ -38,7 +39,7 @@ class SetupSeeder extends Seeder {
       'firstname' => 'client',
       'lastname' => '2',
       'username' => 'client2',
-      'gender' => 'female',
+      'gender' => 'male',
       'email' => 'client2@example.com',
       'email_verified_at' => now(),
       'password' => bcrypt('11111111'),
@@ -76,6 +77,18 @@ class SetupSeeder extends Seeder {
       'email_verified_at' => now(),
       'password' => bcrypt('11111111'),
       'type' => 'client',
+    ]);
+
+    Story::create([
+      'name' => 'Story 1',
+      'description' => 'Story 1 description',
+      'user_id' => 1,
+    ]);
+
+    Story::create([
+      'name' => 'Story 2',
+      'description' => 'Story 2 description',
+      'user_id' => 1,
     ]);
 
   }
