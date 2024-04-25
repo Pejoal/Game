@@ -27,8 +27,7 @@ let props = defineProps({
   },
   story: {
     type: Object,
-    default: {
-    },
+    default: {},
   },
   cardGroups: {
     type: Array,
@@ -47,6 +46,17 @@ const taskMoved = () => {
     cardGroups: props.cardGroups,
   });
 };
+
+const userCards = ref([
+  {
+    name: "John",
+    description: "John is the",
+  },
+  {
+    name: "John 2",
+    description: "John 2",
+  },
+]);
 </script>
 
 <template>
@@ -126,5 +136,24 @@ const taskMoved = () => {
         </section>
       </section>
     </main>
+
+    <Draggable
+      class="flex items-center justify-center gap-2 bg-red-400 px-4 py-2"
+      :list="userCards"
+      group="cards"
+      itemKey="id"
+      @change="taskMoved"
+    >
+      <template #item="{ element, index }">
+        <div class="bg-slate-700 p-2 my-2 cursor-pointer rounded-lg h-20 w-40">
+          <p class="block mb-2 text-xl text-gray-100">
+            {{ element.name }}
+          </p>
+          <span class="text-white truncate">
+            {{ element.description }}
+          </span>
+        </div>
+      </template>
+    </Draggable>
   </AuthLayout>
 </template>
