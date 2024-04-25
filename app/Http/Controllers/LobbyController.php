@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Events\LobbyMessageSent;
 use App\Events\LobbyStarted;
 use App\Models\Lobby;
+use App\Models\Project;
 use App\Models\Story;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -25,12 +26,19 @@ class LobbyController extends Controller {
   public function start(Request $request, Lobby $lobby) {
     $user = $request->user();
     broadcast(new LobbyStarted($user, $lobby->id))->toOthers();
+    $project = Project::find(1);
+    $statuses = $project->statuses()->get()->toArray();
 
     return Inertia::render('Lobby/Start', [
       "lobbyId" => $lobby->id,
       "hostId" => $lobby->host_id,
       "name" => $lobby->name,
       "max_players" => $lobby->max_players,
+      "project" => [
+        'name' => $project->name,
+        'slug' => $project->slug,
+      ],
+      "statuses" => $statuses,
     ]);
   }
 

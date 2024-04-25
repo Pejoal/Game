@@ -4,8 +4,10 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LobbyController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\StatusController;
 use App\Http\Controllers\StoryController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -73,6 +75,16 @@ Route::group([], function () {
       Route::post('lobby/store', [LobbyController::class, 'store'])->name('lobby.store');
       Route::post('/lobby_message', [LobbyController::class, 'broadcastMessage']);
 
+      Route::get('project', [ProjectController::class, 'index'])->name('project.index');
+      Route::post('project/store', [ProjectController::class, 'store'])->name('project.store');
+      Route::get('project/{project:slug}', [ProjectController::class, 'show'])->name('project.show');
+
+      Route::post('project/{project:slug}/status/store', [StatusController::class, 'store'])->name('status.store');
+      Route::put('project/status/sync', [StatusController::class, 'sync'])->name('status.sync');
+
+      Route::post('project/{status:id}/task/store', [TaskController::class, 'store'])->name('task.store');
+      Route::put('project/task/sync', [TaskController::class, 'sync'])->name('task.sync');
+
     });
 
     // Admin
@@ -81,14 +93,6 @@ Route::group([], function () {
 
       Route::get('admin/storys', [StoryController::class, 'admin'])->name('admin.story');
       Route::post('admin/story/store', [StoryController::class, 'store'])->name('story.store');
-
-      Route::get('questions/{type}', [QuestionController::class, 'showByType'])->name('questions.showByType');
-      Route::post('question/store', [QuestionController::class, 'store'])->name('question.store');
-      Route::get('question/{question}/get', [QuestionController::class, 'get'])->name('question.get');
-      Route::put('question/{question}/update', [QuestionController::class, 'update'])->name('question.update');
-      Route::delete('question/{question}/delete', [QuestionController::class, 'destroy'])->name('question.destroy');
-      Route::post('question/{question}/photo/update', [QuestionController::class, 'updatePhoto'])->name('question.photo.update');
-      Route::post('question/{question}/video/update', [QuestionController::class, 'updateVideo'])->name('question.video.update');
 
     });
 

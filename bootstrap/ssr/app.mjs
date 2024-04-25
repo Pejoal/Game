@@ -544,6 +544,7 @@ const php_en = {
   "validation.between.numeric": "The :attribute must be between :min and :max.",
   "validation.between.string": "The :attribute must be between :min and :max characters.",
   "validation.boolean": "The :attribute field must be true or false.",
+  "validation.can": "The :attribute field contains an unauthorized value.",
   "validation.confirmed": "The :attribute confirmation does not match.",
   "validation.current_password": "The password is incorrect.",
   "validation.date": "The :attribute is not a valid date.",
@@ -563,6 +564,7 @@ const php_en = {
   "validation.ends_with": "The :attribute must end with one of the following: :values.",
   "validation.enum": "The selected :attribute is invalid.",
   "validation.exists": "The selected :attribute is invalid.",
+  "validation.extensions": "The :attribute field must have one of the following extensions: :values.",
   "validation.file": "The :attribute must be a file.",
   "validation.filled": "The :attribute field must have a value.",
   "validation.gt.array": "The :attribute must have more than :value items.",
@@ -573,6 +575,7 @@ const php_en = {
   "validation.gte.file": "The :attribute must be greater than or equal to :value kilobytes.",
   "validation.gte.numeric": "The :attribute must be greater than or equal to :value.",
   "validation.gte.string": "The :attribute must be greater than or equal to :value characters.",
+  "validation.hex_color": "The :attribute field must be a valid hexadecimal color.",
   "validation.image": "The :attribute must be an image.",
   "validation.in": "The selected :attribute is invalid.",
   "validation.in_array": "The :attribute field does not exist in :other.",
@@ -581,6 +584,7 @@ const php_en = {
   "validation.ipv4": "The :attribute must be a valid IPv4 address.",
   "validation.ipv6": "The :attribute must be a valid IPv6 address.",
   "validation.json": "The :attribute must be a valid JSON string.",
+  "validation.list": "The :attribute field must be a list.",
   "validation.lowercase": "The :attribute must be lowercase.",
   "validation.lt.array": "The :attribute must have less than :value items.",
   "validation.lt.file": "The :attribute must be less than :value kilobytes.",
@@ -618,6 +622,10 @@ const php_en = {
   "validation.password.symbols": "The :attribute must contain at least one symbol.",
   "validation.password.uncompromised": "The given :attribute has appeared in a data leak. Please choose a different :attribute.",
   "validation.present": "The :attribute field must be present.",
+  "validation.present_if": "The :attribute field must be present when :other is :value.",
+  "validation.present_unless": "The :attribute field must be present unless :other is :value.",
+  "validation.present_with": "The :attribute field must be present when :values is present.",
+  "validation.present_with_all": "The :attribute field must be present when :values are present.",
   "validation.prohibited": "The :attribute field is prohibited.",
   "validation.prohibited_if": "The :attribute field is prohibited when :other is :value.",
   "validation.prohibited_unless": "The :attribute field is prohibited unless :other is in :values.",
@@ -627,6 +635,7 @@ const php_en = {
   "validation.required_array_keys": "The :attribute field must contain entries for: :values.",
   "validation.required_if": "The :attribute field is required when :other is :value.",
   "validation.required_if_accepted": "The :attribute field is required when :other is accepted.",
+  "validation.required_if_declined": "The :attribute field is required when :other is declined.",
   "validation.required_unless": "The :attribute field is required unless :other is in :values.",
   "validation.required_with": "The :attribute field is required when :values is present.",
   "validation.required_with_all": "The :attribute field is required when :values are present.",
@@ -696,7 +705,6 @@ const php_en = {
   "words.a_new_verification_link_has_been_sent_to_the_email_address_you_provided_during_registration": "A new verification link has been sent to the email address you provided during registration",
   "words.resend_verification_email": "Resend Verification Email",
   "words.profile": "Profile",
-  "words.quiz": "Quiz",
   "words.my_data": "My Data",
   "words.navigation": "Navigation",
   "words.pending": "Pending",
@@ -719,7 +727,17 @@ const php_en = {
   "words.already_registered": "Already Registered",
   "words.copyright_all_rights_reserved": "Copyright © 2024 - All Rights Reserved",
   "words.join": "Join",
-  "words.name": "Name"
+  "words.name": "Name",
+  "words.created": "Created",
+  "words.dashboard": "Dashboard",
+  "words.max_players": "Max Players",
+  "words.game_started": "Game Started",
+  "words.description": "Description",
+  "words.lobbies": "Lobbies",
+  "words.create_lobby": "Create Lobby",
+  "words.story": "Story",
+  "words.stories": "stories",
+  "words.create_story": "Create Story"
 };
 const __vite_glob_1_2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
@@ -3346,31 +3364,30 @@ function o(t4, r2) {
     return t5.__proto__ = r3, t5;
   }, o(t4, r2);
 }
-function i() {
-  if ("undefined" == typeof Reflect || !Reflect.construct)
-    return false;
-  if (Reflect.construct.sham)
-    return false;
-  if ("function" == typeof Proxy)
-    return true;
-  try {
-    return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
-    })), true;
-  } catch (t4) {
-    return false;
-  }
-}
-function u(t4, r2, n2) {
-  return u = i() ? Reflect.construct.bind() : function(t5, r3, n3) {
+function i(t4, r2, n2) {
+  return i = function() {
+    if ("undefined" == typeof Reflect || !Reflect.construct)
+      return false;
+    if (Reflect.construct.sham)
+      return false;
+    if ("function" == typeof Proxy)
+      return true;
+    try {
+      return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
+      })), true;
+    } catch (t5) {
+      return false;
+    }
+  }() ? Reflect.construct.bind() : function(t5, r3, n3) {
     var e2 = [null];
     e2.push.apply(e2, r3);
     var i2 = new (Function.bind.apply(t5, e2))();
     return n3 && o(i2, n3.prototype), i2;
-  }, u.apply(null, arguments);
+  }, i.apply(null, arguments);
 }
-function f(t4) {
+function u(t4) {
   var r2 = "function" == typeof Map ? /* @__PURE__ */ new Map() : void 0;
-  return f = function(t5) {
+  return u = function(t5) {
     if (null === t5 || -1 === Function.toString.call(t5).indexOf("[native code]"))
       return t5;
     if ("function" != typeof t5)
@@ -3381,16 +3398,16 @@ function f(t4) {
       r2.set(t5, n2);
     }
     function n2() {
-      return u(t5, arguments, e(this).constructor);
+      return i(t5, arguments, e(this).constructor);
     }
     return n2.prototype = Object.create(t5.prototype, { constructor: { value: n2, enumerable: false, writable: true, configurable: true } }), o(n2, t5);
-  }, f(t4);
+  }, u(t4);
 }
-var a = String.prototype.replace, c = /%20/g, l = { default: "RFC3986", formatters: { RFC1738: function(t4) {
-  return a.call(t4, c, "+");
+var f = String.prototype.replace, a = /%20/g, c = "RFC3986", l = { default: c, formatters: { RFC1738: function(t4) {
+  return f.call(t4, a, "+");
 }, RFC3986: function(t4) {
   return String(t4);
-} }, RFC1738: "RFC1738", RFC3986: "RFC3986" }, s = Object.prototype.hasOwnProperty, v = Array.isArray, p = function() {
+} }, RFC1738: "RFC1738", RFC3986: c }, s = Object.prototype.hasOwnProperty, v = Array.isArray, p = function() {
   for (var t4 = [], r2 = 0; r2 < 256; ++r2)
     t4.push("%" + ((r2 < 16 ? "0" : "") + r2.toString(16)).toUpperCase());
   return t4;
@@ -3485,13 +3502,13 @@ var a = String.prototype.replace, c = /%20/g, l = { default: "RFC3986", formatte
   return t4 + "[" + r2 + "]";
 }, repeat: function(t4) {
   return t4;
-} }, m = Array.isArray, g = String.prototype.split, j = Array.prototype.push, w = function(t4, r2) {
-  j.apply(t4, m(r2) ? r2 : [r2]);
+} }, g = Array.isArray, m = String.prototype.split, j = Array.prototype.push, w = function(t4, r2) {
+  j.apply(t4, g(r2) ? r2 : [r2]);
 }, O = Date.prototype.toISOString, E = l.default, R = { addQueryPrefix: false, allowDots: false, charset: "utf-8", charsetSentinel: false, delimiter: "&", encode: true, encoder: d.encode, encodeValuesOnly: false, format: E, formatter: l.formatters[E], indices: false, serializeDate: function(t4) {
   return O.call(t4);
 }, skipNulls: false, strictNullHandling: false }, S = function t3(r2, n2, e2, o2, i2, u2, f2, a2, c2, l2, s2, v2, p2, y2) {
   var b2, h2 = r2;
-  if ("function" == typeof f2 ? h2 = f2(n2, h2) : h2 instanceof Date ? h2 = l2(h2) : "comma" === e2 && m(h2) && (h2 = d.maybeMap(h2, function(t4) {
+  if ("function" == typeof f2 ? h2 = f2(n2, h2) : h2 instanceof Date ? h2 = l2(h2) : "comma" === e2 && g(h2) && (h2 = d.maybeMap(h2, function(t4) {
     return t4 instanceof Date ? l2(t4) : t4;
   })), null === h2) {
     if (o2)
@@ -3502,7 +3519,7 @@ var a = String.prototype.replace, c = /%20/g, l = { default: "RFC3986", formatte
     if (u2) {
       var j2 = p2 ? n2 : u2(n2, R.encoder, y2, "key", s2);
       if ("comma" === e2 && p2) {
-        for (var O2 = g.call(String(h2), ","), E2 = "", S2 = 0; S2 < O2.length; ++S2)
+        for (var O2 = m.call(String(h2), ","), E2 = "", S2 = 0; S2 < O2.length; ++S2)
           E2 += (0 === S2 ? "" : ",") + v2(u2(O2[S2], R.encoder, y2, "value", s2));
         return [v2(j2) + "=" + E2];
       }
@@ -3513,29 +3530,29 @@ var a = String.prototype.replace, c = /%20/g, l = { default: "RFC3986", formatte
   var k2, x2 = [];
   if (void 0 === h2)
     return x2;
-  if ("comma" === e2 && m(h2))
+  if ("comma" === e2 && g(h2))
     k2 = [{ value: h2.length > 0 ? h2.join(",") || null : void 0 }];
-  else if (m(f2))
+  else if (g(f2))
     k2 = f2;
   else {
-    var C2 = Object.keys(h2);
-    k2 = a2 ? C2.sort(a2) : C2;
+    var T2 = Object.keys(h2);
+    k2 = a2 ? T2.sort(a2) : T2;
   }
-  for (var T2 = 0; T2 < k2.length; ++T2) {
-    var N2 = k2[T2], F2 = "object" == typeof N2 && void 0 !== N2.value ? N2.value : h2[N2];
-    if (!i2 || null !== F2) {
-      var D2 = m(h2) ? "function" == typeof e2 ? e2(n2, N2) : n2 : n2 + (c2 ? "." + N2 : "[" + N2 + "]");
-      w(x2, t3(F2, D2, e2, o2, i2, u2, f2, a2, c2, l2, s2, v2, p2, y2));
+  for (var N2 = 0; N2 < k2.length; ++N2) {
+    var C2 = k2[N2], A2 = "object" == typeof C2 && void 0 !== C2.value ? C2.value : h2[C2];
+    if (!i2 || null !== A2) {
+      var D2 = g(h2) ? "function" == typeof e2 ? e2(n2, C2) : n2 : n2 + (c2 ? "." + C2 : "[" + C2 + "]");
+      w(x2, t3(A2, D2, e2, o2, i2, u2, f2, a2, c2, l2, s2, v2, p2, y2));
     }
   }
   return x2;
-}, k = Object.prototype.hasOwnProperty, x = Array.isArray, C = { allowDots: false, allowPrototypes: false, arrayLimit: 20, charset: "utf-8", charsetSentinel: false, comma: false, decoder: d.decode, delimiter: "&", depth: 5, ignoreQueryPrefix: false, interpretNumericEntities: false, parameterLimit: 1e3, parseArrays: true, plainObjects: false, strictNullHandling: false }, T = function(t4) {
+}, k = Object.prototype.hasOwnProperty, x = Array.isArray, T = { allowDots: false, allowPrototypes: false, arrayLimit: 20, charset: "utf-8", charsetSentinel: false, comma: false, decoder: d.decode, delimiter: "&", depth: 5, ignoreQueryPrefix: false, interpretNumericEntities: false, parameterLimit: 1e3, parseArrays: true, plainObjects: false, strictNullHandling: false }, N = function(t4) {
   return t4.replace(/&#(\d+);/g, function(t5, r2) {
     return String.fromCharCode(parseInt(r2, 10));
   });
-}, N = function(t4, r2) {
+}, C = function(t4, r2) {
   return t4 && "string" == typeof t4 && r2.comma && t4.indexOf(",") > -1 ? t4.split(",") : t4;
-}, F = function(t4, r2, n2, e2) {
+}, A = function(t4, r2, n2, e2) {
   if (t4) {
     var o2 = n2.allowDots ? t4.replace(/\.([^.[]+)/g, "[$1]") : t4, i2 = /(\[[^[\]]*])/g, u2 = n2.depth > 0 && /(\[[^[\]]*])/.exec(o2), f2 = u2 ? o2.slice(0, u2.index) : o2, a2 = [];
     if (f2) {
@@ -3549,7 +3566,7 @@ var a = String.prototype.replace, c = /%20/g, l = { default: "RFC3986", formatte
       a2.push(u2[1]);
     }
     return u2 && a2.push("[" + o2.slice(u2.index) + "]"), function(t5, r3, n3, e3) {
-      for (var o3 = e3 ? r3 : N(r3, n3), i3 = t5.length - 1; i3 >= 0; --i3) {
+      for (var o3 = e3 ? r3 : C(r3, n3), i3 = t5.length - 1; i3 >= 0; --i3) {
         var u3, f3 = t5[i3];
         if ("[]" === f3 && n3.parseArrays)
           u3 = [].concat(o3);
@@ -3566,12 +3583,12 @@ var a = String.prototype.replace, c = /%20/g, l = { default: "RFC3986", formatte
 }, D = function(t4, r2) {
   var n2 = function(t5) {
     if (!t5)
-      return C;
+      return T;
     if (null != t5.decoder && "function" != typeof t5.decoder)
       throw new TypeError("Decoder has to be a function.");
     if (void 0 !== t5.charset && "utf-8" !== t5.charset && "iso-8859-1" !== t5.charset)
       throw new TypeError("The charset option must be either utf-8, iso-8859-1, or undefined");
-    return { allowDots: void 0 === t5.allowDots ? C.allowDots : !!t5.allowDots, allowPrototypes: "boolean" == typeof t5.allowPrototypes ? t5.allowPrototypes : C.allowPrototypes, arrayLimit: "number" == typeof t5.arrayLimit ? t5.arrayLimit : C.arrayLimit, charset: void 0 === t5.charset ? C.charset : t5.charset, charsetSentinel: "boolean" == typeof t5.charsetSentinel ? t5.charsetSentinel : C.charsetSentinel, comma: "boolean" == typeof t5.comma ? t5.comma : C.comma, decoder: "function" == typeof t5.decoder ? t5.decoder : C.decoder, delimiter: "string" == typeof t5.delimiter || d.isRegExp(t5.delimiter) ? t5.delimiter : C.delimiter, depth: "number" == typeof t5.depth || false === t5.depth ? +t5.depth : C.depth, ignoreQueryPrefix: true === t5.ignoreQueryPrefix, interpretNumericEntities: "boolean" == typeof t5.interpretNumericEntities ? t5.interpretNumericEntities : C.interpretNumericEntities, parameterLimit: "number" == typeof t5.parameterLimit ? t5.parameterLimit : C.parameterLimit, parseArrays: false !== t5.parseArrays, plainObjects: "boolean" == typeof t5.plainObjects ? t5.plainObjects : C.plainObjects, strictNullHandling: "boolean" == typeof t5.strictNullHandling ? t5.strictNullHandling : C.strictNullHandling };
+    return { allowDots: void 0 === t5.allowDots ? T.allowDots : !!t5.allowDots, allowPrototypes: "boolean" == typeof t5.allowPrototypes ? t5.allowPrototypes : T.allowPrototypes, arrayLimit: "number" == typeof t5.arrayLimit ? t5.arrayLimit : T.arrayLimit, charset: void 0 === t5.charset ? T.charset : t5.charset, charsetSentinel: "boolean" == typeof t5.charsetSentinel ? t5.charsetSentinel : T.charsetSentinel, comma: "boolean" == typeof t5.comma ? t5.comma : T.comma, decoder: "function" == typeof t5.decoder ? t5.decoder : T.decoder, delimiter: "string" == typeof t5.delimiter || d.isRegExp(t5.delimiter) ? t5.delimiter : T.delimiter, depth: "number" == typeof t5.depth || false === t5.depth ? +t5.depth : T.depth, ignoreQueryPrefix: true === t5.ignoreQueryPrefix, interpretNumericEntities: "boolean" == typeof t5.interpretNumericEntities ? t5.interpretNumericEntities : T.interpretNumericEntities, parameterLimit: "number" == typeof t5.parameterLimit ? t5.parameterLimit : T.parameterLimit, parseArrays: false !== t5.parseArrays, plainObjects: "boolean" == typeof t5.plainObjects ? t5.plainObjects : T.plainObjects, strictNullHandling: "boolean" == typeof t5.strictNullHandling ? t5.strictNullHandling : T.strictNullHandling };
   }(r2);
   if ("" === t4 || null == t4)
     return n2.plainObjects ? /* @__PURE__ */ Object.create(null) : {};
@@ -3583,17 +3600,17 @@ var a = String.prototype.replace, c = /%20/g, l = { default: "RFC3986", formatte
     for (n3 = 0; n3 < o3.length; ++n3)
       if (n3 !== i3) {
         var f3, a3, c2 = o3[n3], l2 = c2.indexOf("]="), s2 = -1 === l2 ? c2.indexOf("=") : l2 + 1;
-        -1 === s2 ? (f3 = r3.decoder(c2, C.decoder, u3, "key"), a3 = r3.strictNullHandling ? null : "") : (f3 = r3.decoder(c2.slice(0, s2), C.decoder, u3, "key"), a3 = d.maybeMap(N(c2.slice(s2 + 1), r3), function(t6) {
-          return r3.decoder(t6, C.decoder, u3, "value");
-        })), a3 && r3.interpretNumericEntities && "iso-8859-1" === u3 && (a3 = T(a3)), c2.indexOf("[]=") > -1 && (a3 = x(a3) ? [a3] : a3), e3[f3] = k.call(e3, f3) ? d.combine(e3[f3], a3) : a3;
+        -1 === s2 ? (f3 = r3.decoder(c2, T.decoder, u3, "key"), a3 = r3.strictNullHandling ? null : "") : (f3 = r3.decoder(c2.slice(0, s2), T.decoder, u3, "key"), a3 = d.maybeMap(C(c2.slice(s2 + 1), r3), function(t6) {
+          return r3.decoder(t6, T.decoder, u3, "value");
+        })), a3 && r3.interpretNumericEntities && "iso-8859-1" === u3 && (a3 = N(a3)), c2.indexOf("[]=") > -1 && (a3 = x(a3) ? [a3] : a3), e3[f3] = k.call(e3, f3) ? d.combine(e3[f3], a3) : a3;
       }
     return e3;
   }(t4, n2) : t4, o2 = n2.plainObjects ? /* @__PURE__ */ Object.create(null) : {}, i2 = Object.keys(e2), u2 = 0; u2 < i2.length; ++u2) {
-    var f2 = i2[u2], a2 = F(f2, e2[f2], n2, "string" == typeof t4);
+    var f2 = i2[u2], a2 = A(f2, e2[f2], n2, "string" == typeof t4);
     o2 = d.merge(o2, a2, n2);
   }
   return d.compact(o2);
-}, I = /* @__PURE__ */ function() {
+}, $ = /* @__PURE__ */ function() {
   function t4(t5, r2, n3) {
     var e2, o2;
     this.name = t5, this.definition = r2, this.bindings = null != (e2 = r2.bindings) ? e2 : {}, this.wheres = null != (o2 = r2.wheres) ? o2 : {}, this.config = n3;
@@ -3606,7 +3623,7 @@ var a = String.prototype.replace, c = /%20/g, l = { default: "RFC3986", formatte
     var n3 = this.template.replace(/(\/?){([^}?]*)(\??)}/g, function(t6, n4, e3, o3) {
       var i3, u3 = "(?<" + e3 + ">" + ((null == (i3 = r2.wheres[e3]) ? void 0 : i3.replace(/(^\^)|(\$$)/g, "")) || "[^/?]+") + ")";
       return o3 ? "(" + n4 + u3 + ")?" : "" + n4 + u3;
-    }).replace(/^\w+:\/\//, ""), e2 = t5.replace(/^\w+:\/\//, "").split("?"), o2 = e2[0], i2 = e2[1], u2 = new RegExp("^" + n3 + "/?$").exec(o2);
+    }).replace(/^\w+:\/\//, ""), e2 = t5.replace(/^\w+:\/\//, "").split("?"), o2 = e2[0], i2 = e2[1], u2 = new RegExp("^" + n3 + "/?$").exec(decodeURI(o2));
     if (u2) {
       for (var f2 in u2.groups)
         u2.groups[f2] = "string" == typeof u2.groups[f2] ? decodeURIComponent(u2.groups[f2]) : u2.groups[f2];
@@ -3614,19 +3631,18 @@ var a = String.prototype.replace, c = /%20/g, l = { default: "RFC3986", formatte
     }
     return false;
   }, n2.compile = function(t5) {
-    var r2 = this, n3 = this.parameterSegments;
-    return n3.length ? this.template.replace(/{([^}?]+)(\??)}/g, function(e2, o2, i2) {
-      var u2, f2, a2;
-      if (!i2 && [null, void 0].includes(t5[o2]))
-        throw new Error("Ziggy error: '" + o2 + "' parameter is required for route '" + r2.name + "'.");
-      if (n3[n3.length - 1].name === o2 && ".*" === r2.wheres[o2])
-        return encodeURIComponent(null != (a2 = t5[o2]) ? a2 : "").replace(/%2F/g, "/");
-      if (r2.wheres[o2] && !new RegExp("^" + (i2 ? "(" + r2.wheres[o2] + ")?" : r2.wheres[o2]) + "$").test(null != (u2 = t5[o2]) ? u2 : ""))
-        throw new Error("Ziggy error: '" + o2 + "' parameter does not match required format '" + r2.wheres[o2] + "' for route '" + r2.name + "'.");
-      return encodeURIComponent(null != (f2 = t5[o2]) ? f2 : "");
+    var r2 = this;
+    return this.parameterSegments.length ? this.template.replace(/{([^}?]+)(\??)}/g, function(n3, e2, o2) {
+      var i2, u2;
+      if (!o2 && [null, void 0].includes(t5[e2]))
+        throw new Error("Ziggy error: '" + e2 + "' parameter is required for route '" + r2.name + "'.");
+      if (r2.wheres[e2] && !new RegExp("^" + (o2 ? "(" + r2.wheres[e2] + ")?" : r2.wheres[e2]) + "$").test(null != (u2 = t5[e2]) ? u2 : ""))
+        throw new Error("Ziggy error: '" + e2 + "' parameter does not match required format '" + r2.wheres[e2] + "' for route '" + r2.name + "'.");
+      return encodeURI(null != (i2 = t5[e2]) ? i2 : "").replace(/%7C/g, "|").replace(/%25/g, "%").replace(/\$/g, "%24");
     }).replace(this.origin + "//", this.origin + "/").replace(/\/+$/, "") : this.template;
   }, r(t4, [{ key: "template", get: function() {
-    return (this.origin + "/" + this.definition.uri).replace(/\/+$/, "");
+    var t5 = (this.origin + "/" + this.definition.uri).replace(/\/+$/, "");
+    return "" === t5 ? "/" : t5;
   } }, { key: "origin", get: function() {
     return this.config.absolute ? this.definition.domain ? "" + this.config.url.match(/^\w+:\/\//)[0] + this.definition.domain + (this.config.port ? ":" + this.config.port : "") : this.config.url : "";
   } }, { key: "parameterSegments", get: function() {
@@ -3635,14 +3651,14 @@ var a = String.prototype.replace, c = /%20/g, l = { default: "RFC3986", formatte
       return { name: t6.replace(/{|\??}/g, ""), required: !/\?}$/.test(t6) };
     })) ? t5 : [];
   } }]), t4;
-}(), P = /* @__PURE__ */ function(t4) {
+}(), F = /* @__PURE__ */ function(t4) {
   var e2, i2;
   function u2(r2, e3, o2, i3) {
     var u3;
     if (void 0 === o2 && (o2 = true), (u3 = t4.call(this) || this).t = null != i3 ? i3 : "undefined" != typeof Ziggy ? Ziggy : null == globalThis ? void 0 : globalThis.Ziggy, u3.t = n({}, u3.t, { absolute: o2 }), r2) {
       if (!u3.t.routes[r2])
         throw new Error("Ziggy error: route '" + r2 + "' is not in the route list.");
-      u3.i = new I(r2, u3.t.routes[r2], u3.t), u3.u = u3.l(e3);
+      u3.i = new $(r2, u3.t.routes[r2], u3.t), u3.u = u3.l(e3);
     }
     return u3;
   }
@@ -3675,9 +3691,9 @@ var a = String.prototype.replace, c = /%20/g, l = { default: "RFC3986", formatte
           n3 = t7.format;
         }
         var e4 = l.formatters[n3], o3 = R.filter;
-        return ("function" == typeof t7.filter || m(t7.filter)) && (o3 = t7.filter), { addQueryPrefix: "boolean" == typeof t7.addQueryPrefix ? t7.addQueryPrefix : R.addQueryPrefix, allowDots: void 0 === t7.allowDots ? R.allowDots : !!t7.allowDots, charset: r4, charsetSentinel: "boolean" == typeof t7.charsetSentinel ? t7.charsetSentinel : R.charsetSentinel, delimiter: void 0 === t7.delimiter ? R.delimiter : t7.delimiter, encode: "boolean" == typeof t7.encode ? t7.encode : R.encode, encoder: "function" == typeof t7.encoder ? t7.encoder : R.encoder, encodeValuesOnly: "boolean" == typeof t7.encodeValuesOnly ? t7.encodeValuesOnly : R.encodeValuesOnly, filter: o3, format: n3, formatter: e4, serializeDate: "function" == typeof t7.serializeDate ? t7.serializeDate : R.serializeDate, skipNulls: "boolean" == typeof t7.skipNulls ? t7.skipNulls : R.skipNulls, sort: "function" == typeof t7.sort ? t7.sort : null, strictNullHandling: "boolean" == typeof t7.strictNullHandling ? t7.strictNullHandling : R.strictNullHandling };
+        return ("function" == typeof t7.filter || g(t7.filter)) && (o3 = t7.filter), { addQueryPrefix: "boolean" == typeof t7.addQueryPrefix ? t7.addQueryPrefix : R.addQueryPrefix, allowDots: void 0 === t7.allowDots ? R.allowDots : !!t7.allowDots, charset: r4, charsetSentinel: "boolean" == typeof t7.charsetSentinel ? t7.charsetSentinel : R.charsetSentinel, delimiter: void 0 === t7.delimiter ? R.delimiter : t7.delimiter, encode: "boolean" == typeof t7.encode ? t7.encode : R.encode, encoder: "function" == typeof t7.encoder ? t7.encoder : R.encoder, encodeValuesOnly: "boolean" == typeof t7.encodeValuesOnly ? t7.encodeValuesOnly : R.encodeValuesOnly, filter: o3, format: n3, formatter: e4, serializeDate: "function" == typeof t7.serializeDate ? t7.serializeDate : R.serializeDate, skipNulls: "boolean" == typeof t7.skipNulls ? t7.skipNulls : R.skipNulls, sort: "function" == typeof t7.sort ? t7.sort : null, strictNullHandling: "boolean" == typeof t7.strictNullHandling ? t7.strictNullHandling : R.strictNullHandling };
       }(r3);
-      "function" == typeof o2.filter ? e3 = (0, o2.filter)("", e3) : m(o2.filter) && (n2 = o2.filter);
+      "function" == typeof o2.filter ? e3 = (0, o2.filter)("", e3) : g(o2.filter) && (n2 = o2.filter);
       var i3 = [];
       if ("object" != typeof e3 || null === e3)
         return "";
@@ -3696,7 +3712,7 @@ var a = String.prototype.replace, c = /%20/g, l = { default: "RFC3986", formatte
     var r2 = this;
     t5 ? this.t.absolute && t5.startsWith("/") && (t5 = this.p().host + t5) : t5 = this.h();
     var e3 = {}, o2 = Object.entries(this.t.routes).find(function(n2) {
-      return e3 = new I(n2[0], n2[1], r2.t).matchesUrl(t5);
+      return e3 = new $(n2[0], n2[1], r2.t).matchesUrl(t5);
     }) || [void 0, void 0];
     return n({ name: o2[0] }, e3, { route: o2[1] });
   }, f2.h = function() {
@@ -3709,16 +3725,21 @@ var a = String.prototype.replace, c = /%20/g, l = { default: "RFC3986", formatte
     var a2 = new RegExp("^" + t5.replace(/\./g, "\\.").replace(/\*/g, ".*") + "$").test(o2);
     if ([null, void 0].includes(r2) || !a2)
       return a2;
-    var c2 = new I(o2, f3, this.t);
+    var c2 = new $(o2, f3, this.t);
     r2 = this.l(r2, c2);
     var l2 = n({}, i3, u3);
     return !(!Object.values(r2).every(function(t6) {
       return !t6;
     }) || Object.values(l2).some(function(t6) {
       return void 0 !== t6;
-    })) || Object.entries(r2).every(function(t6) {
-      return l2[t6[0]] == t6[1];
-    });
+    })) || function t6(r3, n2) {
+      return Object.entries(r3).every(function(r4) {
+        var e4 = r4[0], o3 = r4[1];
+        return Array.isArray(o3) && Array.isArray(n2[e4]) ? o3.every(function(t7) {
+          return n2[e4].includes(t7);
+        }) : "object" == typeof o3 && "object" == typeof n2[e4] && null !== o3 && null !== n2[e4] ? t6(o3, n2[e4]) : n2[e4] == o3;
+      });
+    }(r2, l2);
   }, f2.p = function() {
     var t5, r2, n2, e3, o2, i3, u3 = "undefined" != typeof window ? window.location : {}, f3 = u3.host, a2 = u3.pathname, c2 = u3.search;
     return { host: null != (t5 = null == (r2 = this.t.location) ? void 0 : r2.host) ? t5 : void 0 === f3 ? "" : f3, pathname: null != (n2 = null == (e3 = this.t.location) ? void 0 : e3.pathname) ? n2 : void 0 === a2 ? "" : a2, search: null != (o2 = null == (i3 = this.t.location) ? void 0 : i3.search) ? o2 : void 0 === c2 ? "" : c2 };
@@ -3739,8 +3760,8 @@ var a = String.prototype.replace, c = /%20/g, l = { default: "RFC3986", formatte
       var i3;
       (i3 = {})[o2[0].name] = t5, t5 = i3;
     }
-    return n({}, this.m(r2), this.g(t5, r2));
-  }, f2.m = function(t5) {
+    return n({}, this.g(r2), this.m(t5, r2));
+  }, f2.g = function(t5) {
     var r2 = this;
     return t5.parameterSegments.filter(function(t6) {
       return r2.t.defaults[t6.name];
@@ -3748,7 +3769,7 @@ var a = String.prototype.replace, c = /%20/g, l = { default: "RFC3986", formatte
       var i3, u3 = e3.name;
       return n({}, t6, ((i3 = {})[u3] = r2.t.defaults[u3], i3));
     }, {});
-  }, f2.g = function(t5, r2) {
+  }, f2.m = function(t5, r2) {
     var e3 = r2.bindings, o2 = r2.parameterSegments;
     return Object.entries(t5).reduce(function(t6, r3) {
       var i3, u3, f3 = r3[0], a2 = r3[1];
@@ -3771,10 +3792,10 @@ var a = String.prototype.replace, c = /%20/g, l = { default: "RFC3986", formatte
     var t5 = this.v();
     return n({}, t5.params, t5.query);
   } }]), u2;
-}(/* @__PURE__ */ f(String)), $ = { install: function(t4, r2) {
+}(/* @__PURE__ */ u(String)), I = { install: function(t4, r2) {
   var n2 = function(t5, n3, e2, o2) {
     return void 0 === o2 && (o2 = r2), function(t6, r3, n4, e3) {
-      var o3 = new P(t6, r3, n4, e3);
+      var o3 = new F(t6, r3, n4, e3);
       return t6 ? o3.toString() : o3;
     }(t5, n3, e2, o2);
   };
@@ -3785,10 +3806,10 @@ createInertiaApp({
   title: (title) => `${title} - ${appName}`,
   resolve: (name) => resolvePageComponent(
     `./Pages/${name}.vue`,
-    /* @__PURE__ */ Object.assign({ "./Pages/Admin/Dashboard.vue": () => import("./assets/Dashboard-9246ecac.mjs"), "./Pages/Auth/ConfirmPassword.vue": () => import("./assets/ConfirmPassword-6704423b.mjs"), "./Pages/Auth/ForgotPassword.vue": () => import("./assets/ForgotPassword-99d6e601.mjs"), "./Pages/Auth/Login.vue": () => import("./assets/Login-938c4d29.mjs"), "./Pages/Auth/Register.vue": () => import("./assets/Register-99b1ea6a.mjs"), "./Pages/Auth/ResetPassword.vue": () => import("./assets/ResetPassword-2ee0e9cd.mjs"), "./Pages/Auth/VerifyEmail.vue": () => import("./assets/VerifyEmail-2b8bd1c6.mjs"), "./Pages/Home.vue": () => import("./assets/Home-7eab8098.mjs"), "./Pages/Lobby/Index.vue": () => import("./assets/Index-54f43300.mjs"), "./Pages/Profile/Edit.vue": () => import("./assets/Edit-0746252e.mjs"), "./Pages/Profile/Partials/DeleteUserForm.vue": () => import("./assets/DeleteUserForm-6eb9c9ba.mjs"), "./Pages/Profile/Partials/UpdatePasswordForm.vue": () => import("./assets/UpdatePasswordForm-28bea181.mjs"), "./Pages/Profile/Partials/UpdateProfileInformationForm.vue": () => import("./assets/UpdateProfileInformationForm-cef67489.mjs"), "./Pages/Questions/Index.vue": () => import("./assets/Index-0efa4784.mjs"), "./Pages/Quiz/Admin.vue": () => import("./assets/Admin-3d566dd5.mjs"), "./Pages/Quiz/Client.vue": () => import("./assets/Client-5ee3f933.mjs"), "./Pages/Quiz/Partials/QuestionLocales.vue": () => import("./assets/QuestionLocales-584f2d5b.mjs"), "./Pages/Quiz/Partials/Questions.vue": () => import("./assets/Questions-5b73d3f2.mjs"), "./Pages/Quiz/Partials/Quiz.vue": () => import("./assets/Quiz-39c4c040.mjs"), "./Pages/Quiz/Start.vue": () => import("./assets/Start-ac4685f2.mjs"), "./Pages/User/Index.vue": () => import("./assets/Index-40eda19f.mjs") })
+    /* @__PURE__ */ Object.assign({ "./Pages/Admin/Dashboard.vue": () => import("./assets/Dashboard-2ec0feae.mjs"), "./Pages/Admin/Story/Index.vue": () => import("./assets/Index-0a343983.mjs"), "./Pages/Auth/ConfirmPassword.vue": () => import("./assets/ConfirmPassword-835e0ecb.mjs"), "./Pages/Auth/ForgotPassword.vue": () => import("./assets/ForgotPassword-6cb4ae6b.mjs"), "./Pages/Auth/Login.vue": () => import("./assets/Login-2ec9fa31.mjs"), "./Pages/Auth/Register.vue": () => import("./assets/Register-c491d80f.mjs"), "./Pages/Auth/ResetPassword.vue": () => import("./assets/ResetPassword-c2248fd3.mjs"), "./Pages/Auth/VerifyEmail.vue": () => import("./assets/VerifyEmail-52eb198a.mjs"), "./Pages/Home.vue": () => import("./assets/Home-2c9cf898.mjs"), "./Pages/Lobby/Index.vue": () => import("./assets/Index-198ff274.mjs"), "./Pages/Lobby/Start.vue": () => import("./assets/Start-21008b79.mjs"), "./Pages/Profile/Edit.vue": () => import("./assets/Edit-ae0b0668.mjs"), "./Pages/Profile/Partials/DeleteUserForm.vue": () => import("./assets/DeleteUserForm-73a6699b.mjs"), "./Pages/Profile/Partials/UpdatePasswordForm.vue": () => import("./assets/UpdatePasswordForm-98e55198.mjs"), "./Pages/Profile/Partials/UpdateProfileInformationForm.vue": () => import("./assets/UpdateProfileInformationForm-14eeee7f.mjs"), "./Pages/Quiz/Admin.vue": () => import("./assets/Admin-f55d4876.mjs"), "./Pages/Quiz/Client.vue": () => import("./assets/Client-c0c3ae0f.mjs"), "./Pages/Quiz/Start.vue": () => import("./assets/Start-e23c6a2d.mjs"), "./Pages/User/Index.vue": () => import("./assets/Index-8cb40fe4.mjs") })
   ),
   setup({ el, App, props, plugin }) {
-    const app2 = createApp({ render: () => h$1(App, props) }).use(plugin).use($, Ziggy).use(i18nVue, {
+    const app2 = createApp({ render: () => h$1(App, props) }).use(plugin).use(I, Ziggy).use(i18nVue, {
       lang: "de",
       resolve: (lang) => {
         const langs = /* @__PURE__ */ Object.assign({ "../../lang/php_ar.json": __vite_glob_1_0, "../../lang/php_de.json": __vite_glob_1_1, "../../lang/php_en.json": __vite_glob_1_2, "../../lang/php_es.json": __vite_glob_1_3, "../../lang/php_fr.json": __vite_glob_1_4, "../../lang/php_hi.json": __vite_glob_1_5, "../../lang/php_it.json": __vite_glob_1_6, "../../lang/php_ja.json": __vite_glob_1_7, "../../lang/php_pl.json": __vite_glob_1_8, "../../lang/php_ro.json": __vite_glob_1_9, "../../lang/php_ru.json": __vite_glob_1_10, "../../lang/php_tr.json": __vite_glob_1_11, "../../lang/php_zh.json": __vite_glob_1_12 });
