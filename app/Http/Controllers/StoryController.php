@@ -8,10 +8,10 @@ use Inertia\Inertia;
 
 class StoryController extends Controller {
 
-  public function admin(Request $request) {
-    $storys = Story::get();
+  public function index(Request $request) {
+    $stories = Story::get()->toArray();
     return Inertia::render('Admin/Story/Index', [
-      "storys" => $storys,
+      "stories" => $stories,
     ]);
   }
 
@@ -21,12 +21,11 @@ class StoryController extends Controller {
       'description' => 'string|nullable|max:2000',
     ]);
 
-    $story = auth()->user()->storys()->create([
+    $story = auth()->user()->stories()->create([
       'name' => $request->name,
       'description' => $request->description,
     ]);
 
-    // return redirect(route('story.join', $story->id));
   }
 
   public function delete(Story $story) {

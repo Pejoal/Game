@@ -91,7 +91,7 @@ Route::group([], function () {
     Route::group(['middleware' => 'admins-only'], function () {
       Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
-      Route::get('admin/storys', [StoryController::class, 'admin'])->name('admin.story');
+      Route::get('admin/storys', [StoryController::class, 'index'])->name('admin.story');
       Route::post('admin/story/store', [StoryController::class, 'store'])->name('story.store');
 
     });

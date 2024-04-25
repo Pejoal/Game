@@ -52,8 +52,8 @@ class User extends Authenticatable implements MustVerifyEmail {
     return $this->hasMany(Lobby::class, 'host_id');
   }
 
-  public function modes() {
-    return $this->hasMany(Mode::class);
+  public function stories() {
+    return $this->hasMany(Story::class);
   }
 
   /**

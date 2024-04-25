@@ -116,7 +116,7 @@ const store = () => {
     </Teleport>
 
     <!-- Stories List -->
-    <section v-for="story in stories" class="m-1 p-2 rounded-lg bg-slate-500">
+    <section v-for="story in stories" :key="story.id" class="m-1 p-2 rounded-lg bg-slate-500">
       <p class="text-lg font-bold text-gray-100">{{ story.name }}</p>
       <p class="indent-2 text-white">{{ story.description }}</p>
     </section>
