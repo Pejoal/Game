@@ -77,7 +77,7 @@ const toggleNav = () => {
     <main class="lg:container lg:mx-auto">
       <slot />
     </main>
-    <Footer />
+    <!-- <Footer /> -->
   </div>
 </template>
 <style scoped>
