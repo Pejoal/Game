@@ -140,7 +140,7 @@ const unshiftMessage = (data) => {
   });
 };
 
-let selectedOption = ref(null);
+let selectedOption = ref(0);
 </script>
 
 <template>
@@ -169,9 +169,13 @@ let selectedOption = ref(null);
           class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
         >
           <option value="" disabled>Select an option</option>
-            <option v-for="story in props.stories" :key="story.id" :value="story.id">
-              {{ story.name }}
-            </option>
+          <option
+            v-for="story in props.stories"
+            :key="story.id"
+            :value="story.id"
+          >
+            {{ story.name }}
+          </option>
         </select>
       </section>
     </section>
@@ -211,7 +215,7 @@ let selectedOption = ref(null);
         <button @click="deleteLobby" class="btn btn-danger">
           Delete Lobby
         </button>
-        <Link :href="route('lobby.start', lobbyId)" class="btn btn-primary">
+        <Link :href="route('lobby.start', [lobbyId, selectedOption])" class="btn btn-primary">
           Start Game
         </Link>
       </template>

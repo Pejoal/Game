@@ -73,19 +73,11 @@ Route::group([], function () {
 
       Route::get('lobby/{lobby}/join', [LobbyController::class, 'join'])->name('lobby.join');
       Route::delete('lobby/{lobby}/delete', [LobbyController::class, 'delete'])->name('lobby.delete');
-      Route::get('lobby/{lobby}/start', [LobbyController::class, 'start'])->name('lobby.start');
+      Route::get('lobby/{lobby}/story/{story}/start', [LobbyController::class, 'start'])->name('lobby.start');
       Route::post('lobby/store', [LobbyController::class, 'store'])->name('lobby.store');
       Route::post('/lobby_message', [LobbyController::class, 'broadcastMessage']);
 
-      Route::get('project', [ProjectController::class, 'index'])->name('project.index');
-      Route::post('project/store', [ProjectController::class, 'store'])->name('project.store');
-      Route::get('project/{project:slug}', [ProjectController::class, 'show'])->name('project.show');
-
-      Route::post('project/{project:slug}/status/store', [StatusController::class, 'store'])->name('status.store');
-      Route::put('project/status/sync', [StatusController::class, 'sync'])->name('status.sync');
-
-      Route::post('project/{status:id}/task/store', [TaskController::class, 'store'])->name('task.store');
-      Route::put('project/task/sync', [TaskController::class, 'sync'])->name('task.sync');
+      Route::put('card/sync', [CardController::class, 'sync'])->name('card.sync');
 
     });
 

@@ -15,7 +15,7 @@ class Story extends Model {
   }
 
   public function cardGroups() {
-    return $this->hasMany(CardGroup::class)->with(['cards'])->orderBy('order', 'ASC');
+    return $this->hasMany(CardGroup::class)->with(['cards']);
   }
 
   public function cards() {

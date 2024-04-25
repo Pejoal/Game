@@ -24,10 +24,10 @@ class CardController extends Controller {
 
   public function sync(Request $request) {
     $request->validate([
-      'cardGroupes' => ['required', 'array'],
+      'cardGroups' => ['required', 'array'],
     ]);
 
-    foreach ($request->cardGroupes as $cardGroup) {
+    foreach ($request->cardGroups as $cardGroup) {
       foreach ($cardGroup['cards'] as $i => $card) {
         $order = $i + 1;
         if ($card['card_group_id'] !== $cardGroup['id'] || $card['order'] !== $order) {

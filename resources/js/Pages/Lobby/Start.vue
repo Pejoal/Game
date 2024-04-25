@@ -25,13 +25,12 @@ let props = defineProps({
     type: Number,
     default: 0,
   },
-  project: {
+  story: {
     type: Object,
     default: {
-      name: "",
     },
   },
-  statuses: {
+  cardGroups: {
     type: Array,
     default: [],
   },
@@ -44,8 +43,8 @@ setTimeout(() => {
 }, 4000);
 
 const taskMoved = () => {
-  axios.put(route("task.sync"), {
-    statuses: props.statuses,
+  axios.put(route("card.sync"), {
+    cardGroups: props.cardGroups,
   });
 };
 </script>
@@ -104,19 +103,19 @@ const taskMoved = () => {
         class="relative flex overflow-x-auto h-full rounded-lg bg-blue-200"
       >
         <section
-          v-for="status in statuses"
+          v-for="cardGroup in cardGroups"
           class="p-2 flex-1 flex flex-col h-full overflow-x-hidden overflow-y-auto"
         >
           <Draggable
-            :list="status.tasks"
-            group="tasks"
+            :list="cardGroup.cards"
+            group="cards"
             itemKey="id"
             @change="taskMoved"
           >
             <template #item="{ element, index }">
               <div class="bg-slate-700 p-2 my-2 cursor-pointer rounded-lg">
                 <p class="block mb-2 text-xl text-gray-100">
-                  {{ element.title }}
+                  {{ element.name }}
                 </p>
                 <span class="text-white truncate">
                   {{ element.description }}

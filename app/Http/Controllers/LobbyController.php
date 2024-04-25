@@ -23,22 +23,18 @@ class LobbyController extends Controller {
     ]);
   }
 
-  public function start(Request $request, Lobby $lobby) {
+  public function start(Request $request, Lobby $lobby, Story $story) {
+    $cardGroups = $story->cardGroups()->get()->toArray(); 
     $user = $request->user();
     broadcast(new LobbyStarted($user, $lobby->id))->toOthers();
-    $project = Project::find(1);
-    $statuses = $project->statuses()->get()->toArray();
 
     return Inertia::render('Lobby/Start', [
       "lobbyId" => $lobby->id,
       "hostId" => $lobby->host_id,
       "name" => $lobby->name,
       "max_players" => $lobby->max_players,
-      "project" => [
-        'name' => $project->name,
-        'slug' => $project->slug,
-      ],
-      "statuses" => $statuses,
+      "story" => $story,
+      "cardGroups" => $cardGroups,
     ]);
   }
 
