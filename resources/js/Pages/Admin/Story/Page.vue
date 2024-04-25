@@ -51,8 +51,7 @@ let cardGroupId = ref(0);
 const handleShowCardModal = (id) => {
   showCardModal.value = true;
   cardGroupId.value = id;
-  
-}
+};
 const storeCard = () => {
   form.post(route("card.store", cardGroupId.value), {
     onSuccess: () => {
@@ -82,9 +81,12 @@ const storeCard = () => {
     </h2>
 
     <!-- Create Card Group -->
-    <button class="btn btn-primary" @click="showModal = true">
-      {{ trans("words.create_card_group") }}
-    </button>
+    <section class="flex items-center justify-center">
+      <button class="btn btn-primary" @click="showModal = true">
+        {{ trans("words.create_card_group") }}
+      </button>
+    </section>
+
     <Teleport to="#modal">
       <ResuableModal
         :classes="['w-[90%] md:w-[85%] lg:w-[80%] h-[80%]']"
@@ -128,9 +130,11 @@ const storeCard = () => {
               />
             </section>
 
-            <button class="btn btn-primary" :disabled="form.processing">
-              {{ trans("words.save") }}
-            </button>
+            <section class="flex items-center justify-center">
+              <button class="btn btn-primary" :disabled="form.processing">
+                {{ trans("words.save") }}
+              </button>
+            </section>
             <Transition
               enter-from-class="opacity-0"
               leave-to-class="opacity-0"
@@ -155,15 +159,20 @@ const storeCard = () => {
       <p class="indent-2 text-white">{{ cardGroup.description }}</p>
 
       <!-- Create Card -->
-      <button class="btn btn-primary" @click="() => handleShowCardModal(cardGroup.id)">
-        {{ trans("words.create_card") }}
-      </button>
+      <section class="flex items-center justify-center">
+        <button
+          class="btn btn-primary"
+          @click="() => handleShowCardModal(cardGroup.id)"
+        >
+          {{ trans("words.create_card") }}
+        </button>
+      </section>
     </section>
     <Teleport to="#modal">
       <ResuableModal
         :classes="['w-[90%] md:w-[85%] lg:w-[80%] h-[80%]']"
         :header="trans('words.create_card')"
-        :show="showCardModal" 
+        :show="showCardModal"
         @close="showCardModal = false"
       >
         <template #content>

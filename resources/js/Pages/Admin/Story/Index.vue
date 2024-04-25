@@ -52,9 +52,11 @@ const store = () => {
     </h2>
 
     <!-- Create Story -->
-    <button class="btn btn-primary" @click="showModal = true">
-      {{ trans("words.create_story") }}
-    </button>
+    <section class="flex items-center justify-center">
+      <button class="btn btn-primary" @click="showModal = true">
+        {{ trans("words.create_story") }}
+      </button>
+    </section>
     <Teleport to="#modal">
       <ResuableModal
         :classes="['w-[90%] md:w-[85%] lg:w-[80%] h-[80%]']"
