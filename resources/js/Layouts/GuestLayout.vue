@@ -79,6 +79,5 @@ const toggleNav = () => {
     <div>
       <slot />
     </div>
-    <Footer />
   </div>
 </template>
