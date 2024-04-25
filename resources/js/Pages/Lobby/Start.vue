@@ -118,7 +118,8 @@ const createStatus = () => {
       </p>
     </header>
 
-    <form
+    <!-- Create new Status -->
+    <!-- <form
       @submit.prevent="createStatus"
       class="bg-gray-900 px-4 py-2 rounded-lg"
     >
@@ -151,7 +152,7 @@ const createStatus = () => {
           created
         </p>
       </Transition>
-    </form>
+    </form> -->
 
     <section class="relative p-2 flex overflow-x-auto h-full">
       <!-- statuses (Statuses) -->
