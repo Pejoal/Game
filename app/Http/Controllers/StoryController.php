@@ -18,7 +18,7 @@ class StoryController extends Controller {
 
 
   public function show(Story $story) {
-    $cardGroups = CardGroup::get()->toArray();
+    $cardGroups = CardGroup::where('story_id', $story->id)->with('cards')->get()->toArray();
     return Inertia::render('Admin/Story/Page', [
       "story" => $story,
       "cardGroups" => $cardGroups,

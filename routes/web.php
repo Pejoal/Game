@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CardController;
 use App\Http\Controllers\CardGroupController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LobbyController;
@@ -97,6 +98,8 @@ Route::group([], function () {
       Route::post('admin/story/store', [StoryController::class, 'store'])->name('story.store');
 
       Route::post('admin/story/{story}/card-group/', [CardGroupController::class, 'store'])->name('card.group.store');
+
+      Route::post('admin/card-group/{cardGroup}/card/', [CardController::class, 'store'])->name('card.store');
 
     });
 

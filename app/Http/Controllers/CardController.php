@@ -5,22 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Card;
 use App\Models\CardGroup;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class CardController extends Controller {
   public function store(Request $request, cardGroup $cardGroup) {
     $request->validate([
-      'title' => ['required', 'string', 'max:56'],
+      'name' => ['required', 'string', 'max:100'],
       'description' => ['string', 'nullable'],
     ]);
 
-    return $cardGroup->cards()
+    $cardGroup->cards()
       ->create([
-        'title' => $request->title,
-        'order' => 0,
+        'name' => $request->name,
         'description' => $request->description,
+        'order' => 0,
         'creator_id' => auth()->user()->id,
-        'slug' => Str::slug($request->name, '-'),
       ]);
   }
 

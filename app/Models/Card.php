@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Card extends Model {
   use HasFactory;
 
-  protected $fillable = ['title', 'slug', 'creator_id', 'description', 'order', 'status_id'];
+  protected $fillable = ['name','description', 'creator_id',  'order', 'card_group_id'];
 
   public function users() {
     return $this->belongsToMany(User::class);

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\CardGroup;
 use App\Models\Lobby;
 use App\Models\Story;
 use App\Models\User;
@@ -97,17 +98,16 @@ class SetupSeeder extends Seeder {
       'description' => 'Story 2 description',
       'user_id' => 1,
     ]);
-  
-    // $numbers = range(1, 4);
-    // foreach ($numbers as $number) {
-    //   Status::create([
-    //     'name' => 'Status ' . $number,
-    //     'slug' => 'stat' . $number,
-    //     'order' => 0,
-    //     'project_id' => 1,
-    //     'creator_id' => 2,
-    //   ]);
-    // }
+
+    $numbers = range(1, 4);
+    foreach ($numbers as $number) {
+      CardGroup::create([
+        'name' => 'Group ' . $number,
+        'description' => 'Group ' . $number . ' description',
+        'story_id' => 1,
+        'creator_id' => 2,
+      ]);
+    }
 
     // $numbers = range(1, 12);
     // foreach ($numbers as $number) {
