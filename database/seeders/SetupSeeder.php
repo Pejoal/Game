@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Card;
 use App\Models\CardGroup;
 use App\Models\Lobby;
 use App\Models\Story;
@@ -100,6 +101,7 @@ class SetupSeeder extends Seeder {
     ]);
 
     $numbers = range(1, 4);
+    $i = 1;
     foreach ($numbers as $number) {
       CardGroup::create([
         'name' => 'Group ' . $number,
@@ -107,19 +109,18 @@ class SetupSeeder extends Seeder {
         'story_id' => 1,
         'creator_id' => 2,
       ]);
-    }
 
-    // $numbers = range(1, 12);
-    // foreach ($numbers as $number) {
-    //   Task::create([
-    //     'title' => 'task ' . $number,
-    //     'description' => 'task ' . $number . ' description',
-    //     'slug' => 'task' . $number,
-    //     'order' => 0,
-    //     'status_id' => 1,
-    //     'creator_id' => 2,
-    //   ]);
-    // }
+      $card_numbers = range(1, 4);
+      foreach ($card_numbers as $card_number) {
+        Card::create([
+          'name' => 'Card ' . $i,
+          'description' => 'Card ' . $i++ . ' description',
+          'order' => 0,
+          'card_group_id' => $number,
+          'creator_id' => 2,
+        ]);
+      }
+    }
 
   }
 }

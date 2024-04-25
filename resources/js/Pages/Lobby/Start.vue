@@ -39,7 +39,7 @@ let showToast = ref(true);
 
 setTimeout(() => {
   showToast.value = false;
-}, 4000);
+}, 3000);
 
 const taskMoved = () => {
   axios.put(route("card.sync"), {
@@ -49,12 +49,12 @@ const taskMoved = () => {
 
 const userCards = ref([
   {
-    name: "John",
-    description: "John is the",
+    name: "User Card 1",
+    description: "description",
   },
   {
-    name: "John 2",
-    description: "John 2",
+    name: "User Card 2",
+    description: "description",
   },
 ]);
 </script>
@@ -138,7 +138,7 @@ const userCards = ref([
     </main>
 
     <Draggable
-      class="flex items-center justify-center gap-2 bg-red-400 px-4 py-2"
+      class="flex items-center justify-center gap-2 bg-red-400 px-4 py-2 overflow-x-auto"
       :list="userCards"
       group="cards"
       itemKey="id"
