@@ -100,5 +100,6 @@ return [
   'story' => "Story",
   'stories' => "Stories",
   'create_story' => "Create Story",
+  'create_card_group' => "Create Card Group",
   
 ];

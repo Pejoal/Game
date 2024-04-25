@@ -9,9 +9,9 @@ import { Transition } from "vue";
 import InputError from "@/Components/InputError.vue";
 
 const props = defineProps({
-  stories: {
-    type: Array,
-    default: [],
+  story: {
+    type: Object,
+    default: {},
   },
 });
 
@@ -24,7 +24,7 @@ let nameInput = ref(null);
 let descriptionInput = ref(null);
 
 const store = () => {
-  form.post(route("story.store"), {
+  form.post(route("card.group.store", props.story.id), {
     onSuccess: () => {
       setTimeout(() => {
         showModal.value = false;
@@ -48,17 +48,17 @@ const store = () => {
 
   <AuthLayout>
     <h2 class="text-2xl font-bold underline">
-      {{ trans("words.stories") }}
+      {{ story.name }}
     </h2>
 
-    <!-- Create Story -->
+    <!-- Create Card Group -->
     <button class="btn btn-primary" @click="showModal = true">
-      {{ trans("words.create_story") }}
+      {{ trans("words.create_card_group") }}
     </button>
     <Teleport to="#modal">
       <ResuableModal
         :classes="['w-[90%] md:w-[85%] lg:w-[80%] h-[80%]']"
-        :header="trans('words.create_story')"
+        :header="trans('words.create_card_group')"
         :show="showModal"
         @close="showModal = false"
       >
@@ -114,16 +114,5 @@ const store = () => {
         </template>
       </ResuableModal>
     </Teleport>
-
-    <!-- Stories List -->
-    <template v-for="story in stories" :key="story.id">
-      <Link
-        :href="route('story.show', story.id)"
-        class="block m-1 p-2 rounded-lg bg-slate-500"
-      >
-        <p class="text-lg font-bold text-gray-100">{{ story.name }}</p>
-        <p class="indent-2 text-white">{{ story.description }}</p>
-      </Link>
-    </template>
   </AuthLayout>
 </template>

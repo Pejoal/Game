@@ -15,6 +15,13 @@ class StoryController extends Controller {
     ]);
   }
 
+
+  public function show(Story $story) {
+    return Inertia::render('Admin/Story/Page', [
+      "story" => $story,
+    ]);
+  }
+
   public function store(Request $request) {
     $request->validate([
       'name' => 'required|string|max:255',

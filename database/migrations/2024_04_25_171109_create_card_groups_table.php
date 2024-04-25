@@ -13,7 +13,7 @@ return new class extends Migration {
     Schema::create('card_groups', function (Blueprint $table) {
       $table->id();
       $table->string('name');
-      $table->smallInteger('order')->default(0);
+      $table->text('description')->nullable();
       $table->foreignId('story_id')->constrained('stories')->onDelete('cascade');
       $table->foreignId('creator_id')->constrained('users')->onDelete('cascade');
       $table->timestamps();
