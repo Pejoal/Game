@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CardGroup;
 use App\Models\Story;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -17,8 +18,10 @@ class StoryController extends Controller {
 
 
   public function show(Story $story) {
+    $cardGroups = CardGroup::get()->toArray();
     return Inertia::render('Admin/Story/Page', [
       "story" => $story,
+      "cardGroups" => $cardGroups,
     ]);
   }
 

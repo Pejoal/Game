@@ -13,6 +13,10 @@ const props = defineProps({
     type: Object,
     default: {},
   },
+  cardGroups: {
+    type: Array,
+    default: [],
+  },
 });
 
 const form = useForm({
@@ -114,5 +118,15 @@ const store = () => {
         </template>
       </ResuableModal>
     </Teleport>
+
+    <!-- Card Groups List -->
+    <section
+      v-for="cardGroup in cardGroups"
+      :key="cardGroup.id"
+      class="block m-1 p-2 rounded-lg bg-slate-500"
+    >
+      <p class="text-lg font-bold text-gray-100">{{ cardGroup.name }}</p>
+      <p class="indent-2 text-white">{{ cardGroup.description }}</p>
+    </section>
   </AuthLayout>
 </template>
