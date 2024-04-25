@@ -10,7 +10,7 @@ class StoryController extends Controller {
 
   public function admin(Request $request) {
     $storys = Story::get();
-    return Inertia::render('Admin/story/Index', [
+    return Inertia::render('Admin/Story/Index', [
       "storys" => $storys,
     ]);
   }
