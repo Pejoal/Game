@@ -16,6 +16,7 @@ const props = defineProps({
 });
 
 const form = useForm({
+  id: null,
   name: "",
   description: "",
 });
@@ -23,11 +24,8 @@ let showModal = ref(false);
 let nameInput = ref(null);
 let descriptionInput = ref(null);
 
-const store = (id = 0) => {
+const store = () => {
   form.post(route("story.store"), {
-    data: {
-      id,
-    },
     onSuccess: () => {
       setTimeout(() => {
         showModal.value = false;
@@ -45,7 +43,20 @@ const store = (id = 0) => {
   });
 };
 
-const edit = (id) => {};
+const openCreateModal = (id) => {
+  form.id = null;
+  form.name = "";
+  form.description = "";
+  showModal.value = true;
+};
+
+const edit = (id) => {
+  showModal.value = true;
+  const foundStroy = props.stories.find((story) => story.id === id);
+  form.id = foundStroy.id;
+  form.name = foundStroy.name;
+  form.description = foundStroy.description;
+};
 
 const destroy = (id) => {
   form.post(route("story.delete", id), {});
@@ -62,7 +73,7 @@ const destroy = (id) => {
 
     <!-- Create Story -->
     <section class="flex items-center justify-center">
-      <button class="btn btn-primary" @click="showModal = true">
+      <button class="btn btn-primary" @click="openCreateModal">
         {{ trans("words.create_story") }}
       </button>
     </section>

@@ -16,7 +16,6 @@ class StoryController extends Controller {
     ]);
   }
 
-
   public function show(Story $story) {
     $cardGroups = CardGroup::where('story_id', $story->id)->with('cards')->get()->toArray();
     return Inertia::render('Admin/Story/Page', [
@@ -31,10 +30,17 @@ class StoryController extends Controller {
       'description' => 'string|nullable|max:2000',
     ]);
 
-    $story = auth()->user()->stories()->create([
-      'name' => $request->name,
-      'description' => $request->description,
-    ]);
+    if ($request->id) {
+      Story::find($request->id)->update([
+        'name' => $request->name,
+        'description' => $request->description,
+      ]);
+    } else {
+      auth()->user()->stories()->create([
+        'name' => $request->name,
+        'description' => $request->description,
+      ]);
+    }
 
   }
 
