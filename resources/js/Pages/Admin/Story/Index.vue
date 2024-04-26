@@ -129,7 +129,7 @@ const destroy = (id) => {
               class="transition ease-in-out"
             >
               <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">
-                {{ trans("words.created") }}
+                {{ trans("words.saved") }}
               </p>
             </Transition>
           </form>
