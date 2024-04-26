@@ -88,6 +88,7 @@ Route::group([], function () {
       Route::get('admin/storys', [StoryController::class, 'index'])->name('admin.story');
       Route::get('admin/storys/{story}', [StoryController::class, 'show'])->name('story.show');
       Route::post('admin/story/store', [StoryController::class, 'store'])->name('story.store');
+      Route::post('admin/story/{story}/delete', [StoryController::class, 'delete'])->name('story.delete');
 
       Route::post('admin/story/{story}/card-group/', [CardGroupController::class, 'store'])->name('card.group.store');
 

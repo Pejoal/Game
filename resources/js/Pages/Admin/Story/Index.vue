@@ -23,8 +23,11 @@ let showModal = ref(false);
 let nameInput = ref(null);
 let descriptionInput = ref(null);
 
-const store = () => {
+const store = (id = 0) => {
   form.post(route("story.store"), {
+    data: {
+      id,
+    },
     onSuccess: () => {
       setTimeout(() => {
         showModal.value = false;
@@ -40,6 +43,12 @@ const store = () => {
       }
     },
   });
+};
+
+const edit = (id) => {};
+
+const destroy = (id) => {
+  form.post(route("story.delete", id), {});
 };
 </script>
 
@@ -119,13 +128,19 @@ const store = () => {
 
     <!-- Stories List -->
     <template v-for="story in stories" :key="story.id">
-      <Link
-        :href="route('story.show', story.id)"
-        class="block m-1 p-2 rounded-lg bg-slate-500"
-      >
+      <section class="m-1 p-2 rounded-lg bg-slate-500">
         <p class="text-lg font-bold text-gray-100">{{ story.name }}</p>
         <p class="indent-2 text-white">{{ story.description }}</p>
-      </Link>
+        <section class="flex items-center justify-center gap-2">
+          <button class="btn btn-success" @click="edit(story.id)">Edit</button>
+          <button class="btn btn-danger" @click="destroy(story.id)">
+            Delete
+          </button>
+          <Link :href="route('story.show', story.id)" class="btn btn-info">
+            Details
+          </Link>
+        </section>
+      </section>
     </template>
   </AuthLayout>
 </template>
