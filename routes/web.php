@@ -6,10 +6,7 @@ use App\Http\Controllers\CardGroupController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LobbyController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\StatusController;
 use App\Http\Controllers\StoryController;
-use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -89,11 +86,12 @@ Route::group([], function () {
       Route::get('admin/storys/{story}', [StoryController::class, 'show'])->name('story.show');
       Route::post('admin/story/store', [StoryController::class, 'store'])->name('story.store');
       Route::post('admin/story/{story}/delete', [StoryController::class, 'delete'])->name('story.delete');
-      
+
       Route::post('admin/story/{story}/card-group/', [CardGroupController::class, 'store'])->name('card.group.store');
       Route::post('admin/card-group/{cardGroup}/delete', [CardGroupController::class, 'delete'])->name('card.group.delete');
 
       Route::post('admin/card-group/{cardGroup}/card/', [CardController::class, 'store'])->name('card.store');
+      Route::post('admin/card/{card}/delete', [CardController::class, 'delete'])->name('card.delete');
 
     });
 

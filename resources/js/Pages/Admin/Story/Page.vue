@@ -28,6 +28,13 @@ let showModal = ref(false);
 let nameInput = ref(null);
 let descriptionInput = ref(null);
 
+const openCreateModal = (id) => {
+  form.id = null;
+  form.name = "";
+  form.description = "";
+  showModal.value = true;
+};
+
 const store = () => {
   form.post(route("card.group.store", props.story.id), {
     onSuccess: () => {
@@ -49,7 +56,9 @@ const store = () => {
 
 const edit = (id) => {
   showModal.value = true;
-  const foundCardGroup = props.cardGroups.find((cardGroup) => cardGroup.id === id);
+  const foundCardGroup = props.cardGroups.find(
+    (cardGroup) => cardGroup.id === id
+  );
   form.id = foundCardGroup.id;
   form.name = foundCardGroup.name;
   form.description = foundCardGroup.description;
@@ -64,6 +73,9 @@ let cardGroupId = ref(0);
 const handleShowCardModal = (id) => {
   showCardModal.value = true;
   cardGroupId.value = id;
+  form.id = null;
+  form.name = "";
+  form.description = "";
 };
 const storeCard = () => {
   form.post(route("card.store", cardGroupId.value), {
@@ -83,6 +95,21 @@ const storeCard = () => {
     },
   });
 };
+
+const editCard = (id, cardGroupId) => {
+  showCardModal.value = true;
+  const foundCardGroup = props.cardGroups.find(
+    (cardGroup) => cardGroup.id === cardGroupId
+  );
+  const foundCard = foundCardGroup.cards.find((card) => card.id === id);
+  form.id = foundCard.id;
+  form.name = foundCard.name;
+  form.description = foundCard.description;
+};
+
+const destroyCard = (id) => {
+  form.post(route("card.delete", id), {});
+};
 </script>
 
 <template>
@@ -95,7 +122,7 @@ const storeCard = () => {
 
     <!-- Create Card Group -->
     <section class="flex items-center justify-center">
-      <button class="btn btn-primary" @click="showModal = true">
+      <button class="btn btn-primary" @click="openCreateModal">
         {{ trans("words.create_card_group") }}
       </button>
     </section>
@@ -179,9 +206,26 @@ const storeCard = () => {
       >
         <p class="text-lg font-bold text-gray-100">{{ card.name }}</p>
         <p class="indent-2 text-white">{{ card.description }}</p>
+
+        <section class="flex items-center justify-center gap-2">
+          <button
+            type="button"
+            class="btn btn-success"
+            @click="editCard(card.id, cardGroup.id)"
+          >
+            {{ trans("words.edit") }}
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            @click="destroyCard(card.id)"
+          >
+            {{ trans("words.delete") }}
+          </button>
+        </section>
       </section>
 
-      <!-- Create Card -->
+      <!-- Card Group Controls -->
       <section class="flex items-center justify-center gap-2">
         <button
           class="btn btn-primary"
@@ -189,10 +233,18 @@ const storeCard = () => {
         >
           {{ trans("words.create_card") }}
         </button>
-        <button type="button" class="btn btn-success" @click="edit(cardGroup.id)">
+        <button
+          type="button"
+          class="btn btn-success"
+          @click="edit(cardGroup.id)"
+        >
           {{ trans("words.edit") }}
         </button>
-        <button type="button" class="btn btn-danger" @click="destroy(cardGroup.id)">
+        <button
+          type="button"
+          class="btn btn-danger"
+          @click="destroy(cardGroup.id)"
+        >
           {{ trans("words.delete") }}
         </button>
       </section>
