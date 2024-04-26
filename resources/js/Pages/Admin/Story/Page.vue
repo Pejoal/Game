@@ -20,6 +20,7 @@ const props = defineProps({
 });
 
 const form = useForm({
+  id: null,
   name: "",
   description: "",
 });
@@ -44,6 +45,18 @@ const store = () => {
       }
     },
   });
+};
+
+const edit = (id) => {
+  showModal.value = true;
+  const foundCardGroup = props.cardGroups.find((cardGroup) => cardGroup.id === id);
+  form.id = foundCardGroup.id;
+  form.name = foundCardGroup.name;
+  form.description = foundCardGroup.description;
+};
+
+const destroy = (id) => {
+  form.post(route("card.group.delete", id), {});
 };
 
 let showCardModal = ref(false);
@@ -141,7 +154,7 @@ const storeCard = () => {
               class="transition ease-in-out"
             >
               <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">
-                {{ trans("words.created") }}
+                {{ trans("words.saved") }}
               </p>
             </Transition>
           </form>
@@ -169,12 +182,18 @@ const storeCard = () => {
       </section>
 
       <!-- Create Card -->
-      <section class="flex items-center justify-center">
+      <section class="flex items-center justify-center gap-2">
         <button
           class="btn btn-primary"
           @click="() => handleShowCardModal(cardGroup.id)"
         >
           {{ trans("words.create_card") }}
+        </button>
+        <button type="button" class="btn btn-success" @click="edit(cardGroup.id)">
+          {{ trans("words.edit") }}
+        </button>
+        <button type="button" class="btn btn-danger" @click="destroy(cardGroup.id)">
+          {{ trans("words.delete") }}
         </button>
       </section>
     </section>

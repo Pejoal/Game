@@ -143,12 +143,14 @@ const destroy = (id) => {
         <p class="text-lg font-bold text-gray-100">{{ story.name }}</p>
         <p class="indent-2 text-white">{{ story.description }}</p>
         <section class="flex items-center justify-center gap-2">
-          <button class="btn btn-success" @click="edit(story.id)">Edit</button>
+          <button class="btn btn-success" @click="edit(story.id)">
+            {{ trans("words.edit") }}
+          </button>
           <button class="btn btn-danger" @click="destroy(story.id)">
-            Delete
+            {{ trans("words.delete") }}
           </button>
           <Link :href="route('story.show', story.id)" class="btn btn-info">
-            Details
+            {{ trans("words.details") }}
           </Link>
         </section>
       </section>
