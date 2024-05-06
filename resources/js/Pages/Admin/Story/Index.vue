@@ -19,10 +19,12 @@ const form = useForm({
   id: null,
   name: "",
   description: "",
+  pdf: null,
 });
 let showModal = ref(false);
 let nameInput = ref(null);
 let descriptionInput = ref(null);
+let pdfInput = ref(null);
 
 const store = () => {
   form.post(route("story.store"), {
@@ -60,6 +62,12 @@ const edit = (id) => {
 
 const destroy = (id) => {
   form.post(route("story.delete", id), {});
+};
+
+const uploadPDF = () => {
+  form.post(route("story.updatePDF", form.id), {
+    preserveScroll: true,
+  });
 };
 </script>
 
@@ -130,6 +138,53 @@ const destroy = (id) => {
             >
               <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">
                 {{ trans("words.saved") }}
+              </p>
+            </Transition>
+          </form>
+
+          <form
+            class="p-2 sm:p-4 shadow sm:rounded-lg"
+            @submit.prevent="uploadPDF"
+          >
+            <section class="flex justify-between flex-col sm:flex-row">
+              <div class="my-2">
+                <label class="pr-2" for="pdf">
+                  {{ trans("words.pdf") }}
+                </label>
+                <input
+                  id="pdf"
+                  type="file"
+                  @input="form.pdf = $event.target.files[0]"
+                />
+              </div>
+              <button
+                class="btn btn-success"
+                type="submit"
+                :disabled="form.processing"
+              >
+                {{ trans("words.upload") }}
+              </button>
+            </section>
+            <p
+              v-if="form.errors.pdf"
+              class="text-sm bg-red-600 rounded-md my-1 px-2 py-1"
+            >
+              {{ form.errors.pdf }}
+            </p>
+            <progress
+              v-if="form.progress"
+              :value="form.progress.percentage"
+              max="100"
+            >
+              {{ form.progress.percentage }}%
+            </progress>
+            <Transition
+              enter-from-class="opacity-0"
+              leave-to-class="opacity-0"
+              class="transition ease-in-out"
+            >
+              <p v-if="form.recentlySuccessful" class="text-sm">
+                {{ trans("words.uploaded") }}
               </p>
             </Transition>
           </form>

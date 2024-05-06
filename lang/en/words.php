@@ -103,5 +103,6 @@ return [
   'create_card' => "Create Card",
   'create_card_group' => "Create Card Group",
   'details' => "Details",
+  'pdf' => "PDF",
 
 ];
