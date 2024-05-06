@@ -144,6 +144,7 @@ const uploadPDF = () => {
 
           <form
             class="p-2 sm:p-4 shadow sm:rounded-lg"
+            v-if="form.id"
             @submit.prevent="uploadPDF"
           >
             <section class="flex justify-between flex-col sm:flex-row">
