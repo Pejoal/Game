@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CardGroup;
 use App\Models\Story;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class StoryController extends Controller {
@@ -22,6 +23,18 @@ class StoryController extends Controller {
       "story" => $story,
       "cardGroups" => $cardGroups,
     ]);
+  }
+
+  public function updatePDF(Story $story, Request $request) {
+    if ($request->hasFile('pdf')) {
+      $request->validate([
+        'pdf' => ['required', 'file', 'mimes:pdf', 'max:50000']]
+      );
+      $path = $request->file('pdf')->store('public/stories');
+      $story->pdf = Storage::url($path);
+      $story->save();
+    }
+    return;
   }
 
   public function store(Request $request) {
