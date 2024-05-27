@@ -26,7 +26,7 @@ class LobbyController extends Controller {
   public function start(Request $request, Lobby $lobby, Story $story) {
     $cardGroups = $story->cardGroups()->get()->toArray(); 
     $user = $request->user();
-    broadcast(new LobbyStarted($user, $lobby->id))->toOthers();
+    broadcast(new LobbyStarted($user, $lobby->id,$story->id))->toOthers();
 
     return Inertia::render('Lobby/Start', [
       "lobbyId" => $lobby->id,

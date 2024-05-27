@@ -107,7 +107,7 @@ onMounted(() => {
       }
     })
     .listen("LobbyStarted", (data) => {
-      let link = `/${getActiveLanguage()}/lobby/${props.lobbyId}/start`;
+      let link = `/${getActiveLanguage()}/lobby/${props.lobbyId}/story/${data.story_id}/start`;
       location.href = link;
     })
     .error((error) => {
@@ -140,7 +140,7 @@ const unshiftMessage = (data) => {
   });
 };
 
-let selectedOption = ref(0);
+let selectedStory = ref(0);
 </script>
 
 <template>
@@ -158,27 +158,30 @@ let selectedOption = ref(0);
         {{ props.max_players }}
       </p>
     </header>
-    <section class="my-1 px-2">
-      <label for="select" class="block text-sm font-medium text-gray-700"
-        >Story:</label
-      >
-      <section class="mt-1 relative">
-        <select
-          id="select"
-          v-model="selectedOption"
-          class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+
+    <form v-if="props.hostId === page.auth.user.id">
+      <section class="my-1 px-2">
+        <label for="select" class="block text-sm font-medium text-gray-700"
+          >Story:</label
         >
-          <option value="" disabled>Select an option</option>
-          <option
-            v-for="story in props.stories"
-            :key="story.id"
-            :value="story.id"
+        <section class="mt-1 relative">
+          <select
+            id="select"
+            v-model="selectedStory"
+            class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
           >
-            {{ story.name }}
-          </option>
-        </select>
+            <option value="" disabled>Select an option</option>
+            <option
+              v-for="story in props.stories"
+              :key="story.id"
+              :value="story.id"
+            >
+              {{ story.name }}
+            </option>
+          </select>
+        </section>
       </section>
-    </section>
+    </form>
 
     <section
       class="mb-2 bg-zinc-400 px-2 border border-gray-600 rounded-md shadow-lg"
@@ -215,7 +218,10 @@ let selectedOption = ref(0);
         <button @click="deleteLobby" class="btn btn-danger">
           Delete Lobby
         </button>
-        <Link :href="route('lobby.start', [lobbyId, selectedOption])" class="btn btn-primary">
+        <Link
+          :href="route('lobby.start', [lobbyId, selectedStory])"
+          class="btn btn-primary"
+        >
           Start Game
         </Link>
       </template>

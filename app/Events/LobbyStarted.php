@@ -15,9 +15,11 @@ class LobbyStarted implements ShouldBroadcastNow {
 
   public $user;
   public $lobbyId;
-  public function __construct(User $user, int $lobbyId) {
+  public $story_id;
+  public function __construct(User $user, int $lobbyId,int $story_id) {
     $this->user = $user;
     $this->lobbyId = $lobbyId;
+    $this->story_id = $story_id;
   }
 
   /**
@@ -34,6 +36,7 @@ class LobbyStarted implements ShouldBroadcastNow {
   public function broadcastWith(): array {
     return [
       "user_id" => $this->user->id,
+      "story_id" => $this->story_id,
       "firstname" => $this->user->firstname,
       "lastname" => $this->user->lastname,
     ];
