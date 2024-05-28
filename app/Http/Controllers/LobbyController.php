@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Events\LobbyMessageSent;
-use App\Events\LobbyStarted;
 use App\Models\Lobby;
-use App\Models\Project;
 use App\Models\Story;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -12,6 +11,12 @@ use Inertia\Inertia;
 class LobbyController extends Controller {
 
   public function join(Lobby $lobby) {
+    $user = auth()->user();
+
+    if (!$lobby->users()->where('user_id', $user->id)->exists()) {
+      $lobby->users()->attach($user->id);
+    }
+
     $stories = Story::get()->toArray();
 
     return Inertia::render('Lobby/Index', [
@@ -24,9 +29,36 @@ class LobbyController extends Controller {
   }
 
   public function start(Request $request, Lobby $lobby, Story $story) {
-    $cardGroups = $story->cardGroups()->get()->toArray(); 
+    $cardGroups = $story->cardGroups()->with('cards')->get();
+    $cards = [];
+
+    foreach ($cardGroups as $group) {
+      foreach ($group->cards as $card) {
+        $cards[] = $card;
+      }
+    }
+
+    shuffle($cards);
+
+    $users = $lobby->users;
+    dd($users, $cards);
+    $userCount = count($users);
+    $cardsPerUser = floor(count($cards) / $userCount);
+
+    // Distribute the cards equally among users
+    $userCards = [];
+    for ($i = 0; $i < $userCount; $i++) {
+      $userCards[$users[$i]->id] = array_slice($cards, $i * $cardsPerUser, $cardsPerUser);
+    }
+
+    // Handle remaining cards if there are any
+    $remainingCards = array_slice($cards, $userCount * $cardsPerUser);
+    foreach ($remainingCards as $index => $card) {
+      $userCards[$users[$index % $userCount]->id][] = $card;
+    }
+
     $user = $request->user();
-    broadcast(new LobbyStarted($user, $lobby->id,$story->id))->toOthers();
+    // broadcast(new LobbyStarted($user, $lobby->id, $story->id))->toOthers();
 
     return Inertia::render('Lobby/Start', [
       "lobbyId" => $lobby->id,
@@ -34,7 +66,8 @@ class LobbyController extends Controller {
       "name" => $lobby->name,
       "max_players" => $lobby->max_players,
       "story" => $story,
-      "cardGroups" => $cardGroups,
+      "cardGroups" => $cardGroups->toArray(),
+      "userCards" => $userCards,
     ]);
   }
 
@@ -48,6 +81,7 @@ class LobbyController extends Controller {
       'name' => $request->name,
       'max_players' => $request->max_players,
     ]);
+    $lobby->users()->attach(auth()->id());
 
     return redirect(route('lobby.join', $lobby->id));
   }
@@ -62,7 +96,5 @@ class LobbyController extends Controller {
       abort(403, 'Not Authorized');
     }
     $lobby->delete();
-
   }
-
 }
