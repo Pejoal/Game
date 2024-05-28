@@ -107,7 +107,9 @@ onMounted(() => {
       }
     })
     .listen("LobbyStarted", (data) => {
-      let link = `/${getActiveLanguage()}/lobby/${props.lobbyId}/story/${data.story_id}/start`;
+      let link = `/${getActiveLanguage()}/lobby/${props.lobbyId}/story/${
+        data.story_id
+      }/start`;
       location.href = link;
     })
     .error((error) => {
@@ -219,6 +221,7 @@ let selectedStory = ref(0);
           Delete Lobby
         </button>
         <Link
+          v-if="selectedStory"
           :href="route('lobby.start', [lobbyId, selectedStory])"
           class="btn btn-primary"
         >
