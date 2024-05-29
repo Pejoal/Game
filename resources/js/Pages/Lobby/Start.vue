@@ -182,6 +182,10 @@ onMounted(() => {
 onUnmounted(() => {
   echo.leaveAllChannels();
 });
+
+const pass = () => {
+  orderCards();
+};
 </script>
 
 <template>
@@ -298,6 +302,10 @@ onUnmounted(() => {
         </div>
       </template>
     </Draggable>
+
+    <section>
+      <button @click="pass" class="btn btn-primary w-[80vw] h-8 mx-auto my-2">Pass</button>
+    </section>
 
     <section>
       <p>PDF</p>
