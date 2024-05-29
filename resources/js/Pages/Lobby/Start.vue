@@ -57,7 +57,10 @@ props.cardGroupIds.forEach((cardGroupId) => {
   cards.value[cardGroupId] = [];
 });
 
+let isItMyTurn = ref(false);
+
 const checkMove = (event) => {
+  console.log(isItMyTurn.value);
   if (!isItMyTurn.value) return false;
 
   const draggedItem = event.draggedContext.element;
@@ -87,6 +90,7 @@ const orderCards = () => {
   cards.value.forEach((cardGroup) => {
     cardGroup?.sort((a, b) => b.order - a.order);
   });
+  isItMyTurn.value = false;
   axios
     .post(route("lobby.turn", props.lobbyId), {
       cards: cards.value,
@@ -94,7 +98,6 @@ const orderCards = () => {
     .then(() => {});
 };
 
-let isItMyTurn = ref(false);
 if (page.auth.user.id == props.hostId) {
   isItMyTurn.value = true;
 }
@@ -170,6 +173,7 @@ onMounted(() => {
     })
     .listen("LobbyTurnChange", (data) => {
       cards.value = data.cards;
+      isItMyTurn.value = true;
     })
     .error((error) => {
       console.error(error);
