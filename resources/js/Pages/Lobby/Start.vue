@@ -48,12 +48,6 @@ setTimeout(() => {
   showToast.value = false;
 }, 3000);
 
-const taskMoved = () => {
-  axios.put(route("card.sync"), {
-    cardGroups: props.cardGroups,
-  });
-};
-
 let cards = ref([]);
 props.cardGroupIds.forEach((cardGroupId) => {
   cards.value[cardGroupId] = [];
@@ -72,16 +66,21 @@ const checkMove = (event) => {
     return false;
   }
 
-  if (validMove && targetList[0]?.order + 1 == draggedItem.order) {
-    // order cards[draggedItem.card_group_id] by order
-    return true;
-  }
-
   if (targetList[0]?.order && targetList[0]?.order + 1 != draggedItem.order) {
     return false;
   }
 
+  if (validMove && targetList[0]?.order + 1 == draggedItem.order) {
+    return true;
+  }
+
   return validMove;
+};
+
+const orderCards = () => {
+  cards.value.forEach((cardGroup) => {
+    cardGroup.sort((a, b) => b.order - a.order);
+  });
 };
 </script>
 
@@ -147,6 +146,7 @@ const checkMove = (event) => {
             group="cards"
             itemKey="id"
             :move="checkMove"
+            @change="orderCards"
           >
             <template #item="{ element, index }">
               <div class="bg-slate-700 p-1 my-1 cursor-pointer rounded-lg">
@@ -177,6 +177,7 @@ const checkMove = (event) => {
       group="cards"
       itemKey="id"
       :move="checkMove"
+      @change="orderCards"
     >
       <template #item="{ element, index }">
         <div class="bg-slate-700 p-1 my-1 cursor-pointer rounded-lg w-40">
