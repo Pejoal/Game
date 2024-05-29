@@ -7,6 +7,9 @@ import { trans } from "laravel-vue-i18n";
 import Draggable from "vuedraggable";
 import { Head } from "@inertiajs/vue3";
 import axios from "axios";
+import { usePage } from "@inertiajs/vue3";
+
+const page = usePage().props;
 
 let props = defineProps({
   name: {
@@ -29,9 +32,9 @@ let props = defineProps({
     type: Object,
     default: {},
   },
-  cardGroups: {
-    type: Array,
-    default: [],
+  userCards: {
+    type: Object,
+    default: {},
   },
 });
 
@@ -46,17 +49,6 @@ const taskMoved = () => {
     cardGroups: props.cardGroups,
   });
 };
-
-const userCards = ref([
-  {
-    name: "User Card 1",
-    description: "description",
-  },
-  {
-    name: "User Card 2",
-    description: "description",
-  },
-]);
 </script>
 
 <template>
@@ -112,7 +104,7 @@ const userCards = ref([
       <section
         class="relative flex overflow-x-auto h-full rounded-lg bg-blue-200"
       >
-        <section
+        <!-- <section
           v-for="cardGroup in cardGroups"
           class="p-2 flex-1 flex flex-col h-full overflow-x-hidden overflow-y-auto"
         >
@@ -133,16 +125,15 @@ const userCards = ref([
               </div>
             </template>
           </Draggable>
-        </section>
+        </section> -->
       </section>
     </main>
 
     <Draggable
-      class="flex items-center justify-center gap-2 bg-red-400 px-4 py-2 overflow-x-auto"
-      :list="userCards"
+      class="flex items-center justify-center gap-2 bg-red-400 px-4 py-2 overflow-x-auto flex-wrap"
+      :list="props.userCards[page.auth.user.id]"
       group="cards"
       itemKey="id"
-      @change="taskMoved"
     >
       <template #item="{ element, index }">
         <div class="bg-slate-700 p-2 my-2 cursor-pointer rounded-lg h-20 w-40">

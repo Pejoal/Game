@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\LobbyMessageSent;
+use App\Events\LobbyStarted;
 use App\Models\Lobby;
 use App\Models\Story;
 use App\Models\User;
@@ -42,7 +43,6 @@ class LobbyController extends Controller {
     shuffle($cards);
 
     $users = $lobby->users;
-    dd($users, $cards);
     $userCount = count($users);
     $cardsPerUser = floor(count($cards) / $userCount);
 
@@ -59,7 +59,7 @@ class LobbyController extends Controller {
     }
 
     $user = $request->user();
-    // broadcast(new LobbyStarted($user, $lobby->id, $story->id))->toOthers();
+    broadcast(new LobbyStarted($user, $lobby->id, $story->id))->toOthers();
 
     return Inertia::render('Lobby/Start', [
       "lobbyId" => $lobby->id,
@@ -67,7 +67,6 @@ class LobbyController extends Controller {
       "name" => $lobby->name,
       "max_players" => $lobby->max_players,
       "story" => $story,
-      "cardGroups" => $cardGroups->toArray(),
       "userCards" => $userCards,
     ]);
   }
