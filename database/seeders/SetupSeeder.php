@@ -115,7 +115,7 @@ class SetupSeeder extends Seeder {
         Card::create([
           'name' => 'Card ' . $i,
           'description' => 'Card ' . $i++ . ' description',
-          'order' => 0,
+          'order' => ($i - 1) * 10,
           'card_group_id' => $number,
           'creator_id' => 2,
         ]);
