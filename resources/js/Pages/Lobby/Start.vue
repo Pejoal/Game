@@ -84,7 +84,7 @@ props.cardGroupIds.forEach((cardGroupId) => {
       </p>
     </header>
 
-    <main class="relative bg-green-600 h-[90vh] py-12 px-16">
+    <main class="relative bg-green-600 h-[80vh] py-12 px-16">
       <section
         class="absolute top-1 left-[50%] transform -translate-x-1/2 flex items-center justify-center flex-col text-white text-sm"
       >
