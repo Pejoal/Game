@@ -81,12 +81,15 @@ class LobbyController extends Controller {
     $user = $request->user();
     broadcast(new LobbyStarted($user, $lobby->id, $story->id))->toOthers();
 
+    $cardGroupIds = $story->cardGroups()->pluck('id');
+
     return Inertia::render('Lobby/Start', [
       "lobbyId" => $lobby->id,
       "hostId" => $lobby->host_id,
       "name" => $lobby->name,
       "max_players" => $lobby->max_players,
       "story" => $story,
+      "cardGroupIds" => $cardGroupIds,
       "userCards" => $userCards,
     ]);
   }

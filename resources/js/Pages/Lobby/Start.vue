@@ -36,6 +36,10 @@ let props = defineProps({
     type: Object,
     default: {},
   },
+  cardGroupIds: {
+    type: Array,
+    default: [],
+  },
 });
 
 let showToast = ref(true);
@@ -49,6 +53,11 @@ const taskMoved = () => {
     cardGroups: props.cardGroups,
   });
 };
+
+let cards = ref([]);
+props.cardGroupIds.forEach((cardGroupId) => {
+  cards.value[cardGroupId] = [];
+});
 </script>
 
 <template>
@@ -104,28 +113,23 @@ const taskMoved = () => {
       <section
         class="relative flex overflow-x-auto h-full rounded-lg bg-blue-200"
       >
-        <!-- <section
-          v-for="cardGroup in cardGroups"
+        <section
+          v-for="cardGroupId in cardGroupIds"
           class="p-2 flex-1 flex flex-col h-full overflow-x-hidden overflow-y-auto"
         >
-          <Draggable
-            :list="cardGroup.cards"
-            group="cards"
-            itemKey="id"
-            @change="taskMoved"
-          >
+          <Draggable :list="cards[cardGroupId]" group="cards" itemKey="id">
             <template #item="{ element, index }">
               <div class="bg-slate-700 p-2 my-2 cursor-pointer rounded-lg">
                 <p class="block mb-2 text-xl text-gray-100">
-                  {{ element.name }}
+                  {{ element?.name }}
                 </p>
                 <span class="text-white truncate">
-                  {{ element.description }}
+                  {{ element?.description }}
                 </span>
               </div>
             </template>
           </Draggable>
-        </section> -->
+        </section>
       </section>
     </main>
 
