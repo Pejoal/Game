@@ -67,6 +67,20 @@ const checkMove = (event) => {
   const validMove = targetList.every(
     (item) => item.card_group_id === draggedItem.card_group_id
   );
+
+  if (targetList.length == 0 && draggedItem.order != 1) {
+    return false;
+  }
+
+  if (validMove && targetList[0]?.order + 1 == draggedItem.order) {
+    // order cards[draggedItem.card_group_id] by order
+    return true;
+  }
+
+  if (targetList[0]?.order && targetList[0]?.order + 1 != draggedItem.order) {
+    return false;
+  }
+
   return validMove;
 };
 </script>
@@ -135,7 +149,7 @@ const checkMove = (event) => {
             :move="checkMove"
           >
             <template #item="{ element, index }">
-              <div class="bg-slate-700 p-2 my-2 cursor-pointer rounded-lg">
+              <div class="bg-slate-700 p-1 my-1 cursor-pointer rounded-lg">
                 <p class="block mb-2 text-xl text-gray-100">
                   {{ element?.name }}
                 </p>
@@ -157,7 +171,7 @@ const checkMove = (event) => {
       :move="checkMove"
     >
       <template #item="{ element, index }">
-        <div class="bg-slate-700 p-2 my-2 cursor-pointer rounded-lg h-20 w-40">
+        <div class="bg-slate-700 p-1 my-1 cursor-pointer rounded-lg h-20 w-40">
           <p class="block mb-2 text-xl text-gray-100">
             {{ element.name }}
           </p>

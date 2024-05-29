@@ -111,11 +111,11 @@ class SetupSeeder extends Seeder {
       ]);
 
       $card_numbers = range(1, 4);
-      foreach ($card_numbers as $card_number) {
+      foreach ($card_numbers as $key => $card_number) {
         Card::create([
           'name' => 'Card ' . $i,
           'description' => 'Card ' . $i++ . ' description',
-          'order' => ($i - 1) * 10,
+          'order' => $key + 1,
           'card_group_id' => $number,
           'creator_id' => 2,
         ]);
