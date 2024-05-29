@@ -73,6 +73,7 @@ Route::group([], function () {
       Route::delete('lobby/{lobby}/user/{user}/leave', [LobbyController::class, 'leave'])->name('lobby.leave');
       Route::get('lobby/{lobby}/story/{story}/start', [LobbyController::class, 'start'])->name('lobby.start');
       Route::post('lobby/store', [LobbyController::class, 'store'])->name('lobby.store');
+      Route::post('lobby/{lobby}/turn', [LobbyController::class, 'turn'])->name('lobby.turn');
       Route::post('/lobby_message', [LobbyController::class, 'broadcastMessage']);
 
       Route::put('card/sync', [CardController::class, 'sync'])->name('card.sync');

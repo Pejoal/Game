@@ -8,6 +8,10 @@ import Draggable from "vuedraggable";
 import { Head } from "@inertiajs/vue3";
 import axios from "axios";
 import { usePage } from "@inertiajs/vue3";
+import { onMounted, onUnmounted } from "vue";
+import Echo from "laravel-echo";
+import Pusher from "pusher-js";
+import { getRandomDigits } from "@/utils";
 
 const page = usePage().props;
 
@@ -79,9 +83,95 @@ const checkMove = (event) => {
 
 const orderCards = () => {
   cards.value.forEach((cardGroup) => {
-    cardGroup.sort((a, b) => b.order - a.order);
+    cardGroup?.sort((a, b) => b.order - a.order);
   });
+  axios
+    .post(route("lobby.turn", props.lobbyId), {
+      cards: cards.value,
+    })
+    .then(() => {});
 };
+
+const env = import.meta.env;
+let initials = ref([]);
+let messages = ref([]);
+let echo;
+
+onMounted(() => {
+  const pusher = new Pusher(env.VITE_PUSHER_APP_KEY, {
+    cluster: env.VITE_PUSHER_APP_CLUSTER,
+    encrypted: true,
+  });
+  echo = new Echo({
+    broadcaster: "pusher",
+    key: env.VITE_PUSHER_APP_KEY,
+    cluster: env.VITE_PUSHER_APP_CLUSTER,
+    encrypted: true,
+    pusher: pusher,
+  });
+  echo
+    .join(`chat.${props.lobbyId}`)
+    .here((users) => {
+      initials.value = users.map(function (user) {
+        return {
+          id: user.id,
+          name: user.firstname[0] + user.lastname[0],
+          fullname: user.firstname + " " + user.lastname,
+        };
+      });
+    })
+    .joining((user) => {
+      messages.value.unshift({
+        id: getRandomDigits(),
+        firstname: user.firstname,
+        lastname: user.lastname,
+        created_at: new Date().toLocaleTimeString(),
+        type: "join",
+      });
+      initials.value.unshift({
+        id: user.id,
+        name: user.firstname[0] + user.lastname[0],
+        fullname: user.firstname + " " + user.lastname,
+      });
+    })
+    .leaving((user) => {
+      messages.value.unshift({
+        id: getRandomDigits(),
+        firstname: user.firstname,
+        lastname: user.lastname,
+        created_at: new Date().toLocaleTimeString(),
+        type: "leave",
+      });
+      initials.value = initials.value.filter(function (ini) {
+        return ini.id != user.id;
+      });
+      axios
+        .delete(route("lobby.leave", [props.lobbyId, user.id]))
+        .then(() => {});
+    })
+    .listen("LobbyMessageSent", (data) => {
+      if (data.user_id != page.auth.user.id) {
+        messages.value.unshift({
+          id: getRandomDigits(),
+          firstname: data.firstname,
+          lastname: data.lastname,
+          content: data.content,
+          created_at: new Date().toLocaleTimeString(),
+          type: "content",
+        });
+      }
+    })
+    .listen("LobbyTurnChange", (data) => {
+      cards.value = data.cards
+    })
+    .error((error) => {
+      console.error(error);
+    });
+});
+
+onUnmounted(() => {
+  echo.leaveAllChannels();
+});
 </script>
 
 <template>

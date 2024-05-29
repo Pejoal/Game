@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\LobbyMessageSent;
 use App\Events\LobbyStarted;
+use App\Events\LobbyTurnChange;
 use App\Models\Card;
 use App\Models\Lobby;
 use App\Models\LobbyCard;
@@ -107,6 +108,11 @@ class LobbyController extends Controller {
     $lobby->users()->attach(auth()->id());
 
     return redirect(route('lobby.join', $lobby->id));
+  }
+
+  public function turn(Request $request, Lobby $lobby) {
+    $user = $request->user();
+    broadcast(new LobbyTurnChange($user, $lobby->id, $request->cards))->toOthers();
   }
 
   public function broadcastMessage(Request $request) {
