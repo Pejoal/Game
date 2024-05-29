@@ -150,7 +150,7 @@ const checkMove = (event) => {
     </main>
 
     <Draggable
-      class="flex items-center justify-center gap-2 bg-red-400 px-4 py-2 overflow-x-auto flex-wrap"
+      class="flex items-center justify-center gap-1 bg-red-400 px-2 py-1 overflow-x-auto flex-wrap"
       :list="props.userCards[page.auth.user.id]"
       group="cards"
       itemKey="id"
