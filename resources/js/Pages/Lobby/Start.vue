@@ -62,7 +62,6 @@ props.cardGroupIds.forEach((cardGroupId) => {
 const checkMove = (event) => {
   const draggedItem = event.draggedContext.element;
   const targetList = event.relatedContext.list;
-  console.log(draggedItem, targetList);
 
   // Check if all items in the target list have the same group_id as the dragged item
   const validMove = targetList.every(
