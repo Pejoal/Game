@@ -40,9 +40,9 @@ let props = defineProps({
     type: Object,
     default: {},
   },
-  cardGroupIds: {
-    type: Array,
-    default: [],
+  cardGroupTypes: {
+    type: Object,
+    default: {},
   },
 });
 
@@ -53,25 +53,24 @@ setTimeout(() => {
 }, 3000);
 
 let cards = ref([]);
-props.cardGroupIds.forEach((cardGroupId) => {
-  cards.value[cardGroupId] = [];
+Object.values(props.cardGroupTypes).forEach((cardGroupType, key) => {
+  cards.value[key] = [];
 });
 
 let isItMyTurn = ref(false);
 
 const checkMove = (event) => {
-  console.log(isItMyTurn.value);
   if (!isItMyTurn.value) return false;
 
   const draggedItem = event.draggedContext.element;
   const targetList = event.relatedContext.list;
 
   // Check if all items in the target list have the same group_id as the dragged item
-  const validMove = targetList.every(
+  const validMove = targetList?.every(
     (item) => item.card_group_id === draggedItem.card_group_id
   );
 
-  if (targetList.length == 0 && draggedItem.order != 1) {
+  if (targetList?.length == 0 && draggedItem.order != 1) {
     return false;
   }
 
@@ -239,11 +238,11 @@ onUnmounted(() => {
         class="relative flex overflow-x-auto h-full rounded-lg bg-blue-200"
       >
         <section
-          v-for="cardGroupId in cardGroupIds"
+          v-for="(cardGroupType, key) in Object.values(cardGroupTypes)"
           class="p-2 flex-1 flex flex-col h-full overflow-x-hidden overflow-y-auto"
         >
           <Draggable
-            :list="cards[cardGroupId]"
+            :list="cards[key]"
             group="cards"
             itemKey="id"
             :move="checkMove"
@@ -251,7 +250,7 @@ onUnmounted(() => {
           >
             <template #item="{ element, index }">
               <div class="bg-slate-700 p-1 my-1 cursor-pointer rounded-lg">
-                <p class="block mb-2 text-xl text-gray-100">
+                <p class="block mb-1 text-xl text-gray-100">
                   {{ element?.name }}
                 </p>
                 <p class="text-white truncate">
@@ -259,7 +258,7 @@ onUnmounted(() => {
                 </p>
                 <section class="flex items-center justify-between my-1">
                   <p class="text-gray-200 font-bold">
-                    {{ element?.card_group_id }}
+                    {{ cardGroupTypes[element?.card_group_id] }}
                   </p>
                   <p class="text-gray-200 font-bold">
                     {{ element?.order }}
@@ -282,7 +281,7 @@ onUnmounted(() => {
     >
       <template #item="{ element, index }">
         <div class="bg-slate-700 p-1 my-1 cursor-pointer rounded-lg w-40">
-          <p class="block mb-2 text-xl text-gray-100">
+          <p class="block mb-1 text-xl text-gray-100">
             {{ element.name }}
           </p>
           <p class="text-white truncate">
@@ -290,7 +289,7 @@ onUnmounted(() => {
           </p>
           <section class="flex items-center justify-between my-1">
             <p class="text-gray-200 font-bold">
-              {{ element?.card_group_id }}
+              {{ cardGroupTypes[element?.card_group_id] }}
             </p>
             <p class="text-gray-200 font-bold">
               {{ element?.order }}

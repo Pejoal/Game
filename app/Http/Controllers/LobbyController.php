@@ -82,7 +82,7 @@ class LobbyController extends Controller {
     $user = $request->user();
     broadcast(new LobbyStarted($user, $lobby->id, $story->id))->toOthers();
 
-    $cardGroupIds = $story->cardGroups()->pluck('id');
+    $cardGroupTypes = $story->cardGroups()->pluck('type','id');
 
     return Inertia::render('Lobby/Start', [
       "lobbyId" => $lobby->id,
@@ -90,7 +90,7 @@ class LobbyController extends Controller {
       "name" => $lobby->name,
       "max_players" => $lobby->max_players,
       "story" => $story,
-      "cardGroupIds" => $cardGroupIds,
+      "cardGroupTypes" => $cardGroupTypes,
       "userCards" => $userCards,
     ]);
   }
