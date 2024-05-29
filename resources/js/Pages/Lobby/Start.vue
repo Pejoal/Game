@@ -58,6 +58,8 @@ props.cardGroupIds.forEach((cardGroupId) => {
 });
 
 const checkMove = (event) => {
+  if (!isItMyTurn.value) return false;
+
   const draggedItem = event.draggedContext.element;
   const targetList = event.relatedContext.list;
 
@@ -91,6 +93,11 @@ const orderCards = () => {
     })
     .then(() => {});
 };
+
+let isItMyTurn = ref(false);
+if (page.auth.user.id == props.hostId) {
+  isItMyTurn.value = true;
+}
 
 const env = import.meta.env;
 let initials = ref([]);
@@ -162,7 +169,7 @@ onMounted(() => {
       }
     })
     .listen("LobbyTurnChange", (data) => {
-      cards.value = data.cards
+      cards.value = data.cards;
     })
     .error((error) => {
       console.error(error);
