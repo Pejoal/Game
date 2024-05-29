@@ -153,9 +153,17 @@ const checkMove = (event) => {
                 <p class="block mb-2 text-xl text-gray-100">
                   {{ element?.name }}
                 </p>
-                <span class="text-white truncate">
+                <p class="text-white truncate">
                   {{ element?.description }}
-                </span>
+                </p>
+                <section class="flex items-center justify-between my-1">
+                  <p class="text-gray-200 font-bold">
+                    {{ element?.card_group_id }}
+                  </p>
+                  <p class="text-gray-200 font-bold">
+                    {{ element?.order }}
+                  </p>
+                </section>
               </div>
             </template>
           </Draggable>
@@ -171,13 +179,21 @@ const checkMove = (event) => {
       :move="checkMove"
     >
       <template #item="{ element, index }">
-        <div class="bg-slate-700 p-1 my-1 cursor-pointer rounded-lg h-20 w-40">
+        <div class="bg-slate-700 p-1 my-1 cursor-pointer rounded-lg w-40">
           <p class="block mb-2 text-xl text-gray-100">
             {{ element.name }}
           </p>
-          <span class="text-white truncate">
+          <p class="text-white truncate">
             {{ element.description }}
-          </span>
+          </p>
+          <section class="flex items-center justify-between my-1">
+            <p class="text-gray-200 font-bold">
+              {{ element?.card_group_id }}
+            </p>
+            <p class="text-gray-200 font-bold">
+              {{ element?.order }}
+            </p>
+          </section>
         </div>
       </template>
     </Draggable>
