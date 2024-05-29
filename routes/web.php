@@ -70,6 +70,7 @@ Route::group([], function () {
 
       Route::get('lobby/{lobby}/join', [LobbyController::class, 'join'])->name('lobby.join');
       Route::delete('lobby/{lobby}/delete', [LobbyController::class, 'delete'])->name('lobby.delete');
+      Route::delete('lobby/{lobby}/user/{user}/leave', [LobbyController::class, 'leave'])->name('lobby.leave');
       Route::get('lobby/{lobby}/story/{story}/start', [LobbyController::class, 'start'])->name('lobby.start');
       Route::post('lobby/store', [LobbyController::class, 'store'])->name('lobby.store');
       Route::post('/lobby_message', [LobbyController::class, 'broadcastMessage']);

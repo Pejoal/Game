@@ -93,6 +93,9 @@ onMounted(() => {
       initials.value = initials.value.filter(function (ini) {
         return ini.id != user.id;
       });
+      axios
+        .delete(route("lobby.leave", [props.lobbyId, user.id]))
+        .then(() => {});
     })
     .listen("LobbyMessageSent", (data) => {
       if (data.user_id != page.auth.user.id) {
