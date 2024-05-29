@@ -58,6 +58,18 @@ let cards = ref([]);
 props.cardGroupIds.forEach((cardGroupId) => {
   cards.value[cardGroupId] = [];
 });
+
+const checkMove = (event) => {
+  const draggedItem = event.draggedContext.element;
+  const targetList = event.relatedContext.list;
+  console.log(draggedItem, targetList);
+
+  // Check if all items in the target list have the same group_id as the dragged item
+  const validMove = targetList.every(
+    (item) => item.card_group_id === draggedItem.card_group_id
+  );
+  return validMove;
+};
 </script>
 
 <template>
@@ -117,7 +129,12 @@ props.cardGroupIds.forEach((cardGroupId) => {
           v-for="cardGroupId in cardGroupIds"
           class="p-2 flex-1 flex flex-col h-full overflow-x-hidden overflow-y-auto"
         >
-          <Draggable :list="cards[cardGroupId]" group="cards" itemKey="id">
+          <Draggable
+            :list="cards[cardGroupId]"
+            group="cards"
+            itemKey="id"
+            :move="checkMove"
+          >
             <template #item="{ element, index }">
               <div class="bg-slate-700 p-2 my-2 cursor-pointer rounded-lg">
                 <p class="block mb-2 text-xl text-gray-100">
@@ -138,6 +155,7 @@ props.cardGroupIds.forEach((cardGroupId) => {
       :list="props.userCards[page.auth.user.id]"
       group="cards"
       itemKey="id"
+      :move="checkMove"
     >
       <template #item="{ element, index }">
         <div class="bg-slate-700 p-2 my-2 cursor-pointer rounded-lg h-20 w-40">
