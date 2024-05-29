@@ -13,7 +13,7 @@ return new class extends Migration {
       $table->id();
       $table->string('name');
       $table->text('description')->nullable();
-      $table->smallInteger('order')->default(0);
+      $table->integer('order')->default(0);
       $table->foreignId('card_group_id')->constrained('card_groups')->onDelete('cascade');
       $table->foreignId('creator_id')->constrained('users')->onDelete('cascade');
       $table->timestamps();

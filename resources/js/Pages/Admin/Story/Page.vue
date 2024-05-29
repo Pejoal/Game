@@ -19,7 +19,7 @@ const props = defineProps({
   },
 });
 
-const form = useForm({
+const cardGroupForm = useForm({
   id: null,
   name: "",
   description: "",
@@ -27,27 +27,28 @@ const form = useForm({
 let showModal = ref(false);
 let nameInput = ref(null);
 let descriptionInput = ref(null);
+let orderInput = ref(null);
 
 const openCreateModal = (id) => {
-  form.id = null;
-  form.name = "";
-  form.description = "";
+  cardGroupForm.id = null;
+  cardGroupForm.name = "";
+  cardGroupForm.description = "";
   showModal.value = true;
 };
 
 const store = () => {
-  form.post(route("card.group.store", props.story.id), {
+  cardGroupForm.post(route("card.group.store", props.story.id), {
     onSuccess: () => {
       setTimeout(() => {
         showModal.value = false;
       }, 1000);
-      form.reset();
+      cardGroupForm.reset();
     },
     onError: () => {
-      if (form.errors.name) {
+      if (cardGroupForm.errors.name) {
         nameInput.value.focus();
       }
-      if (form.errors.description) {
+      if (cardGroupForm.errors.description) {
         descriptionInput.value.focus();
       }
     },
@@ -59,38 +60,50 @@ const edit = (id) => {
   const foundCardGroup = props.cardGroups.find(
     (cardGroup) => cardGroup.id === id
   );
-  form.id = foundCardGroup.id;
-  form.name = foundCardGroup.name;
-  form.description = foundCardGroup.description;
+  cardGroupForm.id = foundCardGroup.id;
+  cardGroupForm.name = foundCardGroup.name;
+  cardGroupForm.description = foundCardGroup.description;
 };
 
 const destroy = (id) => {
-  form.post(route("card.group.delete", id), {});
+  cardGroupForm.post(route("card.group.delete", id), {});
 };
+
+const cardForm = useForm({
+  id: null,
+  name: "",
+  order: 0,
+  description: "",
+});
 
 let showCardModal = ref(false);
 let cardGroupId = ref(0);
+
 const handleShowCardModal = (id) => {
   showCardModal.value = true;
   cardGroupId.value = id;
-  form.id = null;
-  form.name = "";
-  form.description = "";
+  cardForm.id = null;
+  cardForm.name = "";
+  cardForm.order = 0;
+  cardForm.description = "";
 };
 const storeCard = () => {
-  form.post(route("card.store", cardGroupId.value), {
+  cardForm.post(route("card.store", cardGroupId.value), {
     onSuccess: () => {
       setTimeout(() => {
         showCardModal.value = false;
       }, 1000);
-      form.reset();
+      cardForm.reset();
     },
     onError: () => {
-      if (form.errors.name) {
+      if (cardForm.errors.name) {
         nameInput.value.focus();
       }
-      if (form.errors.description) {
+      if (cardForm.errors.description) {
         descriptionInput.value.focus();
+      }
+      if (cardForm.errors.order) {
+        orderInput.value.focus();
       }
     },
   });
@@ -102,13 +115,14 @@ const editCard = (id, cardGroupId) => {
     (cardGroup) => cardGroup.id === cardGroupId
   );
   const foundCard = foundCardGroup.cards.find((card) => card.id === id);
-  form.id = foundCard.id;
-  form.name = foundCard.name;
-  form.description = foundCard.description;
+  cardForm.id = foundCard.id;
+  cardForm.name = foundCard.name;
+  cardForm.description = foundCard.description;
+  cardForm.order = foundCard.order;
 };
 
 const destroyCard = (id) => {
-  form.post(route("card.delete", id), {});
+  cardForm.post(route("card.delete", id), {});
 };
 </script>
 
@@ -142,13 +156,13 @@ const destroyCard = (id) => {
               <TextInput
                 id="name"
                 ref="nameInput"
-                v-model="form.name"
+                v-model="cardGroupForm.name"
                 type="text"
                 class="my-2 block w-3/4 text-black rounded-lg"
                 :placeholder="trans('words.name')"
               />
               <InputError
-                :message="form.errors.name"
+                :message="cardGroupForm.errors.name"
                 class="my-2 bg-white rounded-md px-2 py-1"
               />
             </section>
@@ -159,19 +173,19 @@ const destroyCard = (id) => {
               <TextInput
                 id="description"
                 ref="descriptionInput"
-                v-model="form.description"
+                v-model="cardGroupForm.description"
                 type="text"
                 class="my-2 block w-3/4 text-black rounded-lg"
                 :placeholder="trans('words.description')"
               />
               <InputError
-                :message="form.errors.description"
+                :message="cardGroupForm.errors.description"
                 class="my-2 bg-white rounded-md px-2 py-1"
               />
             </section>
 
             <section class="flex items-center justify-center">
-              <button class="btn btn-primary" :disabled="form.processing">
+              <button class="btn btn-primary" :disabled="cardGroupForm.processing">
                 {{ trans("words.save") }}
               </button>
             </section>
@@ -180,7 +194,7 @@ const destroyCard = (id) => {
               leave-to-class="opacity-0"
               class="transition ease-in-out"
             >
-              <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">
+              <p v-if="cardGroupForm.recentlySuccessful" class="text-sm text-gray-600">
                 {{ trans("words.saved") }}
               </p>
             </Transition>
@@ -264,13 +278,13 @@ const destroyCard = (id) => {
               <TextInput
                 id="name"
                 ref="nameInput"
-                v-model="form.name"
+                v-model="cardForm.name"
                 type="text"
                 class="my-2 block w-3/4 text-black rounded-lg"
                 :placeholder="trans('words.name')"
               />
               <InputError
-                :message="form.errors.name"
+                :message="cardForm.errors.name"
                 class="my-2 bg-white rounded-md px-2 py-1"
               />
             </section>
@@ -281,18 +295,35 @@ const destroyCard = (id) => {
               <TextInput
                 id="description"
                 ref="descriptionInput"
-                v-model="form.description"
+                v-model="cardForm.description"
                 type="text"
                 class="my-2 block w-3/4 text-black rounded-lg"
                 :placeholder="trans('words.description')"
               />
               <InputError
-                :message="form.errors.description"
+                :message="cardForm.errors.description"
                 class="my-2 bg-white rounded-md px-2 py-1"
               />
             </section>
 
-            <button class="btn btn-primary" :disabled="form.processing">
+            <section>
+              {{ trans("words.order") }}
+
+              <TextInput
+                id="order"
+                ref="orderInput"
+                v-model="cardForm.order"
+                type="number"
+                class="my-2 block w-3/4 text-black rounded-lg"
+                :placeholder="trans('words.order')"
+              />
+              <InputError
+                :message="cardForm.errors.order"
+                class="my-2 bg-white rounded-md px-2 py-1"
+              />
+            </section>
+
+            <button class="btn btn-primary" :disabled="cardForm.processing">
               {{ trans("words.save") }}
             </button>
             <Transition
@@ -300,7 +331,7 @@ const destroyCard = (id) => {
               leave-to-class="opacity-0"
               class="transition ease-in-out"
             >
-              <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">
+              <p v-if="cardForm.recentlySuccessful" class="text-sm text-gray-600">
                 {{ trans("words.created") }}
               </p>
             </Transition>

@@ -5,11 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Card;
 use App\Models\CardGroup;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CardController extends Controller {
   public function store(Request $request, cardGroup $cardGroup) {
     $request->validate([
       'name' => ['required', 'string', 'max:100'],
+      'order' => [
+        'required',
+        'numeric',
+        Rule::unique('cards')->where(function ($query) use ($cardGroup) {
+          return $query->where('card_group_id', $cardGroup->id);
+        })->ignore($request->id),
+      ],
       'description' => ['string', 'nullable'],
     ]);
 
@@ -17,13 +25,14 @@ class CardController extends Controller {
       Card::find($request->id)->update([
         'name' => $request->name,
         'description' => $request->description,
+        'order' => $request->order,
       ]);
     } else {
       $cardGroup->cards()
         ->create([
           'name' => $request->name,
           'description' => $request->description,
-          'order' => 0,
+          'order' => $request->order,
           'creator_id' => auth()->user()->id,
         ]);
     }
