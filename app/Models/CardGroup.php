@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CardGroup extends Model {
   use HasFactory;
 
-  protected $fillable = ['name','description', 'creator_id'];
+  protected $fillable = ['name','description','type', 'creator_id'];
 
   public function cards() {
     return $this->hasMany(Card::class)->orderBy('order');

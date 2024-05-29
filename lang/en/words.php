@@ -104,5 +104,7 @@ return [
   'create_card_group' => "Create Card Group",
   'details' => "Details",
   'pdf' => "PDF",
+  'order' => "Order",
+  'type' => "Type",
 
 ];

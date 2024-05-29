@@ -23,16 +23,19 @@ const cardGroupForm = useForm({
   id: null,
   name: "",
   description: "",
+  type: "",
 });
 let showModal = ref(false);
 let nameInput = ref(null);
 let descriptionInput = ref(null);
+let typeInput = ref(null);
 let orderInput = ref(null);
 
 const openCreateModal = (id) => {
   cardGroupForm.id = null;
   cardGroupForm.name = "";
   cardGroupForm.description = "";
+  cardGroupForm.type = "";
   showModal.value = true;
 };
 
@@ -51,6 +54,9 @@ const store = () => {
       if (cardGroupForm.errors.description) {
         descriptionInput.value.focus();
       }
+      if (cardGroupForm.errors.type) {
+        typeInput.value.focus();
+      }
     },
   });
 };
@@ -63,6 +69,7 @@ const edit = (id) => {
   cardGroupForm.id = foundCardGroup.id;
   cardGroupForm.name = foundCardGroup.name;
   cardGroupForm.description = foundCardGroup.description;
+  cardGroupForm.type = foundCardGroup.type;
 };
 
 const destroy = (id) => {
@@ -180,6 +187,23 @@ const destroyCard = (id) => {
               />
               <InputError
                 :message="cardGroupForm.errors.description"
+                class="my-2 bg-white rounded-md px-2 py-1"
+              />
+            </section>
+
+            <section>
+              {{ trans("words.type") }}
+
+              <TextInput
+                id="type"
+                ref="typeInput"
+                v-model="cardGroupForm.type"
+                type="text"
+                class="my-2 block w-3/4 text-black rounded-lg"
+                :placeholder="trans('words.type')"
+              />
+              <InputError
+                :message="cardGroupForm.errors.type"
                 class="my-2 bg-white rounded-md px-2 py-1"
               />
             </section>

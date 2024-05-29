@@ -13,11 +13,13 @@ class CardGroupController extends Controller {
       CardGroup::find($request->id)->update([
         'name' => $request->name,
         'description' => $request->description,
+        'type' => $request->type,
       ]);
     } else {
       $story->cardGroups()->create([
         'name' => $request->name,
         'description' => $request->description,
+        'type' => $request->type,
         'order' => 0,
         'creator_id' => auth()->user()->id,
       ]);

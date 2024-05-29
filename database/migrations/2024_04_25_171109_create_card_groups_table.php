@@ -14,8 +14,12 @@ return new class extends Migration {
       $table->id();
       $table->string('name');
       $table->text('description')->nullable();
+      $table->string('type');
       $table->foreignId('story_id')->constrained('stories')->onDelete('cascade');
       $table->foreignId('creator_id')->constrained('users')->onDelete('cascade');
+
+      $table->unique(['type', 'story_id']); // Ensure uniqueness of card in lobby
+
       $table->timestamps();
     });
   }

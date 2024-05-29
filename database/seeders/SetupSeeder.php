@@ -106,6 +106,7 @@ class SetupSeeder extends Seeder {
       CardGroup::create([
         'name' => 'Group ' . $number,
         'description' => 'Group ' . $number . ' description',
+        'type' => $number,
         'story_id' => 1,
         'creator_id' => 2,
       ]);
