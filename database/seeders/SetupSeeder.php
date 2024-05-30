@@ -123,7 +123,7 @@ class SetupSeeder extends Seeder {
       'user_id' => 1,
     ]);
 
-    $numbers = range(1, 4);
+    $numbers = range(2, 5);
     $i = 1;
     foreach ($numbers as $number) {
       CardGroup::create([
