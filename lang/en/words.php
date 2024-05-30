@@ -106,5 +106,8 @@ return [
   'pdf' => "PDF",
   'order' => "Order",
   'type' => "Type",
+  'you_won' => "You Won!",
+  'you_lost' => "You Lost",
+  'won' => "Won",
 
 ];

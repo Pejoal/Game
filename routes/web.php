@@ -74,6 +74,7 @@ Route::group([], function () {
       Route::get('lobby/{lobby}/story/{story}/start', [LobbyController::class, 'start'])->name('lobby.start');
       Route::post('lobby/store', [LobbyController::class, 'store'])->name('lobby.store');
       Route::post('lobby/{lobby}/turn', [LobbyController::class, 'turn'])->name('lobby.turn');
+      Route::post('lobby/{lobby}/win', [LobbyController::class, 'win'])->name('lobby.win');
       Route::post('/lobby_message', [LobbyController::class, 'broadcastMessage']);
 
       Route::put('card/sync', [CardController::class, 'sync'])->name('card.sync');

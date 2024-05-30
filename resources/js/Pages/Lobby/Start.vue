@@ -1,6 +1,6 @@
 <script setup>
 import AuthLayout from "@/Layouts/AuthLayout.vue";
-import { Teleport, defineProps } from "vue"; // Import defineProps function
+import { Teleport, defineProps, watch } from "vue"; // Import defineProps function
 import Toast from "@/Components/Toast.vue";
 import { ref } from "vue";
 import { trans } from "laravel-vue-i18n";
@@ -32,6 +32,10 @@ let props = defineProps({
     type: Number,
     default: 0,
   },
+  hostName: {
+    type: String,
+    default: "",
+  },
   story: {
     type: Object,
     default: {},
@@ -58,6 +62,8 @@ Object.values(props.cardGroupTypes).forEach((cardGroupType, key) => {
 });
 
 let nextUserId = ref(props.hostId);
+let nextUsername = ref(props.hostName);
+let wonUsername = ref("");
 let users = ref([]);
 
 const checkMove = (event) => {
@@ -69,7 +75,7 @@ const checkMove = (event) => {
   const targetList = event.relatedContext.list;
 
   // Handle Joker Cards
-  if (draggedItem.order == 0) {
+  if (draggedItem.order == 0 && targetList?.length > 0) {
     return true;
   }
 
@@ -181,6 +187,11 @@ onMounted(() => {
     .listen("LobbyTurnChange", (data) => {
       cards.value = data.cards;
       nextUserId.value = data.nextUserId;
+      nextUsername.value = data.nextUsername;
+    })
+    .listen("UserWin", (data) => {
+      wonUsername.value = data.wonUsername;
+      showloseToast.value = true;
     })
     .error((error) => {
       console.error(error);
@@ -205,7 +216,8 @@ const pass = () => {
       if (
         (card?.order + 1 == item?.order &&
           card?.group_card_id == item?.group_card_id) ||
-        (card?.order == 1 && !item)
+        (card?.order == 1 && !item) ||
+        card?.order === 0
       ) {
         alert("Can't pass, you can play");
         return false;
@@ -215,6 +227,19 @@ const pass = () => {
 
   orderCards();
 };
+
+let showWinToast = ref(false);
+let showloseToast = ref(false);
+watch(props.userCards[page.auth.user.id], (newVal) => {
+  if (newVal.length === 0) {
+    showWinToast.value = true;
+    axios
+      .post(route("lobby.win", props.lobbyId), {
+        wonUserId: page.auth.user.id,
+      })
+      .then(() => {});
+  }
+});
 </script>
 
 <template>
@@ -230,6 +255,24 @@ const pass = () => {
         :message="trans('words.game_started')"
       />
     </Teleport>
+    <Teleport to="#toasts">
+      <Toast
+        :show="showWinToast"
+        :type="'success'"
+        @close="showWinToast = false"
+        :message="trans('words.you_won')"
+      />
+    </Teleport>
+    <Teleport to="#toasts">
+      <Toast
+        :show="showloseToast"
+        :type="'danger'"
+        @close="showloseToast = false"
+        :message="`${wonUsername} ${trans('words.won')}, ${trans(
+          'words.you_lost'
+        )}`"
+      />
+    </Teleport>
     <header class="p-2 text-lg font-bold flex items-center justify-between">
       <h2 class="">
         {{ props.name }}
@@ -241,30 +284,34 @@ const pass = () => {
       </p>
     </header>
 
+    <p class="font-bold px-4 py-2 bg-stone-800 text-white">
+      {{ nextUsername }} turn
+    </p>
     <main class="relative bg-green-600 h-[70vh] py-12 px-16">
       <section
         class="absolute top-1 left-[50%] transform -translate-x-1/2 flex items-center justify-center flex-col text-white text-sm"
       >
-        <p>Player 4</p>
-        <span>100</span>
+        <p>{{ initials[3]?.fullname }}</p>
+        <span>0</span>
       </section>
       <section
         class="absolute top-[50%] left-1 transform -translate-y-1/2 flex items-center justify-center flex-col text-white text-sm"
       >
-        <p>Player 2</p>
-        <span>100</span>
+        <p>{{ initials[1]?.fullname }}</p>
+
+        <span>0</span>
       </section>
       <section
         class="absolute top-[50%] right-1 transform -translate-y-1/2 flex items-center justify-center flex-col text-white text-sm"
       >
-        <p>Player 3</p>
-        <span>100</span>
+        <p>{{ initials[2]?.fullname }}</p>
+        <span>0</span>
       </section>
       <section
         class="absolute bottom-1 right-[50%] transform translate-x-1/2 flex items-center justify-center flex-col text-white text-sm"
       >
-        <p>Player 1</p>
-        <span>100</span>
+        <p>{{ initials[0]?.fullname }}</p>
+        <span>0</span>
       </section>
 
       <section

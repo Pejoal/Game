@@ -10,17 +10,15 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class LobbyTurnChange implements ShouldBroadcastNow {
+class UserWin implements ShouldBroadcastNow {
   use Dispatchable, InteractsWithSockets, SerializesModels;
 
   public $lobbyId;
-  public $cards;
-  public $nextUser;
+  public $wonUser;
 
-  public function __construct(int $lobbyId, array $cards,User $nextUser) {
+  public function __construct(int $lobbyId, User $wonUser) {
     $this->lobbyId = $lobbyId;
-    $this->cards = $cards;
-    $this->nextUser = $nextUser;
+    $this->wonUser = $wonUser;
   }
 
   /**
@@ -36,9 +34,7 @@ class LobbyTurnChange implements ShouldBroadcastNow {
 
   public function broadcastWith(): array {
     return [
-      "cards" => $this->cards,
-      "nextUserId" => $this->nextUser->id,
-      "nextUsername" => $this->nextUser->full_name,
+      "wonUsername" => $this->wonUser->full_name,
     ];
   }
 }

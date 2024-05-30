@@ -24,7 +24,7 @@ const toggleNav = () => {
           :alt="trans('words.profile_photo')"
         />
         <Link class="font-bold text-xl" :href="route('home')">
-          {{ $page.props.auth.user.firstname }}
+          {{ $page.props.auth.user.firstname + " " + $page.props.auth.user.lastname }}
         </Link>
       </section>
       <Locales :horizontal="true" />

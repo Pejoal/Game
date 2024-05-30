@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\LobbyMessageSent;
 use App\Events\LobbyStarted;
 use App\Events\LobbyTurnChange;
+use App\Events\UserWin;
 use App\Models\Card;
 use App\Models\Lobby;
 use App\Models\LobbyCard;
@@ -99,6 +100,7 @@ class LobbyController extends Controller {
     return Inertia::render('Lobby/Start', [
       "lobbyId" => $lobby->id,
       "hostId" => $lobby->host_id,
+      "hostName" => User::find($lobby->host_id)->full_name,
       "name" => $lobby->name,
       "max_players" => $lobby->max_players,
       "story" => $story,
@@ -123,8 +125,6 @@ class LobbyController extends Controller {
   }
 
   public function turn(Request $request, Lobby $lobby) {
-    $user = $request->user();
-
     // Extract users and current user ID from the request
     $users = $request->users; // Assuming this is an array of user IDs
     $currentUserId = $request->nextUserId;
@@ -138,7 +138,12 @@ class LobbyController extends Controller {
     $nextUserId = $users[$nextIndex];
 
     // Broadcast the event with the next user's ID
-    broadcast(new LobbyTurnChange($user, $lobby->id, $request->cards, $nextUserId));
+    broadcast(new LobbyTurnChange($lobby->id, $request->cards, User::find($nextUserId)));
+  }
+
+  public function win(Request $request, Lobby $lobby) {
+    $wonUser = User::find($request->wonUserId);
+    broadcast(new UserWin($lobby->id, $wonUser))->toOthers();
   }
 
   public function broadcastMessage(Request $request) {
