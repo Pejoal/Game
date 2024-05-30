@@ -85,11 +85,11 @@ class LobbyController extends Controller {
     $maxCardsCount = max(array_map('count', $userCards));
 
     // Add "joker" cards to users who have fewer cards than the maximum
-    // foreach ($userCards as $userId => &$userCardsArray) {
-    //   while (count($userCardsArray) < $maxCardsCount) {
-    //     $userCardsArray[] = Card::find(1);
-    //   }
-    // }
+    foreach ($userCards as $userId => &$userCardsArray) {
+      while (count($userCardsArray) < $maxCardsCount) {
+        $userCardsArray[] = Card::find(1);
+      }
+    }
 
     $user = $request->user();
     broadcast(new LobbyStarted($user, $lobby->id, $story->id))->toOthers();
