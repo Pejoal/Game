@@ -75,7 +75,8 @@ const checkMove = (event) => {
 
   // Check if all items in the target list have the same group_id as the dragged item
   const validMove = targetList?.every(
-    (item) => item.card_group_id === draggedItem.card_group_id
+    (item) =>
+      item.card_group_id === draggedItem.card_group_id || item.order == 0
   );
 
   if (targetList?.length == 0 && draggedItem.order != 1) {
