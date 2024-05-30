@@ -34,6 +34,7 @@ class LobbyController extends Controller {
   }
 
   public function start(Request $request, Lobby $lobby, Story $story) {
+    $userCards = [];
     if (auth()->id() == $lobby->host_id && !LobbyCard::where('lobby_id', $lobby->id)->exists()) {
       $cardGroups = $story->cardGroups()->with('cards')->get();
       $cards = [];
@@ -51,7 +52,6 @@ class LobbyController extends Controller {
       $cardsPerUser = floor(count($cards) / $userCount);
 
       // Distribute the cards equally among users
-      $userCards = [];
       for ($i = 0; $i < $userCount; $i++) {
         $userCards[$users[$i]->id] = array_slice($cards, $i * $cardsPerUser, $cardsPerUser);
       }
@@ -61,8 +61,10 @@ class LobbyController extends Controller {
       foreach ($remainingCards as $index => $card) {
         $userCards[$users[$index % $userCount]->id][] = $card;
       }
+
+      // Save the distributed cards in the LobbyCard model
       foreach ($userCards as $user_id => $cards) {
-        foreach ($cards as $key => $card) {
+        foreach ($cards as $card) {
           LobbyCard::create([
             'user_id' => $user_id,
             'card_id' => $card->id,
@@ -70,14 +72,24 @@ class LobbyController extends Controller {
           ]);
         }
       }
+
     }
 
     $_userCards = LobbyCard::where('lobby_id', $lobby->id)->get();
-    $userCards = [];
 
     foreach ($_userCards as $lobbyCard) {
       $userCards[$lobbyCard->user_id][] = Card::find($lobbyCard->card_id);
     }
+
+    // Determine the maximum number of cards any user has
+    $maxCardsCount = max(array_map('count', $userCards));
+
+    // Add "joker" cards to users who have fewer cards than the maximum
+    // foreach ($userCards as $userId => &$userCardsArray) {
+    //   while (count($userCardsArray) < $maxCardsCount) {
+    //     $userCardsArray[] = Card::find(1);
+    //   }
+    // }
 
     $user = $request->user();
     broadcast(new LobbyStarted($user, $lobby->id, $story->id))->toOthers();

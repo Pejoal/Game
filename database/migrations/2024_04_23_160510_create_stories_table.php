@@ -15,6 +15,7 @@ return new class extends Migration {
       $table->text('description')->nullable();
       $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
       $table->string('pdf')->nullable();
+      $table->softDeletes();
       $table->timestamps();
     });
   }

@@ -89,6 +89,29 @@ class SetupSeeder extends Seeder {
     ]);
 
     Story::create([
+      'name' => 'Story Joker',
+      'description' => 'Story Description',
+      'user_id' => 1,
+      'deleted_at' => now(),
+    ]);
+
+    CardGroup::create([
+      'name' => 'Group 1',
+      'description' => 'Group 1 description',
+      'type' => "JOKER",
+      'story_id' => 1,
+      'creator_id' => 2,
+    ]);
+
+    Card::create([
+      'name' => 'Joker Card',
+      'description' => 'Joker Card description',
+      'order' => 0,
+      'card_group_id' => 1,
+      'creator_id' => 1,
+    ]);
+
+    Story::create([
       'name' => 'Story 1',
       'description' => 'Story 1 description',
       'user_id' => 1,
@@ -107,7 +130,7 @@ class SetupSeeder extends Seeder {
         'name' => 'Group ' . $number,
         'description' => 'Group ' . $number . ' description',
         'type' => $number,
-        'story_id' => 1,
+        'story_id' => 2,
         'creator_id' => 2,
       ]);
 
