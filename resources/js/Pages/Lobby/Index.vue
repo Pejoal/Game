@@ -58,7 +58,6 @@ onMounted(() => {
   echo
     .join(`chat.${props.lobbyId}`)
     .here((users) => {
-      // console.log("users here:", users, "#####");
       initials.value = users.map(function (user) {
         return {
           id: user.id,
@@ -68,7 +67,6 @@ onMounted(() => {
       });
     })
     .joining((user) => {
-      // console.log(user, "Joined the channel", "#####");
       messages.value.unshift({
         id: getRandomDigits(),
         firstname: user.firstname,
@@ -113,7 +111,9 @@ onMounted(() => {
       let link = `/${getActiveLanguage()}/lobby/${props.lobbyId}/story/${
         data.story_id
       }/start`;
-      location.href = link;
+      if (confirm("Start Game?")) {
+        location.href = link;
+      }
     })
     .error((error) => {
       console.error(error);

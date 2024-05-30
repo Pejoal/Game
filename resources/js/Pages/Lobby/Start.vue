@@ -89,7 +89,6 @@ const checkMove = (event) => {
 };
 
 const orderCards = () => {
-  console.log(nextUserId.value);
   cards.value.forEach((cardGroup) => {
     cardGroup?.sort((a, b) => b.order - a.order);
   });
