@@ -184,6 +184,27 @@ onUnmounted(() => {
 });
 
 const pass = () => {
+  if (!isItMyTurn.value) {
+    alert("Wait for your turn");
+    return false;
+  }
+  const lastItems = cards.value.map((arr) =>
+    arr.length > 0 ? arr[arr.length - 1] : null
+  );
+
+  for (const item of lastItems) {
+    for (const card of props.userCards[page.auth.user.id]) {
+      if (
+        (card?.order + 1 == item?.order &&
+          card?.group_card_id == item?.group_card_id) ||
+        (card?.order == 1 && !item)
+      ) {
+        alert("Can't pass, you can play");
+        return false;
+      }
+    }
+  }
+
   orderCards();
 };
 </script>
@@ -304,7 +325,9 @@ const pass = () => {
     </Draggable>
 
     <section>
-      <button @click="pass" class="btn btn-primary w-[80vw] h-8 mx-auto my-2">Pass</button>
+      <button @click="pass" class="btn btn-primary w-[80vw] h-8 mx-auto my-2">
+        Pass
+      </button>
     </section>
 
     <section>
