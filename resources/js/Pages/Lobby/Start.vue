@@ -68,6 +68,7 @@ const checkMove = (event) => {
   const draggedItem = event.draggedContext.element;
   const targetList = event.relatedContext.list;
 
+  // Handle Joker Cards
   if (draggedItem.order == 0) {
     return true;
   }
