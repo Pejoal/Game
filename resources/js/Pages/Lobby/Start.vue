@@ -68,6 +68,10 @@ const checkMove = (event) => {
   const draggedItem = event.draggedContext.element;
   const targetList = event.relatedContext.list;
 
+  if (draggedItem.order == 0) {
+    return true;
+  }
+
   // Check if all items in the target list have the same group_id as the dragged item
   const validMove = targetList?.every(
     (item) => item.card_group_id === draggedItem.card_group_id
@@ -224,7 +228,7 @@ const pass = () => {
         :message="trans('words.game_started')"
       />
     </Teleport>
-    <header class="p-2 text-xl font-bold flex items-center justify-between">
+    <header class="p-2 text-lg font-bold flex items-center justify-between">
       <h2 class="">
         {{ props.name }}
       </h2>
@@ -235,7 +239,7 @@ const pass = () => {
       </p>
     </header>
 
-    <main class="relative bg-green-600 h-[80vh] py-12 px-16">
+    <main class="relative bg-green-600 h-[70vh] py-12 px-16">
       <section
         class="absolute top-1 left-[50%] transform -translate-x-1/2 flex items-center justify-center flex-col text-white text-sm"
       >
@@ -266,7 +270,7 @@ const pass = () => {
       >
         <section
           v-for="(cardGroupType, key) in Object.values(cardGroupTypes)"
-          class="p-2 flex-1 flex flex-col h-full overflow-x-hidden overflow-y-auto"
+          class="p-1 flex-1 flex flex-col h-full overflow-x-hidden overflow-y-auto"
         >
           <Draggable
             :list="cards[key]"
@@ -277,7 +281,7 @@ const pass = () => {
           >
             <template #item="{ element, index }">
               <div class="bg-slate-700 p-1 my-1 cursor-pointer rounded-lg">
-                <p class="block mb-1 text-xl text-gray-100">
+                <p class="block mb-1 text-lg text-gray-100">
                   {{ element?.name }}
                 </p>
                 <p class="text-white truncate">
@@ -308,7 +312,7 @@ const pass = () => {
     >
       <template #item="{ element, index }">
         <div class="bg-slate-700 p-1 my-1 cursor-pointer rounded-lg w-40">
-          <p class="block mb-1 text-xl text-gray-100">
+          <p class="block mb-1 text-lg text-gray-100">
             {{ element.name }}
           </p>
           <p class="text-white truncate">
