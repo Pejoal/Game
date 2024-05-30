@@ -82,7 +82,7 @@ class LobbyController extends Controller {
     $user = $request->user();
     broadcast(new LobbyStarted($user, $lobby->id, $story->id))->toOthers();
 
-    $cardGroupTypes = $story->cardGroups()->pluck('type','id');
+    $cardGroupTypes = $story->cardGroups()->pluck('type', 'id');
 
     return Inertia::render('Lobby/Start', [
       "lobbyId" => $lobby->id,
@@ -112,7 +112,21 @@ class LobbyController extends Controller {
 
   public function turn(Request $request, Lobby $lobby) {
     $user = $request->user();
-    broadcast(new LobbyTurnChange($user, $lobby->id, $request->cards))->toOthers();
+
+    // Extract users and current user ID from the request
+    $users = $request->users; // Assuming this is an array of user IDs
+    $currentUserId = $request->nextUserId;
+
+    // Find the index of the current user in the list
+    $currentIndex = array_search($currentUserId, $users);
+
+    // Determine the next user's index in a circular fashion
+    $userCount = count($users);
+    $nextIndex = ($currentIndex + 1) % $userCount;
+    $nextUserId = $users[$nextIndex];
+
+    // Broadcast the event with the next user's ID
+    broadcast(new LobbyTurnChange($user, $lobby->id, $request->cards, $nextUserId));
   }
 
   public function broadcastMessage(Request $request) {

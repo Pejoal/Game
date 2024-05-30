@@ -57,10 +57,13 @@ Object.values(props.cardGroupTypes).forEach((cardGroupType, key) => {
   cards.value[key] = [];
 });
 
-let isItMyTurn = ref(false);
+let nextUserId = ref(props.hostId);
+let users = ref([]);
 
 const checkMove = (event) => {
-  if (!isItMyTurn.value) return false;
+  if (nextUserId.value != page.auth.user.id) {
+    return false;
+  }
 
   const draggedItem = event.draggedContext.element;
   const targetList = event.relatedContext.list;
@@ -86,20 +89,18 @@ const checkMove = (event) => {
 };
 
 const orderCards = () => {
+  console.log(nextUserId.value);
   cards.value.forEach((cardGroup) => {
     cardGroup?.sort((a, b) => b.order - a.order);
   });
-  isItMyTurn.value = false;
   axios
     .post(route("lobby.turn", props.lobbyId), {
       cards: cards.value,
+      users: users.value,
+      nextUserId: nextUserId.value,
     })
     .then(() => {});
 };
-
-if (page.auth.user.id == props.hostId) {
-  isItMyTurn.value = true;
-}
 
 const env = import.meta.env;
 let initials = ref([]);
@@ -120,8 +121,10 @@ onMounted(() => {
   });
   echo
     .join(`chat.${props.lobbyId}`)
-    .here((users) => {
-      initials.value = users.map(function (user) {
+    .here((data) => {
+      initials.value = data.map(function (user) {
+        users.value.push(user.id);
+
         return {
           id: user.id,
           name: user.firstname[0] + user.lastname[0],
@@ -172,7 +175,7 @@ onMounted(() => {
     })
     .listen("LobbyTurnChange", (data) => {
       cards.value = data.cards;
-      isItMyTurn.value = true;
+      nextUserId.value = data.nextUserId;
     })
     .error((error) => {
       console.error(error);
@@ -184,7 +187,7 @@ onUnmounted(() => {
 });
 
 const pass = () => {
-  if (!isItMyTurn.value) {
+  if (nextUserId.value != page.auth.user.id) {
     alert("Wait for your turn");
     return false;
   }

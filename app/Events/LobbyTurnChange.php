@@ -16,11 +16,13 @@ class LobbyTurnChange implements ShouldBroadcastNow {
 
   public $lobbyId;
   public $cards;
+  public $nextUserId;
 
-  public function __construct(User $user, int $lobbyId, array $cards) {
+  public function __construct(User $user, int $lobbyId, array $cards,int $nextUserId) {
     $this->user = $user;
     $this->lobbyId = $lobbyId;
     $this->cards = $cards;
+    $this->nextUserId = $nextUserId;
   }
 
   /**
@@ -37,6 +39,7 @@ class LobbyTurnChange implements ShouldBroadcastNow {
   public function broadcastWith(): array {
     return [
       "cards" => $this->cards,
+      "nextUserId" => $this->nextUserId,
     ];
   }
 }
