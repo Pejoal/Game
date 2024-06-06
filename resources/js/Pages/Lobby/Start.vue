@@ -217,7 +217,8 @@ const pass = () => {
         (card?.order + 1 == item?.order &&
           card?.group_card_id == item?.group_card_id) ||
         (card?.order == 1 && !item) ||
-        card?.order === 0
+        (card?.order === 0 &&
+          cards.value.some((cardArray) => cardArray.length > 0))
       ) {
         alert("Can't pass, you can play");
         return false;
