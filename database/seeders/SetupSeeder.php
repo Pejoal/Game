@@ -146,5 +146,10 @@ class SetupSeeder extends Seeder {
       }
     }
 
+    CardGroup::find(2)->update(['type' => 'A',]);
+    CardGroup::find(3)->update(['type' => 'B',]);
+    CardGroup::find(4)->update(['type' => 'C',]);
+    CardGroup::find(5)->update(['type' => 'D',]);
+
   }
 }
