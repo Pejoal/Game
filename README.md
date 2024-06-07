@@ -98,6 +98,15 @@ npm run dev
 
 ---
 
+## Redis
+
+- command to subscribe to a redis test channel (route: http://localhost/en/publish)
+```shell
+sail artisan redis:subscribe
+```
+
+---
+
 ### Features
 
 1. Register System Included ( Email / Username )

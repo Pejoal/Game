@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LobbyController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StoryController;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -51,6 +52,11 @@ Route::group([], function () {
     }
     return redirect(route('login'));
 
+  });
+
+  Route::get('/publish', function () {
+    Redis::publish('test-channel', json_encode(['foo' => 'bar']));
+    return 'Message published';
   });
 
   require __DIR__ . '/auth.php';

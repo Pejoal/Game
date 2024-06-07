@@ -24,6 +24,8 @@ services:
       - sail
     depends_on:
       - mariadb
+      - redis
+
   mariadb:
     image: 'mariadb:10'
     ports:
@@ -44,6 +46,14 @@ services:
       test: [ "CMD", "mysqladmin", "ping", "-p${DB_PASSWORD}" ]
       retries: 3
       timeout: 5s
+
+  redis:
+    image: redis:latest
+    ports:
+      - '6379:6379'
+    networks:
+      - sail
+
   phpmyadmin:
     image: phpmyadmin
     restart: always
@@ -53,14 +63,16 @@ services:
       - "81:80"
     environment:
       - PMA_HOST=mariadb
-      - PMA_PORT=3306 
+      - PMA_PORT=3306
     networks:
-      sail:
+      - sail
     depends_on:
       - mariadb
+
 networks:
   sail:
     driver: bridge
+
 volumes:
   sail-mariadb:
     driver: local
