@@ -2,14 +2,19 @@
 
 #### [Live Demo](http://)
 
-![Example Image](/docs/images/Screenshot1.png)
-![Example Image](/docs/images/Screenshot2.png)
-![Example Image](/docs/images/Screenshot3.png)
-![Example Image](/docs/images/Screenshot4.png)
-![Example Image](/docs/images/Screenshot5.png)
-![Example Image](/docs/images/Screenshot6.png)
-![Example Image](/docs/images/Screenshot7.png)
-![Example Image](/docs/images/Screenshot8.png)
+![Example Image](public/docs/images/Screenshot1.png)
+![Example Image](public/docs/images/Screenshot2.png)
+![Example Image](public/docs/images/Screenshot3.png)
+![Example Image](public/docs/images/Screenshot4.png)
+![Example Image](public/docs/images/Screenshot5.png)
+![Example Image](public/docs/images/Screenshot6.png)
+![Example Image](public/docs/images/Screenshot7.png)
+![Example Image](public/docs/images/Screenshot8.png)
+![Example Image](public/docs/images/Screenshot9.png)
+![Example Image](public/docs/images/Screenshot10.png)
+![Example Image](public/docs/images/Screenshot11.png)
+![Example Image](public/docs/images/Screenshot12.png)
+![Example Image](public/docs/images/Screenshot13.png)
 ---
 
 ## Authors
